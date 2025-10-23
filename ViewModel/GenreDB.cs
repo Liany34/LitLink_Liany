@@ -28,5 +28,15 @@ namespace ViewModel
         {
             return new Genre();
         }
+        static private ListGenre list = new ListGenre();
+
+        public static Genre SelectById(int id)
+        {
+            GenreDB db = new GenreDB();
+            list = db.SelectAll();
+
+            Genre g = list.Find(item => item.Id == id);
+            return g;
+        }
     }
 }

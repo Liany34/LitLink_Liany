@@ -1,5 +1,5 @@
 ﻿using Model;
-using System.Data.OleDb;    
+using System.Data.OleDb;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace ViewModel
     {
         public ListLanguage SelectAll()
         {
-            command.CommandText = $"SELECT * FROM Language";
+            command.CommandText = $"SELECT [Language].*  FROM  [Language]";
             ListLanguage groupList = new ListLanguage(base.Select());
             return groupList;
         }
@@ -27,6 +27,16 @@ namespace ViewModel
         public override BaseEntity NewEntity()
         {
             return new Language();
+        }
+        static private ListLanguage list = new ListLanguage();
+
+        public static Language SelectById(int id)
+        {
+            LanguageDB db = new LanguageDB();
+            list = db.SelectAll();
+
+            Language g = list.Find(item => item.Id == id);
+            return g;
         }
     }
 }

@@ -28,5 +28,15 @@ namespace ViewModel
         {
             return new Intrest();
         }
+        static private ListIntrest list = new ListIntrest();
+
+        public static Intrest SelectById(int id)
+        {
+            IntrestDB db = new IntrestDB();
+            list = db.SelectAll();
+
+            Intrest g = list.Find(item => item.Id == id);
+            return g;
+        }
     }
 }

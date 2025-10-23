@@ -28,5 +28,15 @@ namespace ViewModel
         {
             return new Permission();
         }
+        static private ListPermission list = new ListPermission();
+
+        public static Permission SelectById(int id)
+        {
+            PermissionDB db = new PermissionDB();
+            list = db.SelectAll();
+
+            Permission g = list.Find(item => item.Id == id);
+            return g;
+        }
     }
 }
