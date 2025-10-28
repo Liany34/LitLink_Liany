@@ -8,10 +8,13 @@ namespace Model
 {
     public class Book_Series : BaseEntity
     {
-        private int code;
         private string nameSeries;
 
-        public int Code { get => code; set => code = value; }
         public string NameSeries { get => nameSeries; set => nameSeries = value; }
+
+        public override string ToString()
+        {
+            return NameSeries;
+        }
     }
 }

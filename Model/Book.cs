@@ -27,5 +27,10 @@ namespace Model
         public string Information { get => information; set => information = value; }
         public string Cover { get => cover; set => cover = value; }
         public Language Language { get => language; set => language = value; }
+
+        public override string ToString()
+        {
+            return $"Book: {bookName}, Author: {idAuthor.FirstName} {idAuthor.LastName}, Genre: {idGenre.Name}, Language: {language.Name}, Price: {price}, Publication Date: {publicationDate?.ToShortDateString()}, Discount: {discount}";
+        }
     }
 }

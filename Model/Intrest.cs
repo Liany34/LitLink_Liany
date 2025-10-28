@@ -11,5 +11,10 @@ namespace Model
         private string name;
 
         public string Name { get => name; set => name = value; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

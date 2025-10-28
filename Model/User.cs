@@ -21,5 +21,10 @@ namespace Model
         public string Email { get => email; set => email = value; }
         public string Username { get => username; set => username = value; }
         public string Pass { get => pass; set => pass = value; }
+
+        public override string ToString()
+        {
+            return $"ID: {Id}, First Name: {FirstName}, Last Name: {LastName}, Phone Number: {PhoneNumber}, Email: {Email}, Username: {Username}";
+        }
     }
 }

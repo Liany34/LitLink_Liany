@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,5 +16,10 @@ namespace Model
         public string PenName { get => penName; set => penName = value; }
         public Genre Genre { get => genre; set => genre = value; }
         public string InformationAboutAuthor { get => informationAboutAuthor; set => informationAboutAuthor = value; }
+
+        public override string ToString()
+        {
+            return $"Name: {FirstName} {LastName}, PenName: {penName}, Genre: {genre.Name}, InformationAboutAuthor: {informationAboutAuthor}";
+        }
     }
 }

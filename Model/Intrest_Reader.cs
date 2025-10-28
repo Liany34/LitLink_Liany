@@ -14,5 +14,10 @@ namespace Model
 
         public Reader IdReader { get => idReader; set => idReader = value; }
         public Intrest IdIntrest { get => idIntrest; set => idIntrest = value; }
+
+        public override string ToString()
+        {
+            return $"Reader Id: {IdReader.Nickname}, Intrest Id: {IdIntrest.Name}";
+        }
     }
 }

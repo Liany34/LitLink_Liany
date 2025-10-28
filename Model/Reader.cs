@@ -15,5 +15,10 @@ namespace Model
         public string Nickname { get => nickname; set => nickname = value; }
         public bool PremiumSubscription { get => premiumSubscription; set => premiumSubscription = value; }
         public DateTime DateOfBirth { get => dateOfBirth; set => dateOfBirth = value; }
+
+        public override string ToString()
+        {
+            return $"Name: {FirstName} {LastName}, Nickname: {Nickname}, Date of Birth: {DateOfBirth.ToShortDateString()}, Premium Subscription: {PremiumSubscription}";
+        }
     }
 }
