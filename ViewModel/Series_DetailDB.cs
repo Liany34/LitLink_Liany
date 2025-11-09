@@ -38,5 +38,28 @@ namespace ViewModel
             return g;
         }
 
+        protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Series_Detail sd = entity as Series_Detail;
+            if (sd != null)
+            {
+                string sqlStr = $"UPDATE Series_Detail SET IdSeries=@idSeries, IdBook=@idBook WHERE ID=@id";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@idSeries", sd.IdSeries.Id));
+                command.Parameters.Add(new OleDbParameter("@idBook", sd.IdBook.Id));
+                command.Parameters.Add(new OleDbParameter("@id", sd.Id));
+            }
+        }
     }
 }

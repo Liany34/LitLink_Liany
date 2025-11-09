@@ -38,5 +38,28 @@ namespace ViewModel
             Genre g = list.Find(item => item.Id == id);
             return g;
         }
+
+        protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Genre g = entity as Genre;
+            if (g != null)
+            {
+                string sqlStr = $"UPDATE Genre SET Name=@name WHERE ID=@id";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@name", g.Name));
+                command.Parameters.Add(new OleDbParameter("@id", g.Id));
+            }
+        }
     }
 }

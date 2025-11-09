@@ -39,5 +39,29 @@ namespace ViewModel
             return g;
         }
 
+        protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Book_List bl = entity as Book_List;
+            if (bl != null)
+            {
+                string sqlStr = $"UPDATE Book_List SET idReader=@IdReader, listName=@ListName, isPublic=@IsPublic WHERE ID=@id";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@IdReader", bl.IdReader.Id));
+                command.Parameters.Add(new OleDbParameter("@ListName", bl.ListName));
+                command.Parameters.Add(new OleDbParameter("@IsPublic", bl.IsPublic));
+                command.Parameters.Add(new OleDbParameter("@id", bl.Id));
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace ViewModel
 {
@@ -40,5 +41,28 @@ namespace ViewModel
             return g;
         }
 
+        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Author a = entity as Author;
+            if (a != null)
+            {
+                string sqlStr = $"UPDATE Author SET PenName=@penName, Genre=@genre, InformationAboutAuthor=@informationAboutAuthor WHERE ID=@id";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@penName", a.PenName));
+                command.Parameters.Add(new OleDbParameter("@genre", a.Genre.Id));
+                command.Parameters.Add(new OleDbParameter("@informationAboutAuthor", a.InformationAboutAuthor));
+                command.Parameters.Add(new OleDbParameter("@id", a.Id));
+            }
+        }
+        public override void Update(BaseEntity entity)
+        {
+            Author a = entity as Author;
+            if (a != null)
+            {
+                updated.Add(new ChangeEntity(this.CreateUpdatedSQL, entity));
+                updated.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
+            }
+        }
     }
 }

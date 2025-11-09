@@ -38,5 +38,28 @@ namespace ViewModel
             Intrest g = list.Find(item => item.Id == id);
             return g;
         }
+
+        protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Intrest i = entity as Intrest;
+            if (i != null)
+            {
+                string sqlStr = $"UPDATE Intrest SET Name=@name WHERE ID=@id";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@name", i.Name));
+                command.Parameters.Add(new OleDbParameter("@id", i.Id));
+            }
+        }
     }
 }

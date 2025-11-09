@@ -1,4 +1,5 @@
 ﻿using Model;
+using System.Data;
 using System.Data.OleDb;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace ViewModel
         {
             Book_Series bs = entity as Book_Series;
             bs.NameSeries = reader["nameSeries"].ToString();
+            base.CreateModel(entity);
             return bs;
         }
         public override BaseEntity NewEntity()
@@ -34,6 +36,28 @@ namespace ViewModel
 
             Book_Series g = list.Find(item => item.Id == id);
             return g;
+        }
+
+        protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Book_Series bs = entity as Book_Series;
+            if (bs != null)
+            {
+                string sqlStr = $"UPDATE Book_Series SET nameSeries=@nameSeries WHERE id=@id";
+                
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@nameSeries", bs.NameSeries));
+                command.Parameters.Add(new OleDbParameter("@id", bs.Id));
+            }
         }
     }
 }

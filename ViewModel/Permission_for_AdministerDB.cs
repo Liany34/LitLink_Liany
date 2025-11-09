@@ -38,5 +38,28 @@ namespace ViewModel
             return g;
         }
 
+        protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Permissions_for_Administrator pa = entity as Permissions_for_Administrator;
+            if (pa != null)
+            {
+                string sqlStr = $"UPDATE Permissions_for_Administrator SET IdAdministrator=@idAdministrator, IdPermission=@idPermission WHERE ID=@id";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@idAdministrator", pa.IdAdministrator.Id));
+                command.Parameters.Add(new OleDbParameter("@idBook", pa.IdPermission.Id));
+                command.Parameters.Add(new OleDbParameter("@id", pa.Id));
+            }
+        }
     }
 }
