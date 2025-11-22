@@ -16,7 +16,7 @@ namespace Model
         private bool discount;
         private string information;
         private string cover;
-        private Language language;
+        private Language idLanguage;
 
         public string BookName { get => bookName; set => bookName = value; }
         public DateTime? PublicationDate { get => publicationDate; set => publicationDate = value; }
@@ -26,11 +26,11 @@ namespace Model
         public bool Discount { get => discount; set => discount = value; }
         public string Information { get => information; set => information = value; }
         public string Cover { get => cover; set => cover = value; }
-        public Language Language { get => language; set => language = value; }
+        public Language IdLanguage { get => idLanguage; set => idLanguage = value; }
 
         public override string ToString()
         {
-            return $"Book: {bookName}, Author: {idAuthor.FirstName} {idAuthor.LastName}, Genre: {idGenre.Name}, Language: {language.Name}, Price: {price}, Publication Date: {publicationDate?.ToShortDateString()}, Discount: {discount}";
+            return $"Book: {bookName}, Author: {idAuthor.FirstName} {idAuthor.LastName}, Genre: {idGenre.Name}, Language: {idLanguage.Name}, Price: {price}, Publication Date: {publicationDate?.ToShortDateString()}, Discount: {discount}";
         }
     }
 }

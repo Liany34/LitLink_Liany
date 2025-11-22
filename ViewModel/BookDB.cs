@@ -27,7 +27,7 @@ namespace ViewModel
             b.Discount = (bool)reader["discount"];
             b.Information = reader["information"].ToString();
             b.Cover = reader["cover"].ToString();
-            b.Language = LanguageDB.SelectById((int)reader["idLanguage"]);
+            b.IdLanguage = LanguageDB.SelectById((int)reader["idLanguage"]);
             base.CreateModel(entity);
             return b;
         }
@@ -47,12 +47,33 @@ namespace ViewModel
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Book b = entity as Book;
+            if (b != null)
+            {
+                string sqlStr = $"DELETE FROM Book WHERE ID=@id";
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@id", b.Id));
+            }
         }
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Book b = entity as Book;
+            if (b != null)
+            {
+                string sqlStr = $"Insert INTO Book (BookName, PublicationDate, Price, IdAuthor, IdGenre, Discount, Information, Cover, IdLanguage) VALUES (@bookName, @publicationDate, @price, @idAuthor, @idGenre, @discount, @information, @cover, @idLanguage)";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@bookName", b.BookName));
+                command.Parameters.Add(new OleDbParameter("@publicationDate", b.PublicationDate));
+                command.Parameters.Add(new OleDbParameter("@price", b.Price));
+                command.Parameters.Add(new OleDbParameter("@idAuthor", b.IdAuthor.Id));
+                command.Parameters.Add(new OleDbParameter("@idGenre", b.IdGenre.Id));
+                command.Parameters.Add(new OleDbParameter("@discount", b.Discount));
+                command.Parameters.Add(new OleDbParameter("@information", b.Information));
+                command.Parameters.Add(new OleDbParameter("@cover", b.Cover));
+                command.Parameters.Add(new OleDbParameter("@idLanguage", b.IdLanguage.Id));
+            }
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
@@ -71,7 +92,7 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@Discount", b.Discount));
                 command.Parameters.Add(new OleDbParameter("@Information", b.Information));
                 command.Parameters.Add(new OleDbParameter("@Cover", b.Cover));
-                command.Parameters.Add(new OleDbParameter("@IdLanguage", b.Language.Id));
+                command.Parameters.Add(new OleDbParameter("@IdLanguage", b.IdLanguage.Id));
                 command.Parameters.Add(new OleDbParameter("@id", b.Id));
             }
         }

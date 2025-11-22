@@ -1,8 +1,9 @@
 ﻿using Model;
-using System.Data.OleDb;
 using System;
 using System.Collections.Generic;
+using System.Data.OleDb;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,12 +41,26 @@ namespace ViewModel
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Intrest_Reader ir = entity as Intrest_Reader;
+            if (ir != null)
+            {
+                string sqlStr = $"DELETE FROM Intrest_Reader WHERE ID=@id";
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@id", ir.Id));
+            }
         }
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Intrest_Reader ir = entity as Intrest_Reader;
+            if (ir != null)
+            {
+                string sqlStr = $"Insert INTO Intrest_Reader (IdReader, IdIntrest) VALUES (@idReader, @idIntrest)";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@idReader", ir.IdReader.Id));
+                command.Parameters.Add(new OleDbParameter("@idIntrest", ir.IdIntrest.Id));
+            }
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)

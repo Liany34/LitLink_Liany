@@ -40,12 +40,26 @@ namespace ViewModel
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Permissions_for_Administrator pa = entity as Permissions_for_Administrator;
+            if (pa != null)
+            {
+                string sqlStr = $"DELETE FROM Permissions_for_Administrator WHERE ID=@id";
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@id", pa.Id));
+            }
         }
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Permissions_for_Administrator pa = entity as Permissions_for_Administrator;
+            if (pa != null)
+            {
+                string sqlStr = $"Insert INTO Permissions_for_Administrator (IdAdministrator, IdPermission) VALUES (@idAdministrator, @idPermission)";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@idAdministrator", pa.IdAdministrator.Id));
+                command.Parameters.Add(new OleDbParameter("@idPermission", pa.IdPermission.Id));
+            }
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)

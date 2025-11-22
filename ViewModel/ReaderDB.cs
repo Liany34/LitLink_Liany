@@ -44,22 +44,63 @@ namespace ViewModel
             Reader r = entity as Reader;
             if (r != null)
             {
-                string sqlStr = $"UPDATE Reader SET Nickname=@penName, Genre=@genre, InformationAboutAuthor=@informationAboutAuthor WHERE ID=@id";
+                string sqlStr = $"UPDATE Reader SET Nickname=@nickname, PremiumSubscription=@premiumSubscription, DateOfBirth=@dateOfBirth WHERE ID=@id";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@penName", a.PenName));
-                command.Parameters.Add(new OleDbParameter("@genre", a.Genre.Id));
-                command.Parameters.Add(new OleDbParameter("@informationAboutAuthor", a.InformationAboutAuthor));
-                command.Parameters.Add(new OleDbParameter("@id", a.Id));
+                command.Parameters.Add(new OleDbParameter("@nickname", r.Nickname));
+                command.Parameters.Add(new OleDbParameter("@premiumSubsciption", r.PremiumSubscription));
+                command.Parameters.Add(new OleDbParameter("@dateOfBirth", r.DateOfBirth));
+                command.Parameters.Add(new OleDbParameter("@id", r.Id));
             }
         }
         public override void Update(BaseEntity entity)
         {
-            Author a = entity as Author;
-            if (a != null)
+            Reader r = entity as Reader;
+            if (r != null)
             {
                 updated.Add(new ChangeEntity(this.CreateUpdatedSQL, entity));
                 updated.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
+            }
+        }
+        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Reader r = entity as Reader;
+            if (r != null)
+            {
+                string sqlStr = $"Insert INTO Reader (Nickname, PremiumSubscription, DateOfBirth) VALUES (@nickname, @premiumSubscription, @dateOfBirth)";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@nickname", r.Nickname ));
+                command.Parameters.Add(new OleDbParameter("@premiumSubscription", r.PremiumSubscription));
+                command.Parameters.Add(new OleDbParameter("@dateOfBirth", r.DateOfBirth));
+            }
+        }
+        public override void Insert(BaseEntity entity)
+        {
+            Reader r = entity as Reader;
+            if (r != null)
+            {
+                inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
+                inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
+            }
+        }
+        protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        {
+            Reader r = entity as Reader;
+            if (r != null)
+            {
+                string sqlStr = $"DELETE FROM Reader WHERE ID=@id";
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@id", r.Id));
+            }
+        }
+        public override void Delete(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity();
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                deleted.Add(new ChangeEntity(this.CreateDeletedSQL, entity));
+                deleted.Add(new ChangeEntity(base.CreateDeletedSQL, entity));
             }
         }
     }

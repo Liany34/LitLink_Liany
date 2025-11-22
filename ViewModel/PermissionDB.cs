@@ -41,12 +41,25 @@ namespace ViewModel
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Permission p = entity as Permission;
+            if (p != null)
+            {
+                string sqlStr = $"DELETE FROM Permission WHERE ID=@id";
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@id", p.Id));
+            }
         }
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Permission p = entity as Permission;
+            if (p != null)
+            {
+                string sqlStr = $"Insert INTO Permission (Name) VALUES (@name)";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@name", p.Name));
+            }
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)

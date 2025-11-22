@@ -41,12 +41,25 @@ namespace ViewModel
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Genre g = entity as Genre;
+            if (g != null)
+            {
+                string sqlStr = $"DELETE FROM Genre WHERE ID=@id";
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@id", g.Id));
+            }
         }
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Genre g = entity as Genre;
+            if (g != null)
+            {
+                string sqlStr = $"Insert INTO Genre (Name) VALUES (@name)";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@name", g.Name));
+            }
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)

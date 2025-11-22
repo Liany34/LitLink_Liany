@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ViewModel
 {
-    public class Series_DetailDB :BaseDB
+    public class Series_DetailDB : BaseDB
     {
         public ListSeries_Detail SelectAll()
         {
@@ -40,12 +40,26 @@ namespace ViewModel
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Series_Detail sd = entity as Series_Detail;
+            if(sd != null)
+            {
+                string sqlStr = $"DELETE FROM Series_Detail WHERE ID=@id";
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@id", sd.Id));
+            }
         }
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            Series_Detail sd = entity as Series_Detail;
+            if (sd != null)
+            {
+                string sqlStr = $"Insert INTO Series_Detail (IdSeries, IdBook) VALUES (@idSeries, @idBook)";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@idSeries", sd.IdSeries.Id));
+                command.Parameters.Add(new OleDbParameter("@idBook", sd.IdBook.Id));
+            }
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)

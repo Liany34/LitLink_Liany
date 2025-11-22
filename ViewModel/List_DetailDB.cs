@@ -40,12 +40,26 @@ namespace ViewModel
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            List_Detail ld = entity as List_Detail;
+            if (ld != null)
+            {
+                string sqlStr = $"DELETE FROM List_Detail WHERE ID=@id";
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@id", ld.Id));
+            }
         }
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            throw new NotImplementedException();
+            List_Detail ld = entity as List_Detail;
+            if (ld != null)
+            {
+                string sqlStr = $"Insert INTO List_Detail (IdList, IdBook) VALUES (@idList, @idBook)";
+
+                command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@idList", ld.IdList.Id));
+                command.Parameters.Add(new OleDbParameter("@idBook", ld.IdBook.Id));
+            }
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
