@@ -1,0 +1,6 @@
+@LitLink_By_Lian_Z__HostAddress = http://localhost:5265
+
+GET {{LitLink_By_Lian_Z__HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
