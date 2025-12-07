@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitLink_By_Lian_Z.", "LitLink_By_Lian_Z\LitLink_By_Lian_Z..csproj", "{ACD1449D-A450-44C4-8192-674B3487858D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "client\Client.csproj", "{997AB444-EE63-4B29-BCD7-0A702BC791E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{ACD1449D-A450-44C4-8192-674B3487858D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACD1449D-A450-44C4-8192-674B3487858D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACD1449D-A450-44C4-8192-674B3487858D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{997AB444-EE63-4B29-BCD7-0A702BC791E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{997AB444-EE63-4B29-BCD7-0A702BC791E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{997AB444-EE63-4B29-BCD7-0A702BC791E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{997AB444-EE63-4B29-BCD7-0A702BC791E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
