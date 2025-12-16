@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitLink_By_Lian_Z.", "LitLink_By_Lian_Z\LitLink_By_Lian_Z..csproj", "{ACD1449D-A450-44C4-8192-674B3487858D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "client\Client.csproj", "{997AB444-EE63-4B29-BCD7-0A702BC791E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "client\Service.csproj", "{997AB444-EE63-4B29-BCD7-0A702BC791E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
