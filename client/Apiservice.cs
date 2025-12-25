@@ -13,10 +13,20 @@ namespace Service
     {
         string uri;
         public HttpClient client;
+
         public Apiservice()
         {
-            uri = "http://localhost:5265";
+            uri = "https://mcw4p0zt-5265.euw.devtunnels.ms";
             client = new HttpClient();
+        }
+        public Apiservice(HttpClient client, string baseUri)
+        {
+            uri = "https://mcw4p0zt-5265.euw.devtunnels.ms";
+            client = new HttpClient();
+            this.client = client ?? throw new 
+                ArgumentNullException(nameof(client));
+            this.uri = baseUri ?? throw new 
+                ArgumentNullException(nameof(baseUri));
         }
 
         public async Task<ListAuthor> GetAllAuthors()
@@ -33,7 +43,7 @@ namespace Service
         }
         public async Task<int> DeleteAnAuthor(int id)
         {
-            return (await client.DeleteAsync(uri + "/api/Select/BookSelector" + id)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + "/api/Select/DeleteAnAuthor/{id}" + id)).IsSuccessStatusCode ? 1 : 0;
         }
 
 
@@ -65,7 +75,7 @@ namespace Service
         }
         public async Task<int> UpdateABookList(Book_List bl)
         {
-            return (await client.PutAsJsonAsync<Book_List>(uri + "/api/Select/DeleteABookList/{id}", bl)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Book_List>(uri + "/api/Select/UpdateABookList", bl)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteABookList(int id)
         {
@@ -198,7 +208,7 @@ namespace Service
         }
         public async Task<int> InsertAPermissionForAdministrator(Permissions_for_Administrator pa)
         {
-            return (await client.PostAsJsonAsync<Permissions_for_Administrator>(uri + "/api/Select/UpdateAPermissions_for_Administrator", pa)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PostAsJsonAsync<Permissions_for_Administrator>(uri + "/api/Select/InsertAPermissions_for_Administrator", pa)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> UpdateAPermissionForAdministrator(Permissions_for_Administrator pa)
         {

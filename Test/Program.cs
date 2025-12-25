@@ -1,4 +1,5 @@
 ﻿using Model;
+using System.Diagnostics;
 using ViewModel;
 
 
@@ -22,8 +23,6 @@ public class Program
         bsdb.Insert(bsInsert);
         x = bsdb.SaveChanges();
         Console.WriteLine($"{x} rows were inserted");
-        foreach (Book_Series bs in bsList)
-            Console.WriteLine(bs);
         Console.WriteLine();
 
         Book_Series bsUpdate = bsList.Last();
@@ -31,16 +30,12 @@ public class Program
         bsdb.Update(bsUpdate);
         y = bsdb.SaveChanges();
         Console.WriteLine($"{y} rows were updated");
-        foreach (Book_Series bs in bsList)
-            Console.WriteLine(bs);
         Console.WriteLine();
 
         Book_Series bsDelete = bsList.Last();
         bsdb.Delete(bsDelete);
         z = bsdb.SaveChanges();
         Console.WriteLine($"{z} rows were deleted");
-        foreach (Book_Series bs in bsList)
-            Console.WriteLine(bs);
         Console.WriteLine();
 
         Console.WriteLine();
@@ -62,8 +57,6 @@ public class Program
         gdb.Insert(gInsert);
         x = gdb.SaveChanges();
         Console.WriteLine($"{x} rows were inserted");
-        foreach(Genre g in gList)
-            Console.WriteLine(g);
         Console.WriteLine();
 
         Genre gUpdate = gList.Last();
@@ -71,16 +64,12 @@ public class Program
         gdb.Update(gUpdate);
         y = gdb.SaveChanges();
         Console.WriteLine($"{y} rows were updated");
-        foreach (Genre g in gList)
-            Console.WriteLine(g);
         Console.WriteLine();
 
         Genre gDelete = gList.Last();
         gdb.Delete(gDelete);
         z = gdb.SaveChanges();
         Console.WriteLine($"{z} rows were deleted");
-        foreach (Genre g in gList)
-            Console.WriteLine(g);
         Console.WriteLine();
 
         Console.WriteLine();
@@ -102,8 +91,6 @@ public class Program
         idb.Insert(iInsert);
         x = idb.SaveChanges();
         Console.WriteLine($"{x} rows were inserted");
-        foreach (Intrest i in iList)
-            Console.WriteLine(i);
         Console.WriteLine();
 
         Intrest iUpdate = iList.Last();
@@ -111,16 +98,12 @@ public class Program
         idb.Update(iUpdate);
         y = idb.SaveChanges();
         Console.WriteLine($"{y} rows were updated");
-        foreach (Intrest i in iList)
-            Console.WriteLine(i);
         Console.WriteLine();
 
         Intrest iDelete = iList.Last();
         idb.Delete(iDelete);
         z = idb.SaveChanges();
         Console.WriteLine($"{z} rows were deleted");
-        foreach (Intrest i in iList)
-            Console.WriteLine(i);
         Console.WriteLine();
 
         Console.WriteLine();
@@ -142,8 +125,6 @@ public class Program
         ldb.Insert(lInsert);
         x = ldb.SaveChanges();
         Console.WriteLine($"{x} rows were inserted");
-        foreach (Language l in lList)
-            Console.WriteLine(l);
         Console.WriteLine();
 
         Language lUpdate = lList.Last();
@@ -151,16 +132,12 @@ public class Program
         ldb.Update(lUpdate);
         y = ldb.SaveChanges();
         Console.WriteLine($"{y} rows were updated");
-        foreach (Language l in lList)
-            Console.WriteLine(l);
         Console.WriteLine();
 
         Language lDelete = lList.Last();
         ldb.Delete(lDelete);
         z = ldb.SaveChanges();
         Console.WriteLine($"{z} rows were deleted");
-        foreach (Language l in lList)
-            Console.WriteLine(l);
         Console.WriteLine();
 
         Console.WriteLine();
@@ -182,8 +159,6 @@ public class Program
         pdb.Insert(pInsert);
         x = pdb.SaveChanges();
         Console.WriteLine($"{x} rows were inserted");
-        foreach (Permission p in pList)
-            Console.WriteLine(p);
         Console.WriteLine();
 
         Permission pUpdate = pList.Last();
@@ -191,16 +166,12 @@ public class Program
         pdb.Update(pUpdate);
         y = pdb.SaveChanges();
         Console.WriteLine($"{y} rows were updated");
-        foreach (Permission p in pList)
-            Console.WriteLine(p);
         Console.WriteLine();
 
         Permission pDelete = pList.Last();
         pdb.Delete(pDelete);
         z = pdb.SaveChanges();
         Console.WriteLine($"{z} rows were deleted");
-        foreach (Permission p in pList)
-            Console.WriteLine(p);
         Console.WriteLine();
 
         Console.WriteLine();
@@ -227,8 +198,6 @@ public class Program
         udb.Insert(uInsert);
         x = udb.SaveChanges();
         Console.WriteLine($"{x} rows were inserted");
-        foreach (User u in uList)
-            Console.WriteLine(u);
         Console.WriteLine();
 
         User uUpdate = uList.Last();
@@ -241,284 +210,12 @@ public class Program
         udb.Update(uUpdate);
         y = udb.SaveChanges();
         Console.WriteLine($"{y} rows were updated");
-        foreach (User u in uList)
-            Console.WriteLine(u);
         Console.WriteLine();
 
         User uDelete = uList.Last();
         udb.Delete(uDelete);
         z = udb.SaveChanges();
         Console.WriteLine($"{z} rows were deleted");
-        foreach (User u in uList)
-            Console.WriteLine(u);
-        Console.WriteLine();
-
-        Console.WriteLine();
-        Console.WriteLine();
-
-
-
-
-        Console.WriteLine("Book:");
-
-        BookDB bdb = new BookDB();
-        ListBook bList = bdb.SelectAll();
-        foreach (Book b in bList)
-            Console.WriteLine(b);
-        Console.WriteLine();
-
-        Book bInsert = new Book();
-        bInsert.BookName = "The Silent Patient";
-        bInsert.PublicationDate = new DateTime(2019, 2, 5);
-        bInsert.Price = 18;
-        bInsert.IdAuthor = AuthorDB.SelectById(29);
-        bInsert.IdGenre = GenreDB.SelectById(16);
-        bInsert.Discount = false;
-        bInsert.Information = "A thrilling";
-        bInsert.Cover = "silent_patient.jpg";
-        bInsert.IdLanguage = LanguageDB.SelectById(20);
-        bdb.Insert(bInsert);
-        x = bdb.SaveChanges();
-        Console.WriteLine($"{x} rows were inserted");
-        foreach (Book b in bList)
-            Console.WriteLine(b);
-        Console.WriteLine();
-
-        Book bUpdate = bList.Last();
-        bUpdate.BookName = "The Silent Patient - Updated";
-        bUpdate.PublicationDate = new DateTime(2019, 2, 5);
-        bUpdate.Price = 18;
-        bUpdate.IdAuthor = AuthorDB.SelectById(29);
-        bUpdate.IdGenre = GenreDB.SelectById(16);
-        bUpdate.Discount = false;
-        bUpdate.Information = "A thrilling";
-        bUpdate.Cover = "silent_patient.jpg";
-        bUpdate.IdLanguage = LanguageDB.SelectById(20);
-        bdb.Update(bUpdate);
-        y = bdb.SaveChanges();
-        Console.WriteLine($"{y} rows were updated");
-        foreach (Book b in bList)
-            Console.WriteLine(b);
-        Console.WriteLine();
-
-        Book bDelete = bList.Last();
-        bdb.Delete(bDelete);
-        z = bdb.SaveChanges();
-        Console.WriteLine($"{z} rows were deleted");
-        foreach (Book b in bList)
-            Console.WriteLine(b);
-        Console.WriteLine();
-
-        Console.WriteLine();
-        Console.WriteLine();
-
-
-
-
-        Console.WriteLine("Book_List:");
-
-        Book_ListDB bldb = new Book_ListDB();
-        ListBook_List blList = bldb.SelectAll();
-        foreach (Book_List bl in blList)
-            Console.WriteLine(bl);
-        Console.WriteLine();
-
-        Book_List blInsert = new Book_List();
-        blInsert.IdReader = ReaderDB.SelectById(39);
-        blInsert.ListName = "Summer Reads";
-        blInsert.IsPublic = true;
-        bldb.Insert(blInsert);
-        x = bldb.SaveChanges();
-        Console.WriteLine($"{x} rows were inserted");
-        foreach (Book_List bl in blList)
-            Console.WriteLine(bl);
-        Console.WriteLine();
-
-        Book_List blUpdate = blList.Last();
-        blUpdate.IdReader = ReaderDB.SelectById(39);
-        blUpdate.ListName = "Summer Reads Updated";
-        blUpdate.IsPublic = true;
-        bldb.Update(blUpdate);
-        y = bldb.SaveChanges();
-        Console.WriteLine($"{y} rows were updated");
-        foreach (Book_List bl in blList)
-            Console.WriteLine(bl);
-        Console.WriteLine();
-
-        Book_List blDelete = blList.Last();
-        bldb.Delete(blDelete);
-        z = bldb.SaveChanges();
-        Console.WriteLine($"{z} rows were deleted");
-        foreach (Book_List bl in blList)
-            Console.WriteLine(bl);
-        Console.WriteLine();
-
-        Console.WriteLine();
-        Console.WriteLine();
-
-
-
-
-        Console.WriteLine("Intrest_Reader:");
-
-        Intrest_ReaderDB irdb = new Intrest_ReaderDB();
-        ListIntrest_Reader irList = irdb.SelectAll();
-        foreach (Intrest_Reader ir in irList)
-            Console.WriteLine(ir);
-        Console.WriteLine();
-
-        Intrest_Reader irInsert = new Intrest_Reader();
-        irInsert.IdReader = ReaderDB.SelectById(39);
-        irInsert.IdIntrest = IntrestDB.SelectById(16);
-        irdb.Insert(irInsert);
-        x = irdb.SaveChanges();
-        Console.WriteLine($"{x} rows were inserted");
-        foreach (Intrest_Reader ir in irList)
-            Console.WriteLine(ir);
-        Console.WriteLine();
-
-        Intrest_Reader irUpdate = irList.Last();
-        irUpdate.IdReader = ReaderDB.SelectById(39);
-        irUpdate.IdIntrest = IntrestDB.SelectById(17);
-        irdb.Update(irUpdate);
-        y = irdb.SaveChanges();
-        Console.WriteLine($"{y} rows were updated");
-        foreach (Intrest_Reader ir in irList)
-            Console.WriteLine(ir);
-        Console.WriteLine();
-
-        Intrest_Reader irDelete = irList.Last();
-        irdb.Delete(irDelete);
-        z = irdb.SaveChanges();
-        Console.WriteLine($"{z} rows were deleted");
-        foreach (Intrest_Reader ir in irList)
-            Console.WriteLine(ir);
-        Console.WriteLine();
-
-        Console.WriteLine();
-        Console.WriteLine();
-
-
-
-
-        Console.WriteLine("List_Detail:");
-
-        List_DetailDB lddb = new List_DetailDB();
-        ListList_Detail ldList = lddb.SelectAll();
-        foreach (List_Detail ld in ldList)
-            Console.WriteLine(ld);
-        Console.WriteLine();
-
-        List_Detail ldInsert = new List_Detail();
-        ldInsert.IdList = Book_ListDB.SelectById(12);
-        ldInsert.IdBook = BookDB.SelectById(15);
-        lddb.Insert(ldInsert);
-        x = lddb.SaveChanges();
-        Console.WriteLine($"{x} rows were inserted");
-        foreach (List_Detail ld in ldList)
-            Console.WriteLine(ld);
-        Console.WriteLine();
-
-        List_Detail ldUpdate = ldList.Last();
-        ldUpdate.IdList = Book_ListDB.SelectById(12);
-        ldUpdate.IdBook = BookDB.SelectById(16);
-        lddb.Update(ldUpdate);
-        y = lddb.SaveChanges();
-        Console.WriteLine($"{y} rows were updated");
-        foreach (List_Detail ld in ldList)
-            Console.WriteLine(ld);
-        Console.WriteLine();
-
-        List_Detail ldDelete = ldList.Last();
-        lddb.Delete(ldDelete);
-        z = lddb.SaveChanges();
-        Console.WriteLine($"{z} rows were deleted");
-        foreach (List_Detail ld in ldList)
-            Console.WriteLine(ld);
-        Console.WriteLine();
-
-        Console.WriteLine();
-        Console.WriteLine();
-
-
-
-
-        Console.WriteLine("Permission_for_Administrator:");
-
-        Permissions_for_AdministratorDB pfadb = new Permissions_for_AdministratorDB();
-        ListPermissions_for_Administrator pfaList = pfadb.SelectAll();
-        foreach (Permissions_for_Administrator pfa in pfaList)
-            Console.WriteLine(pfa);
-        Console.WriteLine();
-
-        Permissions_for_Administrator pfaInsert = new Permissions_for_Administrator();
-        pfaInsert.IdAdministrator = UserDB.SelectById(29);
-        pfaInsert.IdPermission = PermissionDB.SelectById(18);
-        pfadb.Insert(pfaInsert);
-        x = pfadb.SaveChanges();
-        Console.WriteLine($"{x} rows were inserted");
-        foreach (Permissions_for_Administrator pfa in pfaList)
-            Console.WriteLine(pfa);
-        Console.WriteLine();
-
-        Permissions_for_Administrator pfaUpdate = pfaList.Last();
-        pfaUpdate.IdAdministrator = UserDB.SelectById(29);
-        pfaUpdate.IdPermission = PermissionDB.SelectById(19);
-        pfadb.Update(pfaUpdate);
-        y = pfadb.SaveChanges();
-        Console.WriteLine($"{y} rows were updated");
-        foreach (Permissions_for_Administrator pfa in pfaList)
-            Console.WriteLine(pfa);
-        Console.WriteLine();
-
-        Permissions_for_Administrator pfaDelete = pfaList.Last();
-        pfadb.Delete(pfaDelete);
-        z = pfadb.SaveChanges();
-        Console.WriteLine($"{z} rows were deleted");
-        foreach (Permissions_for_Administrator pfa in pfaList)
-            Console.WriteLine(pfa);
-        Console.WriteLine();
-
-        Console.WriteLine();
-        Console.WriteLine();
-
-
-
-
-        Console.WriteLine("Series_Detail:");
-
-        Series_DetailDB sddb = new Series_DetailDB();
-        ListSeries_Detail sdList = sddb.SelectAll();
-        foreach (Series_Detail sd in sdList)
-            Console.WriteLine(sd);
-        Console.WriteLine();
-
-        Series_Detail sdInsert = new Series_Detail();
-        sdInsert.IdSeries = Book_SeriesDB.SelectById(13);
-        sdInsert.IdBook = BookDB.SelectById(15);
-        sddb.Insert(sdInsert);
-        x = sddb.SaveChanges();
-        Console.WriteLine($"{x} rows were inserted");
-        foreach (Series_Detail sd in sdList)
-            Console.WriteLine(sd);
-        Console.WriteLine();
-
-        Series_Detail sdUpdate = sdList.Last();
-        sdUpdate.IdSeries = Book_SeriesDB.SelectById(13);
-        sdUpdate.IdBook = BookDB.SelectById(16);
-        sddb.Update(sdUpdate);
-        y = sddb.SaveChanges();
-        Console.WriteLine($"{y} rows were updated");
-        foreach (Series_Detail sd in sdList)
-            Console.WriteLine(sd);
-        Console.WriteLine();
-
-        Series_Detail sdDelete = sdList.Last();
-        sddb.Delete(sdDelete);
-        z = sddb.SaveChanges();
-        Console.WriteLine($"{z} rows were deleted");
-        foreach (Series_Detail sd in sdList)
-            Console.WriteLine(sd);
         Console.WriteLine();
 
         Console.WriteLine();
@@ -543,13 +240,11 @@ public class Program
         aInsert.Username = "markTwin1";
         aInsert.Pass = "markPass1";
         aInsert.PenName = "Mark Twain";
-        aInsert.Genre = GenreDB.SelectById(16);
+        aInsert.Genre = gList.First();
         aInsert.InformationAboutAuthor = "Famous American author";
         adb.Insert(aInsert);
         x = adb.SaveChanges();
         Console.WriteLine($"{x} rows were inserted");
-        foreach (Author a in aList)
-            Console.WriteLine(a);
         Console.WriteLine();
 
         Author aUpdate = aList.Last();
@@ -560,21 +255,67 @@ public class Program
         aUpdate.Username = "markTwin1";
         aUpdate.Pass = "markPass1";
         aUpdate.PenName = "Mark Twain";
-        aUpdate.Genre = GenreDB.SelectById(16);
+        aUpdate.Genre = gList.First();
         aUpdate.InformationAboutAuthor = "Famous American author";
         adb.Update(aUpdate);
         y = adb.SaveChanges();
         Console.WriteLine($"{y} rows were updated");
-        foreach (Author a in aList)
-            Console.WriteLine(a);
         Console.WriteLine();
 
         Author aDelete = aList.Last();
         adb.Delete(aDelete);
         z = adb.SaveChanges();
         Console.WriteLine($"{z} rows were deleted");
-        foreach (Author a in aList)
-            Console.WriteLine(a);
+        Console.WriteLine();
+
+        Console.WriteLine();
+        Console.WriteLine();
+
+
+
+
+        Console.WriteLine("Book:");
+
+        BookDB bdb = new BookDB();
+        ListBook bList = bdb.SelectAll();
+        foreach (Book b in bList)
+            Console.WriteLine(b);
+        Console.WriteLine();
+
+        Book bInsert = new Book();
+        bInsert.BookName = "The Silent Patient";
+        bInsert.PublicationDate = new DateTime(2019, 2, 5);
+        bInsert.Price = 18;
+        bInsert.IdAuthor = aList.First();
+        bInsert.IdGenre = gList.First();
+        bInsert.Discount = false;
+        bInsert.Information = "A thrilling";
+        bInsert.Cover = "silent_patient.jpg";
+        bInsert.IdLanguage = lList.First();
+        bdb.Insert(bInsert);
+        x = bdb.SaveChanges();
+        Console.WriteLine($"{x} rows were inserted");
+        Console.WriteLine();
+
+        Book bUpdate = bList.Last();
+        bUpdate.BookName = "The Silent Patient - Updated";
+        bUpdate.PublicationDate = new DateTime(2019, 2, 5);
+        bUpdate.Price = 18;
+        bUpdate.IdAuthor = aList.First();
+        bUpdate.IdGenre = gList.First();
+        bUpdate.Discount = false;
+        bUpdate.Information = "A thrilling";
+        bUpdate.Cover = "silent_patient.jpg";
+        bUpdate.IdLanguage = lList.First();
+        bdb.Update(bUpdate);
+        y = bdb.SaveChanges();
+        Console.WriteLine($"{y} rows were updated");
+        Console.WriteLine();
+
+        Book bDelete = bList.Last();
+        bdb.Delete(bDelete);
+        z = bdb.SaveChanges();
+        Console.WriteLine($"{z} rows were deleted");
         Console.WriteLine();
 
         Console.WriteLine();
@@ -604,8 +345,6 @@ public class Program
         rdb.Insert(rInsert);
         x = rdb.SaveChanges();
         Console.WriteLine($"{x} rows were inserted");
-        foreach (Reader r in rList)
-            Console.WriteLine(r);
         Console.WriteLine();
 
         Reader rUpdate = rList.Last();
@@ -621,19 +360,193 @@ public class Program
         rdb.Update(rUpdate);
         y = rdb.SaveChanges();
         Console.WriteLine($"{y} rows were updated");
-        foreach (Reader r in rList)
-            Console.WriteLine(r);
         Console.WriteLine();
 
         Reader rDelete = rList.Last();
         rdb.Delete(rDelete);
         z = rdb.SaveChanges();
         Console.WriteLine($"{z} rows were deleted");
-        foreach (Reader r in rList)
-            Console.WriteLine(r);
         Console.WriteLine();
 
         Console.WriteLine();
         Console.WriteLine();
+
+
+
+
+        Console.WriteLine("Book_List:");
+
+        Book_ListDB bldb = new Book_ListDB();
+        ListBook_List blList = bldb.SelectAll();
+        foreach (Book_List bl in blList)
+            Console.WriteLine(bl);
+        Console.WriteLine();
+
+        Book_List blInsert = new Book_List();
+        blInsert.IdReader = rList.First();
+        blInsert.ListName = "Summer Reads";
+        blInsert.IsPublic = true;
+        bldb.Insert(blInsert);
+        x = bldb.SaveChanges();
+        Console.WriteLine($"{x} rows were inserted");
+        Console.WriteLine();
+
+        Book_List blUpdate = blList.Last();
+        blUpdate.IdReader = rList.First();
+        blUpdate.ListName = "Summer Reads Updated";
+        blUpdate.IsPublic = true;
+        bldb.Update(blUpdate);
+        y = bldb.SaveChanges();
+        Console.WriteLine($"{y} rows were updated");
+        Console.WriteLine();
+
+        Book_List blDelete = blList.Last();
+        bldb.Delete(blDelete);
+        z = bldb.SaveChanges();
+        Console.WriteLine($"{z} rows were deleted");
+        Console.WriteLine();
+
+        Console.WriteLine();
+        Console.WriteLine();
+
+
+
+
+        Console.WriteLine("Intrest_Reader:");
+
+        Intrest_ReaderDB irdb = new Intrest_ReaderDB();
+        ListIntrest_Reader irList = irdb.SelectAll();
+        foreach (Intrest_Reader ir in irList)
+            Console.WriteLine(ir);
+        Console.WriteLine();
+
+        Intrest_Reader irInsert = new Intrest_Reader();
+        irInsert.IdReader = rList.First();
+        irInsert.IdIntrest = iList.First();
+        irdb.Insert(irInsert);
+        x = irdb.SaveChanges();
+        Console.WriteLine($"{x} rows were inserted");
+        Console.WriteLine();
+
+        Intrest_Reader irUpdate = irList.Last();
+        irUpdate.IdReader = rList.First();
+        irUpdate.IdIntrest = iList.First();
+        irdb.Update(irUpdate);
+        y = irdb.SaveChanges();
+        Console.WriteLine($"{y} rows were updated");
+        Console.WriteLine();
+
+        Intrest_Reader irDelete = irList.Last();
+        irdb.Delete(irDelete);
+        z = irdb.SaveChanges();
+        Console.WriteLine($"{z} rows were deleted");
+        Console.WriteLine();
+
+        Console.WriteLine();
+        Console.WriteLine();
+
+
+
+
+        Console.WriteLine("List_Detail:");
+
+        List_DetailDB lddb = new List_DetailDB();
+        ListList_Detail ldList = lddb.SelectAll();
+        foreach (List_Detail ld in ldList)
+            Console.WriteLine(ld);
+        Console.WriteLine();
+
+        List_Detail ldInsert = new List_Detail();
+        ldInsert.IdList = blList.Last();
+        ldInsert.IdBook = bList.First();
+        lddb.Insert(ldInsert);
+        x = lddb.SaveChanges();
+        Console.WriteLine($"{x} rows were inserted");
+        Console.WriteLine();
+
+        List_Detail ldUpdate = ldList.Last();
+        ldUpdate.IdList = blList.First();
+        ldUpdate.IdBook = bList.First();
+        lddb.Update(ldUpdate);
+        y = lddb.SaveChanges();
+        Console.WriteLine($"{y} rows were updated");
+        Console.WriteLine();
+
+        List_Detail ldDelete = ldList.Last();
+        lddb.Delete(ldDelete);
+        z = lddb.SaveChanges();
+        Console.WriteLine($"{z} rows were deleted");
+        Console.WriteLine();
+
+        Console.WriteLine();
+        Console.WriteLine();
+
+
+
+
+        Console.WriteLine("Permission_for_Administrator:");
+
+        Permissions_for_AdministratorDB pfadb = new Permissions_for_AdministratorDB();
+        ListPermissions_for_Administrator pfaList = pfadb.SelectAll();
+        foreach (Permissions_for_Administrator pfa in pfaList)
+            Console.WriteLine(pfa);
+        Console.WriteLine();
+
+        Permissions_for_Administrator pfaInsert = new Permissions_for_Administrator();
+        pfaInsert.IdAdministrator = uList.First();
+        pfaInsert.IdPermission = pList.First();
+        pfadb.Insert(pfaInsert);
+        x = pfadb.SaveChanges();
+        Console.WriteLine($"{x} rows were inserted");
+        Console.WriteLine();
+
+        Permissions_for_Administrator pfaUpdate = pfaList.Last();
+        pfaUpdate.IdAdministrator = uList.First();
+        pfaUpdate.IdPermission = pList.First();
+        pfadb.Update(pfaUpdate);
+        y = pfadb.SaveChanges();
+        Console.WriteLine($"{y} rows were updated");
+        Console.WriteLine();
+
+        Permissions_for_Administrator pfaDelete = pfaList.Last();
+        pfadb.Delete(pfaDelete);
+        z = pfadb.SaveChanges();
+        Console.WriteLine($"{z} rows were deleted");
+        Console.WriteLine();
+
+        Console.WriteLine();
+        Console.WriteLine();
+
+
+
+
+        Console.WriteLine("Series_Detail:");
+
+        Series_DetailDB sddb = new Series_DetailDB();
+        ListSeries_Detail sdList = sddb.SelectAll();
+        foreach (Series_Detail sd in sdList)
+            Console.WriteLine(sd);
+        Console.WriteLine();
+
+        Series_Detail sdInsert = new Series_Detail();
+        sdInsert.IdSeries = bsList.First();
+        sdInsert.IdBook = bList.First();
+        sddb.Insert(sdInsert);
+        x = sddb.SaveChanges();
+        Console.WriteLine($"{x} rows were inserted");
+        Console.WriteLine();
+
+        Series_Detail sdUpdate = sdList.Last();
+        sdUpdate.IdSeries = bsList.First();
+        sdUpdate.IdBook = bList.First();
+        sddb.Update(sdUpdate);
+        y = sddb.SaveChanges();
+        Console.WriteLine($"{y} rows were updated");
+        Console.WriteLine();
+
+        Series_Detail sdDelete = sdList.Last();
+        sddb.Delete(sdDelete);
+        z = sddb.SaveChanges();
+        Console.WriteLine($"{z} rows were deleted");
     }
 }
