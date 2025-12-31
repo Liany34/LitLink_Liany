@@ -458,12 +458,11 @@ namespace LitLink_By_Lian_Z_.Controllers
         }
 
         [HttpPut]
-        public int UpdateAReader([FromBody] Reader reader)
+        public void UpdateAReader([FromBody] Reader reader)
         {
             ReaderDB db = new ReaderDB();
             db.Update(reader);
             int x = db.SaveChanges();
-            return x;
         }
 
         [HttpDelete("{id}")]

@@ -39,11 +39,11 @@ namespace Service
         }
         public async Task<int> UpdateAnAuthor(Author a)
         {
-            return (await client.PutAsJsonAsync<Author>(uri + "/api/Select/UpdateAnAuthor", a)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Author>(uri + "/api/Select/UpdateAnAuthor/", a)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteAnAuthor(int id)
         {
-            return (await client.DeleteAsync(uri + "/api/Select/DeleteAnAuthor/{id}" + id)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteAnAuthor/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
 
@@ -61,7 +61,7 @@ namespace Service
         }
         public async Task<int> DeleteABook(int id)
         {
-            return (await client.DeleteAsync(uri + "/api/Select/DeleteABook/{id}" + id)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteABook/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
 
@@ -79,7 +79,7 @@ namespace Service
         }
         public async Task<int> DeleteABookList(int id)
         {
-            return (await client.DeleteAsync(uri + "/api/Select/DeleteABookList/{id}" + id)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteABookList/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
 
@@ -97,7 +97,7 @@ namespace Service
         }
         public async Task<int> DeleteABookSeries(int id)
         {
-            return (await client.DeleteAsync(uri + "/api/Select/DeleteABookSeries/{id}" + id)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteABookSeries/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<ListGenre> GetAllGenres()
@@ -114,7 +114,7 @@ namespace Service
         }
         public async Task<int> DeleteAGenre(int id)
         {
-            return (await client.DeleteAsync(uri + "/api/Select/DeleteAGenre/{id}" + id)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteAGenre/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<ListIntrest> GetAllIntrests()
@@ -131,7 +131,7 @@ namespace Service
         }
         public async Task<int> DeleteAnIntrest(int id)
         {
-            return (await client.DeleteAsync(uri + "/api/Select/DeleteAnIntrest/{id}" + id)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteAnIntrest/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<ListIntrest_Reader> GetAllIntrestReaders()
@@ -148,7 +148,7 @@ namespace Service
         }
         public async Task<int> DeleteAnIntrestReader(int id)
         {
-            return (await client.DeleteAsync(uri + "/api/Select/DeleteAnIntrestReader/{id}" + id)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteAnIntrestReader/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<ListLanguage> GetAllLanguages()
@@ -165,7 +165,7 @@ namespace Service
         }
         public async Task<int> DeleteALanguage(int id)
         {
-            return (await client.DeleteAsync(uri + "/api/Select/DeleteALanguage/{id}" + id)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteALanguage/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<ListList_Detail> GetAllListDetails()
@@ -182,7 +182,7 @@ namespace Service
         }
         public async Task<int> DeleteAListDetail(int id)
         {
-            return (await client.DeleteAsync(uri + "/api/Select/DeleteAListDetail/{id}" + id)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteAListDetail/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<ListPermission> GetAllPermissions()
@@ -199,7 +199,7 @@ namespace Service
         }
         public async Task<int> DeleteAPermission(int id)
         {
-            return (await client.DeleteAsync(uri + "/api/Select/DeleteAPermission/{id}" + id)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteAPermission/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<ListPermissions_for_Administrator> GetAllPermissionsForAdministrators()
@@ -216,7 +216,7 @@ namespace Service
         }
         public async Task<int> DeleteAPermissionForAdministrator(int id)
         {
-            return (await client.DeleteAsync(uri + "/api/Select/DeleteAPermissions_for_Administrator/{id}" + id)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteAPermissions_for_Administrator/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<ListReader> GetAllReaders()
@@ -233,7 +233,7 @@ namespace Service
         }
         public async Task<int> DeleteAReader(int id)
         {
-            return (await client.DeleteAsync(uri + "/api/Select/DeleteAReader/{id}" + id)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteAReader/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<ListSeries_Detail> GetAllSeriesDetails()
@@ -250,7 +250,7 @@ namespace Service
         }
         public async Task<int> DeleteASeriesDetail(int id)
         {
-            return (await client.DeleteAsync(uri + "/api/Select/DeleteASeriesDetail/{id}" + id)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteASeriesDetail/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
         public async Task<ListUser> GetAllUsers()
@@ -267,7 +267,7 @@ namespace Service
         }
         public async Task<int> DeleteAUser(int id)
         {
-            return (await client.DeleteAsync(uri + "/api/Select/DeleteAUser/{id}" + id)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteAUser/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
     }
 }

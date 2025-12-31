@@ -67,9 +67,10 @@ namespace ViewModel
             Reader r = entity as Reader;
             if (r != null)
             {
-                string sqlStr = $"Insert INTO Reader (Nickname, PremiumSubscription, DateOfBirth) VALUES (@nickname, @premiumSubscription, @dateOfBirth)";
+                string sqlStr = $"Insert INTO Reader (Id, Nickname, PremiumSubscription, DateOfBirth) VALUES (@id, @nickname, @premiumSubscription, @dateOfBirth)";
 
                 command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@id", r.Id));
                 command.Parameters.Add(new OleDbParameter("@nickname", r.Nickname ));
                 command.Parameters.Add(new OleDbParameter("@premiumSubscription", r.PremiumSubscription));
                 command.Parameters.Add(new OleDbParameter("@dateOfBirth", r.DateOfBirth));
@@ -77,8 +78,8 @@ namespace ViewModel
         }
         public override void Insert(BaseEntity entity)
         {
-            Reader r = entity as Reader;
-            if (r != null)
+            BaseEntity reqEntity = this.NewEntity();
+            if (entity != null & entity.GetType() == reqEntity.GetType())
             {
                 inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
                 inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));

@@ -69,9 +69,10 @@ namespace ViewModel
             Author a = entity as Author;
             if (a != null)
             {
-                string sqlStr = $"INSERT INTO Author (PenName, Genre, InformationAboutAuthor) VALUES (@id, @penName, @genre, @informationAboutAuthor)";
+                string sqlStr = $"INSERT INTO Author (Id, PenName, Genre, InformationAboutAuthor) VALUES (@id, @penName, @genre, @informationAboutAuthor)";
                 
                 command.CommandText = sqlStr;
+                command.Parameters.Add(new OleDbParameter("@id", a.Id));
                 command.Parameters.Add(new OleDbParameter("@penName", a.PenName));
                 command.Parameters.Add(new OleDbParameter("@genre", a.Genre.Id));
                 command.Parameters.Add(new OleDbParameter("@informationAboutAuthor", a.InformationAboutAuthor));
@@ -79,8 +80,8 @@ namespace ViewModel
         }
         public override void Insert(BaseEntity entity)
         {
-            Author a = entity as Author;
-            if (a != null)
+            BaseEntity reqEntity = this.NewEntity();
+            if (entity != null & entity.GetType() == reqEntity.GetType())
             {
                 inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
                 inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
