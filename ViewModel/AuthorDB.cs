@@ -13,7 +13,7 @@ namespace ViewModel
     {
         public ListAuthor SelectAll()
         {
-            command.CommandText = $"SELECT [User].id, [User].firstName, [User].lastName, [User].phoneNumber, [User].email, [User].username, [User].pass, Author.penName, Author.genre, Author.informationAboutAuthor " +
+            command.CommandText = $"SELECT [User].id, [User].firstName, [User].lastName, [User].phoneNumber, [User].email, [User].username, [User].pass, [User].birthdate, Author.penName, Author.genre, Author.informationAboutAuthor " +
                 $"FROM ([User] INNER JOIN Author ON [User].id = Author.id)";
             ListAuthor aList = new ListAuthor(base.Select());
             return aList;

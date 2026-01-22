@@ -21,10 +21,16 @@ namespace ViewModel
             User u = entity as User;
             u.FirstName = reader["firstName"].ToString();
             u.LastName = reader["lastName"].ToString();
-            u.PhoneNumber = reader["phoneNumber"].ToString();
-            u.Email = reader["email"].ToString();
-            u.Username = reader["username"].ToString();
+            if(reader["phoneNumber"] != DBNull.Value)
+                u.PhoneNumber = reader["phoneNumber"].ToString();
+            else
+                u.PhoneNumber = null;
+            if (reader["email"] != DBNull.Value)
+                u.Email = reader["email"].ToString();
+            else
+                u.Username = reader["username"].ToString();
             u.Pass = reader["pass"].ToString();
+            u.Birthdate = (DateTime)reader["birthDate"];
             base.CreateModel(entity);
             return u;
         }
@@ -58,7 +64,7 @@ namespace ViewModel
             User u = entity as User;
             if (u != null)
             {
-                string sqlStr = $"Insert INTO [User] (FirstName, LastName, PhoneNumber, Email, Username, Pass) VALUES (@firstName, @lastName, @phoneNumber, @email, @username, @pass)";
+                string sqlStr = $"Insert INTO [User] (FirstName, LastName, PhoneNumber, Email, Username, Pass, Birthdate) VALUES (@firstName, @lastName, @phoneNumber, @email, @username, @pass, @birthdate)";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@firstName", u.FirstName));
@@ -67,6 +73,7 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@email", u.Email));
                 command.Parameters.Add(new OleDbParameter("@username", u.Username));
                 command.Parameters.Add(new OleDbParameter("@pass", u.Pass));
+                command.Parameters.Add(new OleDbParameter("@birthdate", u.Birthdate));
             }
         }
 
@@ -75,7 +82,7 @@ namespace ViewModel
             User u = entity as User;
             if (u != null)
             {
-                string sqlStr = $"UPDATE [User] SET FirstName=@firstName, LastName=@lastName, PhoneNumber=@phoneNumber, Email=@email, Username=@username, Pass=@pass WHERE ID=@id";
+                string sqlStr = $"UPDATE [User] SET FirstName=@firstName, LastName=@lastName, PhoneNumber=@phoneNumber, Email=@email, Username=@username, Pass=@pass, Birthdate=@birthdate WHERE ID=@id";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@firstName", u.FirstName));
@@ -84,6 +91,7 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@email", u.Email));
                 command.Parameters.Add(new OleDbParameter("@username", u.Username));
                 command.Parameters.Add(new OleDbParameter("@pass", u.Pass));
+                command.Parameters.Add(new OleDbParameter("@birthdate", u.Birthdate));
                 command.Parameters.Add(new OleDbParameter("@id", u.Id));
             }
         }
