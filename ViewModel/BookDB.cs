@@ -20,14 +20,26 @@ namespace ViewModel
         {
             Book b = entity as Book;
             b.BookName = reader["bookName"].ToString();
-            b.PublicationDate = DateTime.Parse(reader["publicationDate"].ToString());
-            b.Price = int.Parse(reader["price"].ToString());
-            b.IdAuthor = AuthorDB.SelectById((int)reader["idAuthor"]);
-            b.IdGenre = GenreDB.SelectById((int)reader["idGenre"]);
+            if(reader["publicationDate"] != DBNull.Value)
+                b.PublicationDate = DateTime.Parse(reader["publicationDate"].ToString());
+            else
+                b.PublicationDate = null;
+            if(reader["price"] != DBNull.Value)
+                b.Price = int.Parse(reader["price"].ToString());
+            else
+                b.Price = null;
             b.Discount = (bool)reader["discount"];
             b.Information = reader["information"].ToString();
             b.Cover = reader["cover"].ToString();
-            b.IdLanguage = LanguageDB.SelectById((int)reader["idLanguage"]);
+            int authorId = (int)reader["idAuthor"];
+            b.IdAuthor = AuthorDB.SelectById(authorId);
+            int genreId = (int)reader["idgenre"];
+            b.IdGenre = GenreDB.SelectById(genreId);
+            int languageId = (int)reader["idLanguage"];
+            b.IdLanguage = LanguageDB.SelectById(languageId);
+            //b.IdAuthor = new Author { Id = (int)reader["idAuthor"], PenName = reader["penName"].ToString() };
+            //b.IdGenre = new Genre { Id = (int)reader["idGenre"], Name = reader["name"].ToString() };
+            //b.IdLanguage = new Language { Id = (int)reader["idLanguage"], Name = reader["name"].ToString() };
             base.CreateModel(entity);
             return b;
         }

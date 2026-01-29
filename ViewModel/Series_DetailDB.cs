@@ -12,7 +12,7 @@ namespace ViewModel
     {
         public ListSeries_Detail SelectAll()
         {
-            command.CommandText = $"SELECT Series_Detail.* FROM  Series_Detail";
+            command.CommandText = $"SELECT \r\nFROM   Series_Detail";
             ListSeries_Detail sdList = new ListSeries_Detail(base.Select());
             return sdList;
         }

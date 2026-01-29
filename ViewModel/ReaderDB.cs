@@ -12,8 +12,7 @@ namespace ViewModel
     {
         public ListReader SelectAll()
         {
-            command.CommandText = $"SELECT [User].id, [User].firstName, [User].lastName, [User].phoneNumber, [User].email, [User].username, [User].pass, [User].bithdate, Reader.nickname, Reader.premiumSubscription " +
-                $"FROM ([User] INNER JOIN Reader ON [User].id = Reader.id)";
+            command.CommandText = $"SELECT [User].id, [User].firstName, [User].lastName, [User].phoneNumber, [User].email, [User].username, [User].pass, [User].birthdate, Reader.nickname, Reader.premiumSubscription\r\nFROM   (Reader INNER JOIN\r\n             [User] ON Reader.id = [User].id)";
             ListReader pList = new ListReader(base.Select());
             return pList;
         }

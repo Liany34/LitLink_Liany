@@ -12,23 +12,17 @@ namespace ViewModel
     {
         public ListUser SelectAll()
         {
-            command.CommandText = $"SELECT [User].* FROM  [User]";
-            ListUser uList = new ListUser(base.Select());
-            return uList;
+            command.CommandText = $"SELECT * FROM [User]";
+            ListUser groupList = new ListUser(base.Select());
+            return groupList;
         }
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             User u = entity as User;
             u.FirstName = reader["firstName"].ToString();
             u.LastName = reader["lastName"].ToString();
-            if(reader["phoneNumber"] != DBNull.Value)
-                u.PhoneNumber = reader["phoneNumber"].ToString();
-            else
-                u.PhoneNumber = null;
-            if (reader["email"] != DBNull.Value)
-                u.Email = reader["email"].ToString();
-            else
-                u.Username = reader["username"].ToString();
+            u.PhoneNumber = reader["phoneNumber"] != DBNull.Value ? reader["phoneNumber"].ToString() : null;
+            u.Email = reader["email"] != DBNull.Value ? reader["email"].ToString() : null;
             u.Pass = reader["pass"].ToString();
             u.Birthdate = (DateTime)reader["birthDate"];
             base.CreateModel(entity);

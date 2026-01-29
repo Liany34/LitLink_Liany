@@ -12,7 +12,7 @@ namespace ViewModel
     {
         public ListCart SelectAll()
         {
-            command.CommandText = "SELECT * FROM Cart";
+            command.CommandText = " @\\\"SELECT c.id, c.discountCode, c.totalPrice,\\r\\n           r.id AS ReaderId, [User].firstName AS ReaderFirstName, [User].lastName AS READERLastName    \\r\\n    FROM (((Cart c\\r\\n      LEFT JOIN Reader a ON c.idReader = r.id)\\r\\n    INNER JOIN [User] ON r.id = [User].id\\\";\"";
             ListCart groupList = new ListCart(base.Select());
             return groupList;
         }
@@ -21,7 +21,10 @@ namespace ViewModel
         {
             Cart c = entity as Cart;
             c.IdReader = ReaderDB.SelectById((int)reader["idReader"]);
-            c.DiscountCode = reader["discountCode"].ToString();
+            if(reader["discountCode"] != DBNull.Value)
+                c.DiscountCode = reader["discountCode"].ToString();
+            else
+                c.DiscountCode = null;
             c.TotalPrice = Convert.ToDouble(reader["totalPrice"]);
             base.CreateModel(entity);
             return c;
@@ -82,4 +85,5 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@id", c.Id));
             }
         }
+    }
 }
