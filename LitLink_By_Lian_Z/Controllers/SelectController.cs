@@ -482,8 +482,8 @@ namespace LitLink_By_Lian_Z_.Controllers
         public ListSeries_Detail SelectAllSeriesDetails()
         {
             Series_DetailDB db = new Series_DetailDB();
-            ListSeries_Detail seriesDetais = db.SelectAll();
-            return seriesDetais;
+            ListSeries_Detail seriesDetails = db.SelectAll();
+            return seriesDetails;
         }
 
         [HttpPost]
@@ -549,6 +549,84 @@ namespace LitLink_By_Lian_Z_.Controllers
             User user = UserDB.SelectById(id);
             UserDB db = new UserDB();
             db.Delete(user);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+
+        // Cart
+        [HttpGet]
+        [ActionName("CartSelector")]
+        public ListCart SelectAllCarts()
+        {
+            CartDB db = new CartDB();
+            ListCart carts = db.SelectAll();
+            return carts;
+        }
+
+        [HttpPost]
+        public int InsertACart([FromBody] Cart cart)
+        {
+            CartDB db = new CartDB();
+            db.Insert(cart);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+        [HttpPut]
+        public int UpdateACart([FromBody] Cart cart)
+        {
+            CartDB db = new CartDB();
+            db.Update(cart);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+        [HttpDelete("{id}")]
+        public int DeleteACart(int id)
+        {
+            Cart cart = CartDB.SelectById(id);
+            CartDB db = new CartDB();
+            db.Delete(cart);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+
+        // Cart_Detail
+        [HttpGet]
+        [ActionName("CartDetailSelector")]
+        public ListCart_Detail SelectAllCartDetails()
+        {
+            Cart_DetailDB db = new Cart_DetailDB();
+            ListCart_Detail cartDetails = db.SelectAll();
+            return cartDetails;
+        }
+
+        [HttpPost]
+        public int InsertACartDetail([FromBody] Cart_Detail cartDetail)
+        {
+            Cart_DetailDB db = new Cart_DetailDB();
+            db.Insert(cartDetail);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+        [HttpPut]
+        public int UpdateACartDetail([FromBody] Cart_Detail cartDetail)
+        {
+            Cart_DetailDB db = new Cart_DetailDB();
+            db.Update(cartDetail);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+        [HttpDelete("{id}")]
+        public int DeleteACartDetail(int id)
+        {
+            Cart_Detail cartDetail = Cart_DetailDB.SelectById(id);
+            Cart_DetailDB db = new Cart_DetailDB();
+            db.Delete(cartDetail);
             int x = db.SaveChanges();
             return x;
         }

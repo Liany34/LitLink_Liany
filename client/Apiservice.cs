@@ -269,5 +269,45 @@ namespace Service
         {
             return (await client.DeleteAsync(uri + $"/api/Select/DeleteAUser/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
+
+        public async Task<ListCart> GetAllCarts()
+        {
+            return await client.GetFromJsonAsync<ListCart>(uri + "/api/Select/CartSelector");
+        }
+
+        public async Task<int> InsertACart(Cart c)
+        {
+            return (await client.PostAsJsonAsync<Cart>(uri + "/api/Select/InsertACart", c)).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<int> UpdateACart(Cart c)
+        {
+            return (await client.PutAsJsonAsync<Cart>(uri + "/api/Select/UpdateACart", c)).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<int> DeleteACart(int id)
+        {
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteACart/{id}")).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<ListCart_Detail> GetAllCartDetails()
+        {
+            return await client.GetFromJsonAsync<ListCart_Detail>(uri + "/api/Select/CartDetailSelector");
+        }
+
+        public async Task<int> InsertACartDetail(Cart_Detail cd)
+        {
+            return (await client.PostAsJsonAsync<Cart_Detail>(uri + "/api/Select/InsertACartDetail", cd)).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<int> UpdateACartDetail(Cart_Detail cd)
+        {
+            return (await client.PutAsJsonAsync<Cart_Detail>(uri + "/api/Select/UpdateACartDetail", cd)).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<int> DeleteACartDetail(int id)
+        {
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteACartDetail/{id}")).IsSuccessStatusCode ? 1 : 0;
+        }
     }
 }

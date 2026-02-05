@@ -92,5 +92,16 @@ namespace Service
         public Task<int> InsertAUser(User user);
         public Task<int> UpdateAUser(User user);
         public Task<int> DeleteAUser(int id);
+
+
+        public Task<ListCart> GetAllCarts();
+        public Task<int> InsertACart(Cart cart);
+        public Task<int> UpdateACart(Cart cart);
+        public Task<int> DeleteACart(int id);
+
+        public Task<ListCart_Detail> GetAllCartDetails();
+        public Task<int> InsertACartDetail(Cart_Detail cartDetail);
+        public Task<int> UpdateACartDetail(Cart_Detail cartDetail);
+        public Task<int> DeleteACartDetail(int id);
     }
 }

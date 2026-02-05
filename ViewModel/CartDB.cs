@@ -12,7 +12,7 @@ namespace ViewModel
     {
         public ListCart SelectAll()
         {
-            command.CommandText = " @\\\"SELECT c.id, c.discountCode, c.totalPrice,\\r\\n           r.id AS ReaderId, [User].firstName AS ReaderFirstName, [User].lastName AS READERLastName    \\r\\n    FROM (((Cart c\\r\\n      LEFT JOIN Reader a ON c.idReader = r.id)\\r\\n    INNER JOIN [User] ON r.id = [User].id\\\";\"";
+            command.CommandText = "SELECT * From Cart";
             ListCart groupList = new ListCart(base.Select());
             return groupList;
         }

@@ -16,7 +16,7 @@ namespace Model
 
         public override string ToString()
         {
-            return $"List Name: {IdList.ListName}, Book Title: {IdBook}";
+            return $"List Name: {IdList.ListName}, Book Title: {IdBook.BookName}";
         }
     }
 }
