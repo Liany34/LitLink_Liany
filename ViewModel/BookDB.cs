@@ -37,9 +37,6 @@ namespace ViewModel
             b.IdGenre = GenreDB.SelectById(genreId);
             int languageId = (int)reader["idLanguage"];
             b.IdLanguage = LanguageDB.SelectById(languageId);
-            //b.IdAuthor = new Author { Id = (int)reader["idAuthor"], PenName = reader["penName"].ToString() };
-            //b.IdGenre = new Genre { Id = (int)reader["idGenre"], Name = reader["name"].ToString() };
-            //b.IdLanguage = new Language { Id = (int)reader["idLanguage"], Name = reader["name"].ToString() };
             base.CreateModel(entity);
             return b;
         }
