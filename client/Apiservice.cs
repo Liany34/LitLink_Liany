@@ -14,15 +14,16 @@ namespace Service
         string uri;
         public HttpClient client;
 
-        public Apiservice()
-        {
-            uri = "https://mcw4p0zt-5265.euw.devtunnels.ms";
-            client = new HttpClient();
-        }
+        //public Apiservice()
+        //{
+        //    uri = "https://8rdr4sf5-5265.euw.devtunnels.ms";
+        //    client = new HttpClient();
+        //}
         public Apiservice(HttpClient client, string baseUri)
         {
-            uri = "https://mcw4p0zt-5265.euw.devtunnels.ms";
+            uri = "https://8rdr4sf5-5265.euw.devtunnels.ms";
             client = new HttpClient();
+            client.BaseAddress = new Uri(uri);
             this.client = client ?? throw new 
                 ArgumentNullException(nameof(client));
             this.uri = baseUri ?? throw new 

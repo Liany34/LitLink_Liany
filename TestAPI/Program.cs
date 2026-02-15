@@ -24,7 +24,7 @@ public class Program
                 services.AddScoped<Apiservice>(sp =>
                 {
                     var client = sp.GetRequiredService<HttpClient>();
-                    var baseUri = "https://mcw4p0zt-5265.euw.devtunnels.ms";
+                    var baseUri = "https://8rdr4sf5-5265.euw.devtunnels.ms";
                     return new Apiservice(client, baseUri);
                 });
             })
@@ -38,224 +38,224 @@ public class Program
             var buyerService =
                 scope.ServiceProvider.GetRequiredService<Apiservice>();
             var bookSeriess = await buyerService.GetAllBookSeries();
-            Console.WriteLine(bookSeriess.Count);
+            //Console.WriteLine(bookSeriess.Count);
 
-            Book_Series bs = new Book_Series
-            {
-                NameSeries = "new bs"
-            };
-            await buyerService.InsertABookSeries(bs);
-            bookSeriess = await buyerService.GetAllBookSeries();
-            Console.WriteLine(bookSeriess.Count);
+            //Book_Series bs = new Book_Series
+            //{
+            //    NameSeries = "new bs"
+            //};
+            //await buyerService.InsertABookSeries(bs);
+            //bookSeriess = await buyerService.GetAllBookSeries();
+            //Console.WriteLine(bookSeriess.Count);
 
-            Book_Series mybs = bookSeriess.Last();
-            mybs.NameSeries = "Updated";
-            await buyerService.UpdateABookSeries(mybs);
+            //Book_Series mybs = bookSeriess.Last();
+            //mybs.NameSeries = "Updated";
+            //await buyerService.UpdateABookSeries(mybs);
 
-            id = bookSeriess.Last().Id;
-            await buyerService.DeleteABookSeries(id);
-            bookSeriess = await buyerService.GetAllBookSeries();
-            Console.WriteLine(bookSeriess.Count);
+            //id = bookSeriess.Last().Id;
+            //await buyerService.DeleteABookSeries(id);
+            //bookSeriess = await buyerService.GetAllBookSeries();
+            //Console.WriteLine(bookSeriess.Count);
 
-            Console.WriteLine();
-            Console.WriteLine();
-
-
+            //Console.WriteLine();
+            //Console.WriteLine();
 
 
-            Console.WriteLine("Genre:");
+
+
+            //Console.WriteLine("Genre:");
 
             ListGenre genres = await buyerService.GetAllGenres();
-            Console.WriteLine(genres.Count);
+            //Console.WriteLine(genres.Count);
 
-            Genre g = new Genre
-            {
-                Name = "new g"
-            };
-            await buyerService.InsertAGenre(g);
-            genres = await buyerService.GetAllGenres();
-            Console.WriteLine(genres.Count);
+            //Genre g = new Genre
+            //{
+            //    Name = "new g"
+            //};
+            //await buyerService.InsertAGenre(g);
+            //genres = await buyerService.GetAllGenres();
+            //Console.WriteLine(genres.Count);
 
-            Genre myg = genres.Last();
-            myg.Name = "Updated";
-            await buyerService.UpdateAGenre(myg);
+            //Genre myg = genres.Last();
+            //myg.Name = "Updated";
+            //await buyerService.UpdateAGenre(myg);
 
-            id = genres.Last().Id;
-            await buyerService.DeleteAGenre(id);
-            genres = await buyerService.GetAllGenres();
-            Console.WriteLine(genres.Count);
+            //id = genres.Last().Id;
+            //await buyerService.DeleteAGenre(id);
+            //genres = await buyerService.GetAllGenres();
+            //Console.WriteLine(genres.Count);
 
-            Console.WriteLine();
-            Console.WriteLine();
-
-
+            //Console.WriteLine();
+            //Console.WriteLine();
 
 
-            Console.WriteLine("Intrest:");
+
+
+            //Console.WriteLine("Intrest:");
 
             ListIntrest intrests = await buyerService.GetAllIntrests();
-            Console.WriteLine(intrests.Count);
+            //Console.WriteLine(intrests.Count);
 
-            Intrest i = new Intrest
-            {
-                Name = "new i"
-            };
-            await buyerService.InsertAnIntrest(i);
-            intrests = await buyerService.GetAllIntrests();
-            Console.WriteLine(intrests.Count);
+            //Intrest i = new Intrest
+            //{
+            //    Name = "new i"
+            //};
+            //await buyerService.InsertAnIntrest(i);
+            //intrests = await buyerService.GetAllIntrests();
+            //Console.WriteLine(intrests.Count);
 
-            Intrest myi = intrests.Last();
-            myi.Name = "Updated";
-            await buyerService.UpdateAnIntrest(myi);
+            //Intrest myi = intrests.Last();
+            //myi.Name = "Updated";
+            //await buyerService.UpdateAnIntrest(myi);
 
-            id = intrests.Last().Id;
-            await buyerService.DeleteAnIntrest(id);
-            intrests = await buyerService.GetAllIntrests();
-            Console.WriteLine(intrests.Count);
+            //id = intrests.Last().Id;
+            //await buyerService.DeleteAnIntrest(id);
+            //intrests = await buyerService.GetAllIntrests();
+            //Console.WriteLine(intrests.Count);
 
-            Console.WriteLine();
-            Console.WriteLine();
+            //Console.WriteLine();
+            //Console.WriteLine();
 
 
 
-            Console.WriteLine("Language:");
+            //Console.WriteLine("Language:");
 
             ListLanguage languages = await buyerService.GetAllLanguages();
-            Console.WriteLine(languages.Count);
+            //Console.WriteLine(languages.Count);
 
-            Language l = new Language
-            {
-                Name = "new l"
-            };
-            await buyerService.InsertALanguage(l);
-            languages = await buyerService.GetAllLanguages();
-            Console.WriteLine(languages.Count);
+            //Language l = new Language
+            //{
+            //    Name = "new l"
+            //};
+            //await buyerService.InsertALanguage(l);
+            //languages = await buyerService.GetAllLanguages();
+            //Console.WriteLine(languages.Count);
 
-            Language myl = languages.Last();
-            myl.Name = "Updated";
-            await buyerService.UpdateALanguage(myl);
+            //Language myl = languages.Last();
+            //myl.Name = "Updated";
+            //await buyerService.UpdateALanguage(myl);
 
-            id = languages.Last().Id;
-            await buyerService.DeleteALanguage(id);
-            languages = await buyerService.GetAllLanguages();
-            Console.WriteLine(languages.Count);
+            //id = languages.Last().Id;
+            //await buyerService.DeleteALanguage(id);
+            //languages = await buyerService.GetAllLanguages();
+            //Console.WriteLine(languages.Count);
 
-            Console.WriteLine();
-            Console.WriteLine();
-
-
+            //Console.WriteLine();
+            //Console.WriteLine();
 
 
-            Console.WriteLine("Permission:");
+
+
+            //Console.WriteLine("Permission:");
 
             ListPermission permissions = await buyerService.GetAllPermissions();
-            Console.WriteLine(permissions.Count);
+            //Console.WriteLine(permissions.Count);
 
-            Permission p = new Permission
-            {
-                Name = "new p"
-            };
-            await buyerService.InsertAPermission(p);
-            permissions = await buyerService.GetAllPermissions();
-            Console.WriteLine(permissions.Count);
+            //Permission p = new Permission
+            //{
+            //    Name = "new p"
+            //};
+            //await buyerService.InsertAPermission(p);
+            //permissions = await buyerService.GetAllPermissions();
+            //Console.WriteLine(permissions.Count);
 
-            Permission myp = permissions.Last();
-            myp.Name = "Updated";
-            await buyerService.UpdateAPermission(myp);
+            //Permission myp = permissions.Last();
+            //myp.Name = "Updated";
+            //await buyerService.UpdateAPermission(myp);
 
-            id = permissions.Last().Id;
-            await buyerService.DeleteAPermission(id);
-            permissions = await buyerService.GetAllPermissions();
-            Console.WriteLine(permissions.Count);
+            //id = permissions.Last().Id;
+            //await buyerService.DeleteAPermission(id);
+            //permissions = await buyerService.GetAllPermissions();
+            //Console.WriteLine(permissions.Count);
 
-            Console.WriteLine();
-            Console.WriteLine();
-
-
+            //Console.WriteLine();
+            //Console.WriteLine();
 
 
-            Console.WriteLine("User:");
+
+
+            //Console.WriteLine("User:");
 
             ListUser users = await buyerService.GetAllUsers();
-            Console.WriteLine(users.Count);
+            //Console.WriteLine(users.Count);
 
-            User u = new User
-            {
-                FirstName = "new u",
-                LastName = "new u",
-                PhoneNumber = "0000000000",
-                Email = "aaaaaaaa",
-                Username = "new u",
-                Pass = "new u",
-                Birthdate = new DateTime(2000, 1, 1)
-            };
-            await buyerService.InsertAUser(u);
-            users = await buyerService.GetAllUsers();
-            Console.WriteLine(users.Count);
+            //User u = new User
+            //{
+            //    FirstName = "new u",
+            //    LastName = "new u",
+            //    PhoneNumber = "0000000000",
+            //    Email = "aaaaaaaa",
+            //    Username = "new u",
+            //    Pass = "new u",
+            //    Birthdate = new DateTime(2000, 1, 1)
+            //};
+            //await buyerService.InsertAUser(u);
+            //users = await buyerService.GetAllUsers();
+            //Console.WriteLine(users.Count);
 
-            User myu = users.Last();
-            myu.FirstName = "Updated";
-            myu.LastName = "Updated";
-            myu.PhoneNumber = "1111111111";
-            myu.Email = "bbbbbbbb";
-            myu.Username = "Updated";
-            myu.Pass = "Updated";
-            myu.Birthdate = new DateTime(1999, 12, 31);
-            await buyerService.UpdateAUser(myu);
+            //User myu = users.Last();
+            //myu.FirstName = "Updated";
+            //myu.LastName = "Updated";
+            //myu.PhoneNumber = "1111111111";
+            //myu.Email = "bbbbbbbb";
+            //myu.Username = "Updated";
+            //myu.Pass = "Updated";
+            //myu.Birthdate = new DateTime(1999, 12, 31);
+            //await buyerService.UpdateAUser(myu);
 
-            id = users.Last().Id;
-            await buyerService.DeleteAUser(id);
-            users = await buyerService.GetAllUsers();
-            Console.WriteLine(users.Count);
+            //id = users.Last().Id;
+            //await buyerService.DeleteAUser(id);
+            //users = await buyerService.GetAllUsers();
+            //Console.WriteLine(users.Count);
 
-            Console.WriteLine();
-            Console.WriteLine();
-
-
+            //Console.WriteLine();
+            //Console.WriteLine();
 
 
-            Console.WriteLine("Author:");
+
+
+            //Console.WriteLine("Author:");
 
             ListAuthor authors = await buyerService.GetAllAuthors();
-            Console.WriteLine(authors.Count);
+            //Console.WriteLine(authors.Count);
 
-            int x = await buyerService.InsertAnAuthor(new Author
-            {
-                FirstName = users.First().FirstName,
-                LastName = users.First().LastName,
-                PhoneNumber = "0000000000",
-                Email = "aaaaaaaa",
-                Username = "new a",
-                Pass = "new a",
-                Birthdate = new DateTime(2000, 1, 1),
-                PenName = "new a",
-                Genre = genres.First(),
-                InformationAboutAuthor = "new a"
-            });
-            Console.WriteLine(x);
-            authors = await buyerService.GetAllAuthors();
-            Console.WriteLine(authors.Count);
+            //int x = await buyerService.InsertAnAuthor(new Author
+            //{
+            //    FirstName = users.First().FirstName,
+            //    LastName = users.First().LastName,
+            //    PhoneNumber = "0000000000",
+            //    Email = "aaaaaaaa",
+            //    Username = "new a",
+            //    Pass = "new a",
+            //    Birthdate = new DateTime(2000, 1, 1),
+            //    PenName = "new a",
+            //    Genre = genres.First(),
+            //    InformationAboutAuthor = "new a"
+            //});
+            //Console.WriteLine(x);
+            //authors = await buyerService.GetAllAuthors();
+            //Console.WriteLine(authors.Count);
 
-            Author mya = authors.Last();
-            mya.FirstName = "Updated";
-            mya.LastName = "Updated";
-            mya.PhoneNumber = "1111111111";
-            mya.Email = "bbbbbbbb";
-            mya.Username = "Updated";
-            mya.Pass = "Updated";
-            mya.Birthdate = new DateTime(1999, 12, 31);
-            mya.PenName = "Updated";
-            mya.Genre = genres.Last();
-            mya.InformationAboutAuthor = " NewwwwwwwUpdated";
-            await buyerService.UpdateAnAuthor(mya);
+            //Author mya = authors.Last();
+            //mya.FirstName = "Updated";
+            //mya.LastName = "Updated";
+            //mya.PhoneNumber = "1111111111";
+            //mya.Email = "bbbbbbbb";
+            //mya.Username = "Updated";
+            //mya.Pass = "Updated";
+            //mya.Birthdate = new DateTime(1999, 12, 31);
+            //mya.PenName = "Updated";
+            //mya.Genre = genres.Last();
+            //mya.InformationAboutAuthor = " NewwwwwwwUpdated";
+            //await buyerService.UpdateAnAuthor(mya);
 
-            id = authors.Last().Id;
-            await buyerService.DeleteAnAuthor(id);
-            authors = await buyerService.GetAllAuthors();
-            Console.WriteLine(authors.Count);
+            //id = authors.Last().Id;
+            //await buyerService.DeleteAnAuthor(id);
+            //authors = await buyerService.GetAllAuthors();
+            //Console.WriteLine(authors.Count);
 
-            Console.WriteLine();
-            Console.WriteLine();
+            //Console.WriteLine();
+            //Console.WriteLine();
 
 
 
@@ -268,294 +268,294 @@ public class Program
             Book b = new Book
             {
                 BookName = "new b",
-                PublicationDate = new DateTime(2025, 12, 12),
+                PublicationDate = new DateTime(2024, 10, 10),
                 Price = 100,
                 IdAuthor = authors.First(),
                 IdGenre = genres.First(),
                 Discount = false,
                 Information = "new b",
                 Cover = "new b",
-                IdLanguage = languages.First(),
+                IdLanguage = languages.First()
             };
             await buyerService.InsertABook(b);
             books = await buyerService.GetAllBooks();
             Console.WriteLine(books.Count);
 
-            Book myb = books.Last();
-            myb.BookName = "Updated";
-            myb.PublicationDate = new DateTime(2024, 11, 11);
-            myb.Price = 200;
-            myb.IdAuthor = authors.Last();
-            myb.IdGenre = genres.Last();
-            myb.Discount = true;
-            myb.Information = "Updated";
-            myb.Cover = "Updated";
-            myb.IdLanguage = languages.Last();
-            await buyerService.UpdateABook(myb);
-
-            id = books.Last().Id;
-            await buyerService.DeleteABook(id);
-            books = await buyerService.GetAllBooks();
-            Console.WriteLine(books.Count);
-
-            Console.WriteLine();
-            Console.WriteLine();
-
-
-
-
-            Console.WriteLine("Reader:");
-
-            ListReader readers = await buyerService.GetAllReaders();
-            Console.WriteLine(readers.Count);
-
-            Reader r = new Reader()
-            {
-                FirstName = "new r",
-                LastName = "new r",
-                PhoneNumber = "0000000000",
-                Email = "aaaaaaaa",
-                Username = "new r",
-                Birthdate = new DateTime(2000, 1, 1),
-                Pass = "new r",
-                Nickname = "new r",
-                PremiumSubscription = false,
-            };
-            await buyerService.InsertAReader(r);
-            readers = await buyerService.GetAllReaders();
-            Console.WriteLine(readers.Count);
-
-            Reader myr = readers.Last();
-            myr.FirstName = "Updated";
-            myr.LastName = "Updated";
-            myr.PhoneNumber = "1111111111";
-            myr.Email = "bbbbbbbb";
-            myr.Username = "Updated";
-            myr.Birthdate = new DateTime(1999, 12, 31);
-            myr.Pass = "Updated";
-            myr.Nickname = "Newwwwwwwwwwwww Updated";
-            myr.PremiumSubscription = true;
-            await buyerService.UpdateAReader(myr);
-
-            id = readers.Last().Id;
-            await buyerService.DeleteAReader(id);
-            readers = await buyerService.GetAllReaders();
-            Console.WriteLine(readers.Count);
+            ////Book myb = books.Last();
+            ////myb.BookName = "Updated";
+            ////myb.PublicationDate = new DateTime(2024, 11, 11);
+            ////myb.Price = 200;
+            ////myb.IdAuthor = authors.Last();
+            ////myb.IdGenre = genres.Last();
+            ////myb.Discount = true;
+            ////myb.Information = "Updated";
+            ////myb.Cover = "Updated";
+            ////myb.IdLanguage = languages.Last();
+            ////await buyerService.UpdateABook(myb);
+
+            //////id = books.Last().Id;
+            //////await buyerService.DeleteABook(id);
+            //////books = await buyerService.GetAllBooks();
+            //////Console.WriteLine(books.Count);
+
+            ////Console.WriteLine();
+            ////Console.WriteLine();
+
+
+
+
+            ////Console.WriteLine("Reader:");
+
+            ////ListReader readers = await buyerService.GetAllReaders();
+            ////Console.WriteLine(readers.Count);
+
+            ////Reader r = new Reader()
+            ////{
+            ////    FirstName = "new r",
+            ////    LastName = "new r",
+            ////    PhoneNumber = "0000000000",
+            ////    Email = "aaaaaaaa",
+            ////    Username = "new r",
+            ////    Birthdate = new DateTime(2000, 1, 1),
+            ////    Pass = "new r",
+            ////    Nickname = "new r",
+            ////    PremiumSubscription = false,
+            ////};
+            ////await buyerService.InsertAReader(r);
+            ////readers = await buyerService.GetAllReaders();
+            ////Console.WriteLine(readers.Count);
+
+            ////Reader myr = readers.Last();
+            ////myr.FirstName = "Updated";
+            ////myr.LastName = "Updated";
+            ////myr.PhoneNumber = "1111111111";
+            ////myr.Email = "bbbbbbbb";
+            ////myr.Username = "Updated";
+            ////myr.Birthdate = new DateTime(1999, 12, 31);
+            ////myr.Pass = "Updated";
+            ////myr.Nickname = "Newwwwwwwwwwwww Updated";
+            ////myr.PremiumSubscription = true;
+            ////await buyerService.UpdateAReader(myr);
+
+            //////id = readers.Last().Id;
+            //////await buyerService.DeleteAReader(id);
+            //////readers = await buyerService.GetAllReaders();
+            //////Console.WriteLine(readers.Count);
 
-            Console.WriteLine();
-            Console.WriteLine();
+            ////Console.WriteLine();
+            ////Console.WriteLine();
 
 
 
 
-            Console.WriteLine("Book_List:");
+            ////Console.WriteLine("Book_List:");
 
-            ListBook_List bookLists = await buyerService.GetAllBookLists();
-            Console.WriteLine(bookLists.Count);
+            ////ListBook_List bookLists = await buyerService.GetAllBookLists();
+            ////Console.WriteLine(bookLists.Count);
 
-            Book_List bl = new Book_List
-            {
-                IdReader = readers.First(),
-                ListName = "new bl",
-                IsPublic = false
-            };
-            await buyerService.InsertABookList(bl);
-            bookLists = await buyerService.GetAllBookLists();
-            Console.WriteLine(bookLists.Count);
+            ////Book_List bl = new Book_List
+            ////{
+            ////    IdReader = readers.First(),
+            ////    ListName = "new bl",
+            ////    IsPublic = false
+            ////};
+            ////await buyerService.InsertABookList(bl);
+            ////bookLists = await buyerService.GetAllBookLists();
+            ////Console.WriteLine(bookLists.Count);
 
-            Book_List mybl = bookLists.Last();
-            mybl.IdReader = ReaderDB.SelectById(readers.Last().Id);
-            mybl.ListName = "Updated";
-            mybl.IsPublic = true;
-            x = await buyerService.UpdateABookList(mybl);
-            Console.WriteLine(x);
+            ////Book_List mybl = bookLists.Last();
+            ////mybl.IdReader = ReaderDB.SelectById(readers.Last().Id);
+            ////mybl.ListName = "Updated";
+            ////mybl.IsPublic = true;
+            ////x = await buyerService.UpdateABookList(mybl);
+            ////Console.WriteLine(x);
 
-            id = bookLists.Last().Id;
-            await buyerService.DeleteABookList(id);
-            bookLists = await buyerService.GetAllBookLists();
-            Console.WriteLine(bookLists.Count);
+            //////id = bookLists.Last().Id;
+            //////await buyerService.DeleteABookList(id);
+            //////bookLists = await buyerService.GetAllBookLists();
+            //////Console.WriteLine(bookLists.Count);
 
-            Console.WriteLine();
-            Console.WriteLine();
+            ////Console.WriteLine();
+            ////Console.WriteLine();
 
 
 
 
-            Console.WriteLine("Intrest_Reader:");
+            ////Console.WriteLine("Intrest_Reader:");
 
-            ListIntrest_Reader intrestReaders = await buyerService.GetAllIntrestReaders();
-            Console.WriteLine(intrestReaders.Count);
+            ////ListIntrest_Reader intrestReaders = await buyerService.GetAllIntrestReaders();
+            ////Console.WriteLine(intrestReaders.Count);
 
-            Intrest_Reader ir = new Intrest_Reader
-            {
-                IdReader = readers.First(),
-                IdIntrest = intrests.First()
-            };
-            await buyerService.InsertAnIntrestReader(ir);
-            intrestReaders = await buyerService.GetAllIntrestReaders();
-            Console.WriteLine(intrestReaders.Count);
+            ////Intrest_Reader ir = new Intrest_Reader
+            ////{
+            ////    IdReader = readers.First(),
+            ////    IdIntrest = intrests.First()
+            ////};
+            ////await buyerService.InsertAnIntrestReader(ir);
+            ////intrestReaders = await buyerService.GetAllIntrestReaders();
+            ////Console.WriteLine(intrestReaders.Count);
 
-            Intrest_Reader myir = intrestReaders.Last();
-            myir.IdReader = readers.Last();
-            myir.IdIntrest = intrests.Last();
-            await buyerService.UpdateAnIntrestReader(myir);
+            ////Intrest_Reader myir = intrestReaders.Last();
+            ////myir.IdReader = readers.Last();
+            ////myir.IdIntrest = intrests.Last();
+            ////await buyerService.UpdateAnIntrestReader(myir);
 
-            id = intrestReaders.Last().Id;
-            await buyerService.DeleteAnIntrestReader(id);
-            intrestReaders = await buyerService.GetAllIntrestReaders();
-            Console.WriteLine(intrestReaders.Count);
+            //////id = intrestReaders.Last().Id;
+            //////await buyerService.DeleteAnIntrestReader(id);
+            //////intrestReaders = await buyerService.GetAllIntrestReaders();
+            //////Console.WriteLine(intrestReaders.Count);
 
-            Console.WriteLine();
-            Console.WriteLine();
+            ////Console.WriteLine();
+            ////Console.WriteLine();
 
 
 
 
-            Console.WriteLine("List_Detail:");
+            ////Console.WriteLine("List_Detail:");
 
-            ListList_Detail listDetails = await buyerService.GetAllListDetails();
-            Console.WriteLine(listDetails.Count);
+            ////ListList_Detail listDetails = await buyerService.GetAllListDetails();
+            ////Console.WriteLine(listDetails.Count);
 
-            List_Detail ld = new List_Detail
-            {
-                IdList = bookLists.First(),
-                IdBook = books.First()
-            };
-            await buyerService.InsertAListDetail(ld);
-            listDetails = await buyerService.GetAllListDetails();
-            Console.WriteLine(listDetails.Count);
+            ////List_Detail ld = new List_Detail
+            ////{
+            ////    IdList = bookLists.First(),
+            ////    IdBook = books.First()
+            ////};
+            ////await buyerService.InsertAListDetail(ld);
+            ////listDetails = await buyerService.GetAllListDetails();
+            ////Console.WriteLine(listDetails.Count);
 
-            List_Detail myld = listDetails.Last();
-            myld.IdList = bookLists.Last();
-            myld.IdBook = books.Last();
-            await buyerService.UpdateAListDetail(myld);
+            ////List_Detail myld = listDetails.Last();
+            ////myld.IdList = bookLists.Last();
+            ////myld.IdBook = books.Last();
+            ////await buyerService.UpdateAListDetail(myld);
 
-            id = listDetails.Last().Id;
-            await buyerService.DeleteAListDetail(id);
-            listDetails = await buyerService.GetAllListDetails();
-            Console.WriteLine(listDetails.Count);
+            //////id = listDetails.Last().Id;
+            //////await buyerService.DeleteAListDetail(id);
+            //////listDetails = await buyerService.GetAllListDetails();
+            //////Console.WriteLine(listDetails.Count);
 
-            Console.WriteLine();
-            Console.WriteLine();
+            ////Console.WriteLine();
+            ////Console.WriteLine();
 
 
 
 
-            Console.WriteLine("Permissions_for_Administrator:");
+            ////Console.WriteLine("Permissions_for_Administrator:");
 
-            ListPermissions_for_Administrator permissionsForAdministrators = await buyerService.GetAllPermissionsForAdministrators();
-            Console.WriteLine(permissionsForAdministrators.Count);
+            ////ListPermissions_for_Administrator permissionsForAdministrators = await buyerService.GetAllPermissionsForAdministrators();
+            ////Console.WriteLine(permissionsForAdministrators.Count);
 
-            Permissions_for_Administrator pfa = new Permissions_for_Administrator
-            {
-                IdAdministrator = users.First(),
-                IdPermission = permissions.First()
-            };
-            await buyerService.InsertAPermissionForAdministrator(pfa);
-            permissionsForAdministrators = await buyerService.GetAllPermissionsForAdministrators();
-            Console.WriteLine(permissionsForAdministrators.Count);
+            ////Permissions_for_Administrator pfa = new Permissions_for_Administrator
+            ////{
+            ////    IdAdministrator = users.First(),
+            ////    IdPermission = permissions.First()
+            ////};
+            ////await buyerService.InsertAPermissionForAdministrator(pfa);
+            ////permissionsForAdministrators = await buyerService.GetAllPermissionsForAdministrators();
+            ////Console.WriteLine(permissionsForAdministrators.Count);
 
-            Permissions_for_Administrator mypfa = permissionsForAdministrators.Last();
-            mypfa.IdAdministrator = users.Last();
-            mypfa.IdPermission = permissions.Last();
-            await buyerService.UpdateAPermissionForAdministrator(pfa);
+            ////Permissions_for_Administrator mypfa = permissionsForAdministrators.Last();
+            ////mypfa.IdAdministrator = users.Last();
+            ////mypfa.IdPermission = permissions.Last();
+            ////await buyerService.UpdateAPermissionForAdministrator(pfa);
 
-            id = permissionsForAdministrators.Last().Id;
-            await buyerService.DeleteAPermissionForAdministrator(id);
-            permissionsForAdministrators = await buyerService.GetAllPermissionsForAdministrators();
-            Console.WriteLine(permissionsForAdministrators.Count);
+            //////id = permissionsForAdministrators.Last().Id;
+            //////await buyerService.DeleteAPermissionForAdministrator(id);
+            //////permissionsForAdministrators = await buyerService.GetAllPermissionsForAdministrators();
+            //////Console.WriteLine(permissionsForAdministrators.Count);
 
-            Console.WriteLine();
-            Console.WriteLine();
+            ////Console.WriteLine();
+            ////Console.WriteLine();
 
 
 
 
-            Console.WriteLine("Series_Detail:");
+            ////Console.WriteLine("Series_Detail:");
 
-            ListSeries_Detail seriesDetails = await buyerService.GetAllSeriesDetails();
-            Console.WriteLine(seriesDetails.Count);
+            ////ListSeries_Detail seriesDetails = await buyerService.GetAllSeriesDetails();
+            ////Console.WriteLine(seriesDetails.Count);
 
-            Series_Detail sd = new Series_Detail
-            {
-                IdSeries = bookSeriess.First(),
-                IdBook = books.First()
-            };
-            await buyerService.InsertASeriesDetail(sd);
-            seriesDetails = await buyerService.GetAllSeriesDetails();
-            Console.WriteLine(seriesDetails.Count);
+            ////Series_Detail sd = new Series_Detail
+            ////{
+            ////    IdSeries = bookSeriess.First(),
+            ////    IdBook = books.First()
+            ////};
+            ////await buyerService.InsertASeriesDetail(sd);
+            ////seriesDetails = await buyerService.GetAllSeriesDetails();
+            ////Console.WriteLine(seriesDetails.Count);
 
-            Series_Detail mysd = seriesDetails.Last();
-            mysd.IdSeries = bookSeriess.Last();
-            mysd.IdBook = books.Last();
-            await buyerService.UpdateASeriesDetail(mysd);
+            ////Series_Detail mysd = seriesDetails.Last();
+            ////mysd.IdSeries = bookSeriess.Last();
+            ////mysd.IdBook = books.Last();
+            ////await buyerService.UpdateASeriesDetail(mysd);
 
-            id = seriesDetails.Last().Id;
-            await buyerService.DeleteASeriesDetail(id);
-            seriesDetails = await buyerService.GetAllSeriesDetails();
-            Console.WriteLine(seriesDetails.Count);
+            //////id = seriesDetails.Last().Id;
+            //////await buyerService.DeleteASeriesDetail(id);
+            //////seriesDetails = await buyerService.GetAllSeriesDetails();
+            //////Console.WriteLine(seriesDetails.Count);
 
-            Console.WriteLine();
-            Console.WriteLine();
+            ////Console.WriteLine();
+            ////Console.WriteLine();
 
 
 
 
-            Console.WriteLine("Cart:");
+            ////Console.WriteLine("Cart:");
 
-            ListCart carts = await buyerService.GetAllCarts();
-            Console.WriteLine(carts.Count);
+            ////ListCart carts = await buyerService.GetAllCarts();
+            ////Console.WriteLine(carts.Count);
 
-            Cart c = new Cart
-            {
-                IdReader = readers.First(),
-                DiscountCode = "new c",
-                TotalPrice = 100
-            };
-            await buyerService.InsertACart(c);
-            carts = await buyerService.GetAllCarts();
-            Console.WriteLine(seriesDetails.Count);
+            ////Cart c = new Cart
+            ////{
+            ////    IdReader = readers.First(),
+            ////    DiscountCode = "new c",
+            ////    TotalPrice = 100
+            ////};
+            ////await buyerService.InsertACart(c);
+            ////carts = await buyerService.GetAllCarts();
+            ////Console.WriteLine(seriesDetails.Count);
 
-            Cart myc = carts.Last();
-            myc.IdReader = readers.Last();
-            myc.DiscountCode = "1222";
-            myc.TotalPrice = 200;
-            await buyerService.UpdateACart(myc);
+            ////Cart myc = carts.Last();
+            ////myc.IdReader = readers.Last();
+            ////myc.DiscountCode = "1222";
+            ////myc.TotalPrice = 200;
+            ////await buyerService.UpdateACart(myc);
 
-            id = carts.Last().Id;
-            await buyerService.DeleteACart(id);
-            carts = await buyerService.GetAllCarts();
-            Console.WriteLine(carts.Count);
+            //////id = carts.Last().Id;
+            //////await buyerService.DeleteACart(id);
+            //////carts = await buyerService.GetAllCarts();
+            //////Console.WriteLine(carts.Count);
 
-            Console.WriteLine();
-            Console.WriteLine();
+            ////Console.WriteLine();
+            ////Console.WriteLine();
 
 
 
 
-            Console.WriteLine("Cart_Detail:");
+            ////Console.WriteLine("Cart_Detail:");
 
-            ListCart_Detail cartDetails = await buyerService.GetAllCartDetails();
-            Console.WriteLine(cartDetails.Count);
+            ////ListCart_Detail cartDetails = await buyerService.GetAllCartDetails();
+            ////Console.WriteLine(cartDetails.Count);
 
-            Cart_Detail cd = new Cart_Detail
-            {
-                IdCart = carts.First(),
-                IdBook = books.First()
-            };
-            await buyerService.InsertACartDetail(cd);
-            cartDetails = await buyerService.GetAllCartDetails();
-            Console.WriteLine(cartDetails.Count);
+            ////Cart_Detail cd = new Cart_Detail
+            ////{
+            ////    IdCart = carts.First(),
+            ////    IdBook = books.First()
+            ////};
+            ////await buyerService.InsertACartDetail(cd);
+            ////cartDetails = await buyerService.GetAllCartDetails();
+            ////Console.WriteLine(cartDetails.Count);
 
-            Cart_Detail mycd = cartDetails.Last();
-            mycd.IdCart = carts.Last();
-            mysd.IdBook = books.Last();
-            await buyerService.UpdateACartDetail(mycd);
+            ////Cart_Detail mycd = cartDetails.Last();
+            ////mycd.IdCart = carts.Last();
+            ////mysd.IdBook = books.Last();
+            ////await buyerService.UpdateACartDetail(mycd);
 
-            id = cartDetails.Last().Id;
-            await buyerService.DeleteACartDetail(id);
-            cartDetails = await buyerService.GetAllCartDetails();
-            Console.WriteLine(cartDetails.Count);
+            //////id = cartDetails.Last().Id;
+            //////await buyerService.DeleteACartDetail(id);
+            //////cartDetails = await buyerService.GetAllCartDetails();
+            //////Console.WriteLine(cartDetails.Count);
 
             Console.ReadLine();
         }
