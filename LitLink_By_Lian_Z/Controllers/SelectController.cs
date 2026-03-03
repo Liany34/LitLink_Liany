@@ -11,7 +11,7 @@ namespace LitLink_By_Lian_Z_.Controllers
     {
         // Author
         [HttpGet]
-        [ActionName("AuthorSelector")]
+        [ActionName("AuthorSelector")]  
         public ListAuthor SelectAllAuthors()
         {
             AuthorDB db = new AuthorDB();

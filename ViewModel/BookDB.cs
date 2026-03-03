@@ -70,18 +70,18 @@ namespace ViewModel
             Book b = entity as Book;
             if (b != null)
             {
-                string sqlStr = $"Insert INTO Book (BookName, PublicationDate, Price, IdAuthor, IdGenre, Discount, Information, Cover, IdLanguage) VALUES (@bookName, @publicationDate, @price, @idAuthor, @idGenre, @discount, @information, @cover, @idLanguage)";
+                string sqlStr = $"Insert INTO Book (BookName, PublicationDate, Price, IdAuthor, IdLanguage, IdGenre, Discount, Information, Cover) VALUES (@bookName, @publicationDate, @price, @idAuthor, @idLanguage, @idGenre, @discount, @information, @cover)";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@bookName", b.BookName));
+                command.Parameters.Add(new OleDbParameter("@@bookName", b.BookName));
                 command.Parameters.Add(new OleDbParameter("@publicationDate", b.PublicationDate));
                 command.Parameters.Add(new OleDbParameter("@price", b.Price));
                 command.Parameters.Add(new OleDbParameter("@idAuthor", b.IdAuthor.Id));
+                command.Parameters.Add(new OleDbParameter("@idLanguage", b.IdLanguage.Id));
                 command.Parameters.Add(new OleDbParameter("@idGenre", b.IdGenre.Id));
                 command.Parameters.Add(new OleDbParameter("@discount", b.Discount));
                 command.Parameters.Add(new OleDbParameter("@information", b.Information));
                 command.Parameters.Add(new OleDbParameter("@cover", b.Cover));
-                command.Parameters.Add(new OleDbParameter("@idLanguage", b.IdLanguage.Id));
             }
         }
 

@@ -286,7 +286,7 @@ public class Program
         Console.WriteLine();
 
         Book bInsert = new Book();
-        bInsert.BookName = "The Silent Patient";
+        bInsert.BookName = "The ";
         bInsert.PublicationDate = new DateTime(2019, 2, 5);
         bInsert.Price = 18;
         bInsert.IdAuthor = aList.First();

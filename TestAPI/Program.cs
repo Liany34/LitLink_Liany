@@ -41,19 +41,19 @@ public class Program
             var bookSeries = await buyerService.GetAllBookSeries();
             Console.WriteLine(bookSeries.Count);
 
-            //Book_Series insertBs = new Book_Series
-            //{
-            //    NameSeries = "new Bs"
-            //};
-            //await buyerService.InsertABookSeries(insertBs);
-            //bookSeries = await buyerService.GetAllBookSeries();
-            //Console.WriteLine(bookSeries.Count);
+            Book_Series insertBs = new Book_Series
+            {
+                NameSeries = "new Bs"
+            };
+            await buyerService.InsertABookSeries(insertBs);
+            bookSeries = await buyerService.GetAllBookSeries();
+            Console.WriteLine(bookSeries.Count);
 
-            //Book_Series updateBs = bookSeries.Last();
-            //updateBs.NameSeries = "updated Bs";
-            //await buyerService.UpdateABookSeries(updateBs);
-            //bookSeries = await buyerService.GetAllBookSeries();
-            //Console.WriteLine(bookSeries.Last());
+            Book_Series updateBs = bookSeries.Last();
+            updateBs.NameSeries = "updated Bs";
+            await buyerService.UpdateABookSeries(updateBs);
+            bookSeries = await buyerService.GetAllBookSeries();
+            Console.WriteLine(bookSeries.Last());
 
             //id = bookSeries.Last().Id;
             //await buyerService.DeleteABookSeries(id);
@@ -286,14 +286,14 @@ public class Program
             var book = await buyerService.GetAllBooks();
             Console.WriteLine(book.Count);
 
-            Book insertB = new Book
+            Book insertB = new Book // not working
             {
                 BookName = "new B",
                 PublicationDate = new DateTime(2020, 1, 1),
                 Price = 99.9,
-                IdAuthor = author.First(),
-                IdLanguage = language.First(),
+                IdAuthor = author.First(), // Use the object from the API
                 IdGenre = genre.First(),
+                IdLanguage = language.First(),
                 Discount = true,
                 Information = "new B",
                 Cover = "jjjjjjj"
@@ -302,16 +302,24 @@ public class Program
             book = await buyerService.GetAllBooks();
             Console.WriteLine(book.Count);
 
-            //Permission updateP = permission.Last();
-            //updateP.Name = "updated P";
-            //await buyerService.UpdateAPermission(updateP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Last());
+            ////Book updateB = BookDB.SelectById(115); // not working
+            ////updateB.BookName = "updated B";
+            ////updateB.PublicationDate = new DateTime(2021, 2, 2);
+            ////updateB.Price = 88.8;
+            ////updateB.IdAuthor = AuthorDB.SelectById(29);
+            ////updateB.IdLanguage = LanguageDB.SelectById(16);
+            ////updateB.IdGenre = GenreDB.SelectById(16);
+            ////updateB.Discount = false;
+            ////updateB.Information = "updated B";
+            ////updateB.Cover = "kkkkkkk";
+            ////await buyerService.UpdateABook(updateB);
+            ////book = await buyerService.GetAllBooks();
+            ////Console.WriteLine(book.Last());
 
-            //id = permission.Last().Id;
-            //await buyerService.DeleteAPermission(id);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            //id = book.Last().Id;
+            //await buyerService.DeleteABook(id);
+            //book = await buyerService.GetAllBooks();
+            //Console.WriteLine(book.Count);
 
             Console.WriteLine();
             Console.WriteLine();
@@ -322,27 +330,43 @@ public class Program
 
             Console.WriteLine("Reader:");
 
-            //var permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            var reader = await buyerService.GetAllReaders();
+            Console.WriteLine(reader.Count);
 
-            //Permission insertP = new Permission
+            //Reader insertR = new Reader
             //{
-            //    Name = "new P"
+            //    FirstName = "new r",
+            //    LastName = "new r",
+            //    PhoneNumber = "123456789",
+            //    Email = "kkkkkk",
+            //    Username = "llll",
+            //    Pass = "llll",
+            //    Birthdate = new DateTime(2000, 1, 1),
+            //    Nickname = "new r",
+            //    PremiumSubscription = true
             //};
-            //await buyerService.InsertAPermission(insertP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            //await buyerService.InsertAReader(insertR);
+            //reader = await buyerService.GetAllReaders();
+            //Console.WriteLine(reader.Count);
 
-            //Permission updateP = permission.Last();
-            //updateP.Name = "updated P";
-            //await buyerService.UpdateAPermission(updateP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Last());
+            //Reader updateR = reader.Last();
+            //updateR.FirstName = "updated R";
+            //updateR.LastName = "updated R";
+            //updateR.PhoneNumber = "987654321";
+            //updateR.Email = "jjjjjjj";
+            //updateR.Username = "jjjjjj";
+            //updateR.Pass = "jjjjjj";
+            //updateR.Birthdate = new DateTime(1999, 12, 31);
+            //updateR.Nickname = "updated R";
+            //updateR.PremiumSubscription = false;
+            //await buyerService.UpdateAReader(updateR);
+            //reader = await buyerService.GetAllReaders();
+            //Console.WriteLine(reader.Last());
 
-            //id = permission.Last().Id;
-            //await buyerService.DeleteAPermission(id);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            //id = reader.Last().Id;
+            //await buyerService.DeleteAReader(id);
+            //reader = await buyerService.GetAllReaders();
+            //Console.WriteLine(reader.Count);
 
             Console.WriteLine();
             Console.WriteLine();
@@ -353,27 +377,31 @@ public class Program
 
             Console.WriteLine("Book_List:");
 
-            //var permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            var bookList = await buyerService.GetAllBookLists();
+            Console.WriteLine(bookList.Count);
 
-            //Permission insertP = new Permission
-            //{
-            //    Name = "new P"
-            //};
-            //await buyerService.InsertAPermission(insertP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            ////Book_List insertBL = new Book_List // not working
+            ////{
+            ////    IdReader = ReaderDB.SelectById(39),
+            ////    ListName = "new BL",
+            ////    IsPublic = true
+            ////};
+            ////await buyerService.InsertABookList(insertBL);
+            ////bookList = await buyerService.GetAllBookLists();
+            ////Console.WriteLine(bookList.Count);
 
-            //Permission updateP = permission.Last();
-            //updateP.Name = "updated P";
-            //await buyerService.UpdateAPermission(updateP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Last());
+            ////Book_List updateBL = bookList.Last(); // not working
+            ////updateBL.IdReader = ReaderDB.SelectById(39);
+            ////updateBL.ListName = "updated BL";
+            ////updateBL.IsPublic = false;
+            ////await buyerService.UpdateABookList(updateBL);
+            ////bookList = await buyerService.GetAllBookLists();
+            ////Console.WriteLine(bookList.Last());
 
-            //id = permission.Last().Id;
-            //await buyerService.DeleteAPermission(id);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            //id = bookList.Last().Id;
+            //await buyerService.DeleteABookList(id);
+            //bookList = await buyerService.GetAllBookLists();
+            //Console.WriteLine(bookList.Count);
 
             Console.WriteLine();
             Console.WriteLine();
@@ -384,27 +412,29 @@ public class Program
 
             Console.WriteLine("Intrest_Reader:");
 
-            //var permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            var intrestReader = await buyerService.GetAllIntrestReaders();
+            Console.WriteLine(intrestReader.Count);
 
-            //Permission insertP = new Permission
-            //{
-            //    Name = "new P"
-            //};
-            //await buyerService.InsertAPermission(insertP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            ////Intrest_Reader insertIR = new Intrest_Reader // not working
+            ////{
+            ////    IdReader = ReaderDB.SelectById(39),
+            ////    IdIntrest = IntrestDB.SelectById(16)
+            ////};
+            ////await buyerService.InsertAnIntrestReader(insertIR);
+            ////intrestReader = await buyerService.GetAllIntrestReaders();
+            ////Console.WriteLine(intrestReader.Count);
 
-            //Permission updateP = permission.Last();
-            //updateP.Name = "updated P";
-            //await buyerService.UpdateAPermission(updateP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Last());
+            ////Intrest_Reader updateIR = intrestReader.Last(); // not working
+            ////updateIR.IdReader = ReaderDB.SelectById(39);
+            ////updateIR.IdIntrest = IntrestDB.SelectById(16);
+            ////await buyerService.UpdateAnIntrestReader(updateIR);
+            ////intrestReader = await buyerService.GetAllIntrestReaders();
+            ////Console.WriteLine(intrestReader.Last());
 
-            //id = permission.Last().Id;
-            //await buyerService.DeleteAPermission(id);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            //id = intrestReader.Last().Id;
+            //await buyerService.DeleteAnIntrestReader(id);
+            //intrestReader = await buyerService.GetAllIntrestReaders();
+            //Console.WriteLine(intrestReader.Count);
 
             Console.WriteLine();
             Console.WriteLine();
@@ -415,27 +445,29 @@ public class Program
 
             Console.WriteLine("List_Detail:");
 
-            //var permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            var listDetail = await buyerService.GetAllListDetails();
+            Console.WriteLine(listDetail.Count);
 
-            //Permission insertP = new Permission
-            //{
-            //    Name = "new P"
-            //};
-            //await buyerService.InsertAPermission(insertP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            ////List_Detail insertLD = new List_Detail // not working
+            ////{
+            ////    IdList = Book_ListDB.SelectById(12),
+            ////    IdBook = BookDB.SelectById(115)
+            ////};
+            ////await buyerService.InsertAListDetail(insertLD);
+            ////listDetail = await buyerService.GetAllListDetails();
+            ////Console.WriteLine(listDetail.Count);
 
-            //Permission updateP = permission.Last();
-            //updateP.Name = "updated P";
-            //await buyerService.UpdateAPermission(updateP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Last());
+            ////List_Detail updateLD = listDetail.Last(); // not working
+            ////updateLD.IdList = Book_ListDB.SelectById(12);
+            ////updateLD.IdBook = BookDB.SelectById(115);
+            ////await buyerService.UpdateAListDetail(updateLD);
+            ////listDetail = await buyerService.GetAllListDetails();
+            ////Console.WriteLine(listDetail.Last());
 
-            //id = permission.Last().Id;
-            //await buyerService.DeleteAPermission(id);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            //id = listDetail.Last().Id;
+            //await buyerService.DeleteAListDetail(id);
+            //listDetail = await buyerService.GetAllListDetails();
+            //Console.WriteLine(listDetail.Count);
 
             Console.WriteLine();
             Console.WriteLine();
@@ -446,27 +478,29 @@ public class Program
 
             Console.WriteLine("Permission_for_Administrator:");
 
-            //var permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            var permissionForAdmin = await buyerService.GetAllPermissionsForAdministrators();
+            Console.WriteLine(permissionForAdmin.Count);
 
-            //Permission insertP = new Permission
-            //{
-            //    Name = "new P"
-            //};
-            //await buyerService.InsertAPermission(insertP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            ////Permissions_for_Administrator insertPFA = new Permissions_for_Administrator // not working
+            ////{
+            ////    IdAdministrator = UserDB.SelectById(29),
+            ////    IdPermission = PermissionDB.SelectById(18)
+            ////};
+            ////await buyerService.InsertAPermissionForAdministrator(insertPFA);
+            ////permissionForAdmin = await buyerService.GetAllPermissionsForAdministrators(); ;
+            ////Console.WriteLine(permissionForAdmin.Count);
 
-            //Permission updateP = permission.Last();
-            //updateP.Name = "updated P";
-            //await buyerService.UpdateAPermission(updateP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Last());
+            ////Permissions_for_Administrator updatePFA = permissionForAdmin.Last(); // not working
+            ////updatePFA.IdAdministrator = UserDB.SelectById(29);
+            ////updatePFA.IdPermission = PermissionDB.SelectById(18);
+            ////await buyerService.UpdateAPermissionForAdministrator(updatePFA);
+            ////permissionForAdmin = await buyerService.GetAllPermissionsForAdministrators();
+            ////Console.WriteLine(permissionForAdmin.Last());
 
-            //id = permission.Last().Id;
-            //await buyerService.DeleteAPermission(id);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            //id = permissionForAdmin.Last().Id;
+            //await buyerService.DeleteAPermissionForAdministrator(id);
+            //permissionForAdmin = await buyerService.GetAllPermissionsForAdministrators();
+            //Console.WriteLine(permissionForAdmin.Count);
 
             Console.WriteLine();
             Console.WriteLine();
@@ -477,27 +511,29 @@ public class Program
 
             Console.WriteLine("Series_Detail:");
 
-            //var permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            var seriesDetail = await buyerService.GetAllSeriesDetails();
+            Console.WriteLine(seriesDetail.Count);
 
-            //Permission insertP = new Permission
-            //{
-            //    Name = "new P"
-            //};
-            //await buyerService.InsertAPermission(insertP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            ////Series_Detail insertSD = new Series_Detail // not working
+            ////{
+            ////    IdSeries = Book_SeriesDB.SelectById(16),
+            ////    IdBook = BookDB.SelectById(115)
+            ////};
+            ////await buyerService.InsertASeriesDetail(insertSD);
+            ////seriesDetail = await buyerService.GetAllSeriesDetails();
+            ////Console.WriteLine(seriesDetail.Count);
 
-            //Permission updateP = permission.Last();
-            //updateP.Name = "updated P";
-            //await buyerService.UpdateAPermission(updateP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Last());
+            ////Series_Detail updateSD = seriesDetail.Last(); // not working
+            ////updateSD.IdSeries = Book_SeriesDB.SelectById(13);
+            ////updateSD.IdBook = BookDB.SelectById(115);
+            ////await buyerService.UpdateASeriesDetail(updateSD);
+            ////seriesDetail = await buyerService.GetAllSeriesDetails();
+            ////Console.WriteLine(seriesDetail.Last());
 
-            //id = permission.Last().Id;
-            //await buyerService.DeleteAPermission(id);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            //id = seriesDetail.Last().Id;
+            //await buyerService.DeleteASeriesDetail(id);
+            //seriesDetail = await buyerService.GetAllSeriesDetails();
+            //Console.WriteLine(seriesDetail.Count);
 
             Console.WriteLine();
             Console.WriteLine();
@@ -508,27 +544,31 @@ public class Program
 
             Console.WriteLine("Cart:");
 
-            //var permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            var cart = await buyerService.GetAllCarts();
+            Console.WriteLine(cart.Count);
 
-            //Permission insertP = new Permission
-            //{
-            //    Name = "new P"
-            //};
-            //await buyerService.InsertAPermission(insertP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            ////Cart insertC = new Cart // not working
+            ////{
+            ////    IdReader = ReaderDB.SelectById(39),
+            ////    DiscountCode = "new C",
+            ////    TotalPrice = 99.9
+            ////};
+            ////await buyerService.InsertACart(insertC);
+            ////cart = await buyerService.GetAllCarts();
+            ////Console.WriteLine(cart.Count);
 
-            //Permission updateP = permission.Last();
-            //updateP.Name = "updated P";
-            //await buyerService.UpdateAPermission(updateP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Last());
+            ////Cart updateC = cart.Last(); // not working
+            ////updateC.IdReader = ReaderDB.SelectById(39);
+            ////updateC.DiscountCode = "updated C";
+            ////updateC.TotalPrice = 88.8;
+            ////await buyerService.UpdateACart(updateC);
+            ////cart = await buyerService.GetAllCarts();
+            ////Console.WriteLine(cart.Last());
 
-            //id = permission.Last().Id;
-            //await buyerService.DeleteAPermission(id);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            //id = cart.Last().Id;
+            //await buyerService.DeleteACart(id);
+            //cart = await buyerService.GetAllCarts();
+            //Console.WriteLine(cart.Count);
 
             Console.WriteLine();
             Console.WriteLine();
@@ -539,27 +579,29 @@ public class Program
 
             Console.WriteLine("Cart_Detail:");
 
-            //var permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            var cartDetail = await buyerService.GetAllCartDetails();
+            Console.WriteLine(cartDetail.Count);
 
-            //Permission insertP = new Permission
-            //{
-            //    Name = "new P"
-            //};
-            //await buyerService.InsertAPermission(insertP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            ////Cart_Detail insertCD = new Cart_Detail // not working
+            ////{
+            ////    IdCart = CartDB.SelectById(1),
+            ////    IdBook = BookDB.SelectById(115),
+            ////};
+            ////await buyerService.InsertACartDetail(insertCD);
+            ////cartDetail = await buyerService.GetAllCartDetails();
+            ////Console.WriteLine(cartDetail.Count);
 
-            //Permission updateP = permission.Last();
-            //updateP.Name = "updated P";
-            //await buyerService.UpdateAPermission(updateP);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Last());
+            ////Cart_Detail updateCD = cartDetail.Last(); // not working
+            ////updateCD.IdCart = CartDB.SelectById(2);
+            ////updateCD.IdBook = BookDB.SelectById(115);
+            ////await buyerService.UpdateACartDetail(updateCD);
+            ////cartDetail = await buyerService.GetAllCartDetails();
+            ////Console.WriteLine(cartDetail.Last());
 
-            //id = permission.Last().Id;
-            //await buyerService.DeleteAPermission(id);
-            //permission = await buyerService.GetAllPermissions();
-            //Console.WriteLine(permission.Count);
+            //id = cartDetail.Last().Id;
+            //await buyerService.DeleteACartDetail(id);
+            //cartDetail = await buyerService.GetAllCartDetails();
+            //Console.WriteLine(cartDetail.Count);
 
             Console.WriteLine();
             Console.WriteLine();
