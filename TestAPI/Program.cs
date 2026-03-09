@@ -10,6 +10,7 @@ using ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Http;
 using System.Threading.Tasks.Dataflow;
+using System.ComponentModel;
 
 
 namespace TestAPI;
@@ -41,19 +42,19 @@ public class Program
             var bookSeries = await buyerService.GetAllBookSeries();
             Console.WriteLine(bookSeries.Count);
 
-            Book_Series insertBs = new Book_Series
-            {
-                NameSeries = "new Bs"
-            };
-            await buyerService.InsertABookSeries(insertBs);
-            bookSeries = await buyerService.GetAllBookSeries();
-            Console.WriteLine(bookSeries.Count);
+            //Book_Series insertBs = new Book_Series
+            //{
+            //    NameSeries = "new Bs"
+            //};
+            //await buyerService.InsertABookSeries(insertBs);
+            //bookSeries = await buyerService.GetAllBookSeries();
+            //Console.WriteLine(bookSeries.Count);
 
-            Book_Series updateBs = bookSeries.Last();
-            updateBs.NameSeries = "updated Bs";
-            await buyerService.UpdateABookSeries(updateBs);
-            bookSeries = await buyerService.GetAllBookSeries();
-            Console.WriteLine(bookSeries.Last());
+            //Book_Series updateBs = bookSeries.Last();
+            //updateBs.NameSeries = "updated Bs";
+            //await buyerService.UpdateABookSeries(updateBs);
+            //bookSeries = await buyerService.GetAllBookSeries();
+            //Console.WriteLine(bookSeries.Last());
 
             //id = bookSeries.Last().Id;
             //await buyerService.DeleteABookSeries(id);
@@ -291,9 +292,9 @@ public class Program
                 BookName = "new B",
                 PublicationDate = new DateTime(2020, 1, 1),
                 Price = 99.9,
-                IdAuthor = author.First(), // Use the object from the API
-                IdGenre = genre.First(),
+                IdAuthor = author.First(),
                 IdLanguage = language.First(),
+                IdGenre = genre.First(),
                 Discount = true,
                 Information = "new B",
                 Cover = "jjjjjjj"
