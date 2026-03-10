@@ -25,6 +25,7 @@ namespace ViewModel
             u.Email = reader["email"] != DBNull.Value ? reader["email"].ToString() : null;
             u.Pass = reader["pass"].ToString();
             u.Birthdate = (DateTime)reader["birthDate"];
+            u.Username = reader["username"].ToString();
             base.CreateModel(entity);
             return u;
         }

@@ -14,11 +14,11 @@ namespace Service
         string uri;
         public HttpClient client;
 
-        //public Apiservice()
-        //{
-        //    uri = "https://8rdr4sf5-5265.euw.devtunnels.ms";
-        //    client = new HttpClient();
-        //}
+        public Apiservice()
+        {
+            uri = "https://8rdr4sf5-5265.euw.devtunnels.ms";
+            client = new HttpClient();
+        }
         public Apiservice(HttpClient client, string baseUri)
         {
             uri = "https://8rdr4sf5-5265.euw.devtunnels.ms";
@@ -54,7 +54,26 @@ namespace Service
         }
         public async Task<int> InsertABook(Book b)
         {
-            return (await client.PostAsJsonAsync<Book>(uri + "/api/Select/InsertABook", b)).IsSuccessStatusCode ? 1 : 0;
+            try
+            {
+                HttpResponseMessage response = await client.PostAsJsonAsync<Book>(uri + "/api/Select/InsertABook", b);
+                //return (await client.PostAsJsonAsync<Book>(uri + "/api/Select/InsertABook", b)).IsSuccessStatusCode ? 1 : 0;
+                if (response.IsSuccessStatusCode)
+                {
+                    return 1;
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to insert book. Status code: {response.StatusCode}");
+                    return 0;
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return 0;
+     
         }
         public async Task<int> UpdateABook(Book b)
         {

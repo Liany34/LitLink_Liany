@@ -61,6 +61,7 @@ namespace LitLink_By_Lian_Z_.Controllers
         }
 
         [HttpPost]
+        [ActionName("InsertABook")]
         public int InsertABook([FromBody] Book book)
         {
             BookDB db = new BookDB();
