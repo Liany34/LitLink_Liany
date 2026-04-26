@@ -25,7 +25,6 @@ namespace ViewModel
                 c.DiscountCode = reader["discountCode"].ToString();
             else
                 c.DiscountCode = null;
-            c.TotalPrice = Convert.ToDouble(reader["totalPrice"]);
             base.CreateModel(entity);
             return c;
         }
@@ -62,12 +61,11 @@ namespace ViewModel
             Cart c = entity as Cart;
             if (c != null)
             {
-                string sqlStr = $"Insert INTO Cart (IdReader, DiscountCode, TotalPrice) VALUES (@idReader, @discountCode, @totalPrice)";
+                string sqlStr = $"Insert INTO Cart (IdReader, DiscountCode) VALUES (@idReader, @discountCode)";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@idReader", c.IdReader.Id));
                 command.Parameters.Add(new OleDbParameter("@discountCode", c.DiscountCode));
-                command.Parameters.Add(new OleDbParameter("@totalPrice", c.TotalPrice));
             }
         }
 
@@ -76,12 +74,11 @@ namespace ViewModel
             Cart c = entity as Cart;
             if (c != null)
             {
-                string sqlStr = $"UPDATE Cart SET IdReader=@idReader, DiscountCode=@discountCode, TotalPrice=@totalPrice WHERE ID=@id";
+                string sqlStr = $"UPDATE Cart SET IdReader=@idReader, DiscountCode=@discountCode WHERE ID=@id";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@idReader", c.IdReader.Id));
                 command.Parameters.Add(new OleDbParameter("@discountCode", c.DiscountCode));
-                command.Parameters.Add(new OleDbParameter("@totalPrice", c.TotalPrice));
                 command.Parameters.Add(new OleDbParameter("@id", c.Id));
             }
         }

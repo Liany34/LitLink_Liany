@@ -364,84 +364,7 @@ namespace LitLink_By_Lian_Z_.Controllers
         }
 
 
-        // Permission
-        [HttpGet]
-        [ActionName("PermissionSelector")]
-        public ListPermission SelectAllPermissions()
-        {
-            PermissionDB db = new PermissionDB();
-            ListPermission permissions = db.SelectAll();
-            return permissions;
-        }
-
-        [HttpPost]
-        public int InsertAPermission([FromBody] Permission permission)
-        {
-            PermissionDB db = new PermissionDB();
-            db.Insert(permission);
-            int x = db.SaveChanges();
-            return x;
-        }
-
-        [HttpPut]
-        public int UpdateAPermission([FromBody] Permission permission)
-        {
-            PermissionDB db = new PermissionDB();
-            db.Update(permission);
-            int x = db.SaveChanges();
-            return x;
-        }
-
-        [HttpDelete("{id}")]
-        public int DeleteAPermission(int id)
-        {
-            Permission permission = PermissionDB.SelectById(id);
-            PermissionDB db = new PermissionDB();
-            db.Delete(permission);
-            int x = db.SaveChanges();
-            return x;
-        }
-
-
-        // Permission_for_Administrator
-        [HttpGet]
-        [ActionName("PermissionforAdministratorSelector")]
-        public ListPermissions_for_Administrator SelectAllPermissionsforAdministrators()
-        {
-            Permissions_for_AdministratorDB db = new Permissions_for_AdministratorDB();
-            ListPermissions_for_Administrator permissionsforAdministrators = db.SelectAll();
-            return permissionsforAdministrators;
-        }
-
-        [HttpPost]
-        public int InsertAPermissions_for_Administrator([FromBody] Permissions_for_Administrator permissionsforAdministrator)
-        {
-            Permissions_for_AdministratorDB db = new Permissions_for_AdministratorDB();
-            db.Insert(permissionsforAdministrator);
-            int x = db.SaveChanges();
-            return x;
-        }
-
-        [HttpPut]
-        public int UpdateAPermissions_for_Administrator([FromBody] Permissions_for_Administrator permissionsforAdministrator)
-        {
-            Permissions_for_AdministratorDB db = new Permissions_for_AdministratorDB();
-            db.Update(permissionsforAdministrator);
-            int x = db.SaveChanges();
-            return x;
-        }
-
-        [HttpDelete("{id}")]
-        public int DeleteAPermissions_for_Administrator(int id)
-        {
-            Permissions_for_Administrator permissionsforAdministrator = Permissions_for_AdministratorDB.SelectById(id);
-            Permissions_for_AdministratorDB db = new Permissions_for_AdministratorDB();
-            db.Delete(permissionsforAdministrator);
-            int x = db.SaveChanges();
-            return x;
-        }
-
-
+        
         // Reader
         [HttpGet]
         [ActionName("ReaderSelector")]
@@ -557,6 +480,14 @@ namespace LitLink_By_Lian_Z_.Controllers
             return x;
         }
 
+        [HttpGet]
+        [ActionName("UserPRPSelector64Byte")]
+        public string SelectUserPRPById(int id)
+        {
+            UserDB db = new UserDB();
+            string pic = db.SelectPRPByUserID(id);
+            return pic;
+        }
 
         // Cart
         [HttpGet]
@@ -631,6 +562,192 @@ namespace LitLink_By_Lian_Z_.Controllers
             Cart_Detail cartDetail = Cart_DetailDB.SelectById(id);
             Cart_DetailDB db = new Cart_DetailDB();
             db.Delete(cartDetail);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+
+        // Following
+        [HttpGet]
+        [ActionName("FollowingSelector")]
+        public ListFollowing SelectAllFollowings()
+        {
+            FollowingDB db = new FollowingDB();
+            ListFollowing followings = db.SelectAll();
+            return followings;
+        }
+
+        [HttpPost]
+        public int InsertAFollowing([FromBody] Following following)
+        {
+            FollowingDB db = new FollowingDB();
+            db.Insert(following);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+        [HttpPut]
+        public int UpdateAFollowing([FromBody] Following following)
+        {
+            FollowingDB db = new FollowingDB();
+            db.Update(following);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+        [HttpDelete("{id}")]
+        public int DeleteAFollowing(int id)
+        {
+            Following following = FollowingDB.SelectById(id);
+            FollowingDB db = new FollowingDB();
+            db.Delete(following);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+
+        //News
+        [HttpGet]
+        [ActionName("NewsSelector")]
+        public ListNews SelectAllNews()
+        {
+            NewsDB db = new NewsDB();
+            ListNews news = db.SelectAll();
+            return news;
+        }
+
+        [HttpPost]
+        public int InsertANews([FromBody] News news)
+        {
+            NewsDB db = new NewsDB();
+            db.Insert(news);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+        [HttpPut]
+        public int UpdateANews([FromBody] News news)
+        {
+            NewsDB db = new NewsDB();
+            db.Update(news);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+        [HttpDelete("{id}")]
+        public int DeleteANews(int id)
+        {
+            News news = NewsDB.SelectById(id);
+            NewsDB db = new NewsDB();
+            db.Delete(news);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+
+        // Reviews
+        [HttpGet]
+        [ActionName("ReviewSelector")]
+        public ListReviews SelectAllReviews()
+        {
+            ReviewsDB db = new ReviewsDB();
+            ListReviews reviews = db.SelectAll();
+            return reviews;
+        }
+
+        [HttpPost]
+        public int InsertAReview([FromBody] Reviews review)
+        {
+            ReviewsDB db = new ReviewsDB();
+            db.Insert(review);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+        [HttpPut]
+        public int UpdateAReview([FromBody] Reviews review)
+        {
+            ReviewsDB db = new ReviewsDB();
+            db.Update(review);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+        [HttpDelete("{id}")]
+        public int DeleteAReview(int id)
+        {
+            Reviews review = ReviewsDB.SelectById(id);
+            ReviewsDB db = new ReviewsDB();
+            db.Delete(review);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+
+        //Admin
+        [HttpGet]
+        [ActionName("AdminSelector")]
+        public ListAdmin SelectAllAdmins()
+        {
+            AdminDB db = new AdminDB();
+            ListAdmin admins = db.SelectAll();
+            return admins;
+        }
+
+        [HttpPost]
+        public int InsertAnAdmin([FromBody] Admin admin)
+        {
+            AdminDB db = new AdminDB();
+            db.Insert(admin);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+        [HttpDelete("{id}")]
+        public int DeleteAnAdmin(int id)
+        {
+            Admin admin = AdminDB.SelectById(id);
+            AdminDB db = new AdminDB();
+            db.Delete(admin);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+
+        //Book_Genre
+        [HttpGet]
+        [ActionName("BookGenreSelector")]
+        public ListBook_Genre SelectAllBookGenres()
+        {
+            Book_GenreDB db = new Book_GenreDB();
+            ListBook_Genre bookGenres = db.SelectAll();
+            return bookGenres;
+        }
+
+        [HttpPost]
+        public int InsertABookGenre([FromBody] Book_Genre bookGenre)
+        {
+            Book_GenreDB db = new Book_GenreDB();
+            db.Insert(bookGenre);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+        [HttpPut]
+        public int UpdateABookGenre([FromBody] Book_Genre bookGenre)
+        {
+            Book_GenreDB db = new Book_GenreDB();
+            db.Update(bookGenre);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+        [HttpDelete("{id}")]
+        public int DeleteABookGenre(int id)
+        {
+            Book_Genre bookGenre = Book_GenreDB.SelectById(id);
+            Book_GenreDB db = new Book_GenreDB();
+            db.Delete(bookGenre);
             int x = db.SaveChanges();
             return x;
         }

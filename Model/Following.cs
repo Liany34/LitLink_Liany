@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Book_Series : BaseEntity
+    public class Following : BaseEntity
     {
-        private string nameSeries;
+        private Reader idReader;
         private Author idAuthor;
 
-        public string NameSeries { get => nameSeries; set => nameSeries = value; }
+        public Reader IdReader { get => idReader; set => idReader = value; }
         public Author IdAuthor { get => idAuthor; set => idAuthor = value; }
 
         public override string ToString()
         {
-            return $"Book Series: {NameSeries}, Author: {IdAuthor.PenName}";
+            return $"{IdReader.Nickname} follows {IdAuthor.PenName}";
         }
     }
 }

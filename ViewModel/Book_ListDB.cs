@@ -21,7 +21,6 @@ namespace ViewModel
             Book_List bl = entity as Book_List;
             bl.IdReader = ReaderDB.SelectById((int)reader["idReader"]);
             bl.ListName = reader["listName"].ToString();
-            bl.IsPublic = (bool)reader["isPublic"];
             base.CreateModel(entity);
             return bl;
         }
@@ -55,12 +54,11 @@ namespace ViewModel
             Book_List bl = entity as Book_List;
             if (bl != null)
             {
-                string sqlStr = $"Insert INTO Book_List (IdReader, ListName, IsPublic) VALUES (@idReader, @listName, @isPublic)";
+                string sqlStr = $"Insert INTO Book_List (IdReader, ListName) VALUES (@idReader, @listName)";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@idReader", bl.IdReader.Id));
                 command.Parameters.Add(new OleDbParameter("@listName", bl.ListName));
-                command.Parameters.Add(new OleDbParameter("@isPublic", bl.IsPublic));
             }
         }
 
@@ -69,12 +67,11 @@ namespace ViewModel
             Book_List bl = entity as Book_List;
             if (bl != null)
             {
-                string sqlStr = $"UPDATE Book_List SET idReader=@IdReader, listName=@ListName, isPublic=@IsPublic WHERE ID=@id";
+                string sqlStr = $"UPDATE Book_List SET idReader=@IdReader, listName=@ListName WHERE ID=@id";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@IdReader", bl.IdReader.Id));
                 command.Parameters.Add(new OleDbParameter("@ListName", bl.ListName));
-                command.Parameters.Add(new OleDbParameter("@IsPublic", bl.IsPublic));
                 command.Parameters.Add(new OleDbParameter("@id", bl.Id));
             }
         }

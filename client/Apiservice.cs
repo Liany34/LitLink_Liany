@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Model;
 using ViewModel;
 
 namespace Service
@@ -14,21 +15,22 @@ namespace Service
         string uri;
         public HttpClient client;
 
+
         public Apiservice()
         {
             uri = "https://8rdr4sf5-5265.euw.devtunnels.ms";
             client = new HttpClient();
         }
-        public Apiservice(HttpClient client, string baseUri)
-        {
-            uri = "https://8rdr4sf5-5265.euw.devtunnels.ms";
-            client = new HttpClient();
-            client.BaseAddress = new Uri(uri);
-            this.client = client ?? throw new 
-                ArgumentNullException(nameof(client));
-            this.uri = baseUri ?? throw new 
-                ArgumentNullException(nameof(baseUri));
-        }
+        //public Apiservice(HttpClient client, string baseUri)
+        //{
+        //    uri = "https://8rdr4sf5-5265.euw.devtunnels.ms";
+        //    client = new HttpClient();
+        //    client.BaseAddress = new Uri(uri);
+        //    this.client = client ?? throw new 
+        //        ArgumentNullException(nameof(client));
+        //    this.uri = baseUri ?? throw new 
+        //        ArgumentNullException(nameof(baseUri));
+        //}
 
         public async Task<ListAuthor> GetAllAuthors()
         {
@@ -205,40 +207,6 @@ namespace Service
             return (await client.DeleteAsync(uri + $"/api/Select/DeleteAListDetail/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
 
-        public async Task<ListPermission> GetAllPermissions()
-        {
-            return await client.GetFromJsonAsync<ListPermission>(uri + "/api/Select/PermissionSelector");
-        }
-        public async Task<int> InsertAPermission(Permission p)
-        {
-            return (await client.PostAsJsonAsync<Permission>(uri + "/api/Select/InsertAPermission", p)).IsSuccessStatusCode ? 1 : 0;
-        }
-        public async Task<int> UpdateAPermission(Permission p)
-        {
-            return (await client.PutAsJsonAsync<Permission>(uri + "/api/Select/UpdateAPermission", p)).IsSuccessStatusCode ? 1 : 0;
-        }
-        public async Task<int> DeleteAPermission(int id)
-        {
-            return (await client.DeleteAsync(uri + $"/api/Select/DeleteAPermission/{id}")).IsSuccessStatusCode ? 1 : 0;
-        }
-
-        public async Task<ListPermissions_for_Administrator> GetAllPermissionsForAdministrators()
-        {
-            return await client.GetFromJsonAsync<ListPermissions_for_Administrator>(uri + "/api/Select/PermissionforAdministratorSelector");
-        }
-        public async Task<int> InsertAPermissionForAdministrator(Permissions_for_Administrator pa)
-        {
-            return (await client.PostAsJsonAsync<Permissions_for_Administrator>(uri + "/api/Select/InsertAPermissions_for_Administrator", pa)).IsSuccessStatusCode ? 1 : 0;
-        }
-        public async Task<int> UpdateAPermissionForAdministrator(Permissions_for_Administrator pa)
-        {
-            return (await client.PutAsJsonAsync<Permissions_for_Administrator>(uri + "/api/Select/UpdateAPermissions_for_Administrator", pa)).IsSuccessStatusCode ? 1 : 0;
-        }
-        public async Task<int> DeleteAPermissionForAdministrator(int id)
-        {
-            return (await client.DeleteAsync(uri + $"/api/Select/DeleteAPermissions_for_Administrator/{id}")).IsSuccessStatusCode ? 1 : 0;
-        }
-
         public async Task<ListReader> GetAllReaders()
         {
             return await client.GetFromJsonAsync<ListReader>(uri + "/api/Select/ReaderSelector");
@@ -328,6 +296,101 @@ namespace Service
         public async Task<int> DeleteACartDetail(int id)
         {
             return (await client.DeleteAsync(uri + $"/api/Select/DeleteACartDetail/{id}")).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<ListFollowing> GetAllFollowings()
+        {
+            return await client.GetFromJsonAsync<ListFollowing>(uri + "/api/Select/FollowingSelector");
+        }
+
+        public async Task<int> InsertAFollowing(Following f)
+        {
+            return (await client.PostAsJsonAsync<Following>(uri + "/api/Select/InsertAFollowing", f)).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<int> UpdateAFollowing(Following f)
+        {
+            return (await client.PutAsJsonAsync<Following>(uri + "/api/Select/UpdateAFollowing", f)).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<int> DeleteAFollowing(int id)
+        {
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteAFollowing/{id}")).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<ListNews> GetAllNews()
+        {
+            return await client.GetFromJsonAsync<ListNews>(uri + "/api/Select/NewsSelector");
+        }
+
+        public async Task<int> InsertANews(News news)
+        {
+            return (await client.PostAsJsonAsync<News>(uri + "/api/Select/InsertANews", news)).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<int> UpdateANews(News news)
+        {
+            return (await client.PutAsJsonAsync<News>(uri + "/api/Select/UpdateANews", news)).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<int> DeleteANews(int id)
+        {
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteANews/{id}")).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<ListReviews> GetAllReviews()
+        {
+            return await client.GetFromJsonAsync<ListReviews>(uri + "/api/Select/ReviewsSelector");
+        }
+
+        public async Task<int> InsertAReview(Reviews review)
+        {
+            return (await client.PostAsJsonAsync<Reviews>(uri + "/api/Select/InsertAReview", review)).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<int> UpdateAReview(Reviews review)
+        {
+            return (await client.PutAsJsonAsync<Reviews>(uri + "/api/Select/UpdateAReview", review)).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<int> DeleteAReview(int id)
+        {
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteAReview/{id}")).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<ListAdmin> GetAllAdmins()
+        {
+            return await client.GetFromJsonAsync<ListAdmin>(uri + "/api/Select/AdminSelector");
+        }
+
+        public async Task<int> InsertAnAdmin(Admin admin)
+        {
+            return (await client.PostAsJsonAsync<Admin>(uri + "/api/Select/InsertAnAdmin", admin)).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<int> DeleteAnAdmin(int id)
+        {
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteAnAdmin/{id}")).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<ListBook_Genre> GetAllBookGenres()
+        {
+            return await client.GetFromJsonAsync<ListBook_Genre>(uri + "/api/Select/BookGenreSelector");
+        }
+
+        public async Task<int> InsertABookGenre(Book_Genre bg)
+        {
+            return (await client.PostAsJsonAsync<Book_Genre>(uri + "/api/Select/InsertABookGenre", bg)).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<int> UpdateABookGenre(Book_Genre bg)
+        {
+            return (await client.PutAsJsonAsync<Book_Genre>(uri + "/api/Select/UpdateABookGenre", bg)).IsSuccessStatusCode ? 1 : 0;
+        }
+
+        public async Task<int> DeleteABookGenre(int id)
+        {
+            return (await client.DeleteAsync(uri + $"/api/Select/DeleteABookGenre/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
     }
 }

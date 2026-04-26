@@ -12,6 +12,13 @@ namespace LitLink_By_Lian_Z_
 
             // Add services to the container.
 
+            builder.Services.AddControllers()
+             .AddJsonOptions(options =>
+             {
+                 options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                 options.JsonSerializerOptions.WriteIndented = true; // אופציונלי: הופך את ה-JSON לקריא יותר
+             });
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

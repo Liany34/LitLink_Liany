@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Permission : BaseEntity
+    public class Admin : User
     {
-        private string name;
-
-        public string Name { get => name; set => name = value; }
-
         public override string ToString()
         {
-            return Name;
+            return $"Admin: {Username}";
         }
     }
 }

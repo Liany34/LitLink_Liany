@@ -15,6 +15,7 @@ namespace Service
         public Task<int> UpdateAnAuthor(Author author);
         public Task<int> DeleteAnAuthor(int id);
 
+
         public Task<ListBook> GetAllBooks();
         public Task<int> InsertABook(Book book);
         public Task<int> UpdateABook(Book book);
@@ -62,19 +63,7 @@ namespace Service
         public Task<int> UpdateAListDetail(List_Detail listDetail);
         public Task<int> DeleteAListDetail(int id);
 
-
-        public Task<ListPermission> GetAllPermissions();
-        public Task<int> InsertAPermission(Permission permission);
-        public Task<int> UpdateAPermission(Permission permission);
-        public Task<int> DeleteAPermission(int id);
-
-
-        public Task<ListPermissions_for_Administrator> GetAllPermissionsForAdministrators();
-        public Task<int> InsertAPermissionForAdministrator(Permissions_for_Administrator permissionForAdministrator);
-        public Task<int> UpdateAPermissionForAdministrator(Permissions_for_Administrator permissionForAdministrator);
-        public Task<int> DeleteAPermissionForAdministrator(int id);
-
-
+        
         public Task<ListReader> GetAllReaders();
         public Task<int> InsertAReader(Reader reader);
         public Task<int> UpdateAReader(Reader reader);
@@ -91,6 +80,7 @@ namespace Service
         public Task<int> InsertAUser(User user);
         public Task<int> UpdateAUser(User user);
         public Task<int> DeleteAUser(int id);
+        public Task<string> GetUserPRP(int id);
 
 
         public Task<ListCart> GetAllCarts();
@@ -102,5 +92,34 @@ namespace Service
         public Task<int> InsertACartDetail(Cart_Detail cartDetail);
         public Task<int> UpdateACartDetail(Cart_Detail cartDetail);
         public Task<int> DeleteACartDetail(int id);
+
+
+        public Task<ListFollowing> GetAllFollowings();
+        public Task<int> InsertAFollowing(Following following);
+        public Task<int> UpdateAFollowing(Following following);
+        public Task<int> DeleteAFollowing(int id);
+
+
+        public Task<ListNews> GetAllNews();
+        public Task<int> InsertANews(News news);
+        public Task<int> UpdateANews(News news);
+        public Task<int> DeleteANews(int id);
+
+
+        public Task<ListReviews> GetAllReviews();
+        public Task<int> InsertAReview(Reviews review);
+        public Task<int> UpdateAReview(Reviews review);
+        public Task<int> DeleteAReview(int id);
+
+
+        public Task<ListAdmin> GetAllAdmins();
+        public Task<int> InsertAnAdmin(Admin admin);
+        public Task<int> DeleteAnAdmin(int id);
+
+
+        public Task<ListBook_Genre> GetAllBookGenres();
+        public Task<int> InsertABookGenre(Book_Genre bookGenre);
+        public Task<int> UpdateABookGenre(Book_Genre bookGenre);
+        public Task<int> DeleteABookGenre(int id);
     }
 }

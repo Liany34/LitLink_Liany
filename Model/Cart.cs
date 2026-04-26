@@ -10,15 +10,13 @@ namespace Model
     {
         private Reader idReader;
         private string? discountCode;
-        private double totalPrice;
 
         public Reader IdReader { get => idReader; set => idReader = value; }
         public string? DiscountCode { get => discountCode; set => discountCode = value; }
-        public double TotalPrice { get => totalPrice; set => totalPrice = value; }
 
         public override string ToString()
         {
-            return $"Cart Id: {Id}, Reader: {idReader.FirstName} {idReader.LastName}, TotalPrice: {totalPrice}";
+            return $"Cart Id: {Id}, Reader: {idReader.FirstName} {idReader.LastName}";
         }
     }
 }

@@ -21,11 +21,16 @@ namespace ViewModel
             User u = entity as User;
             u.FirstName = reader["firstName"].ToString();
             u.LastName = reader["lastName"].ToString();
-            u.PhoneNumber = reader["phoneNumber"] != DBNull.Value ? reader["phoneNumber"].ToString() : null;
-            u.Email = reader["email"] != DBNull.Value ? reader["email"].ToString() : null;
+            u.PhoneNumber = reader["phoneNumber"].ToString();
+            u.Email = reader["email"].ToString();
             u.Pass = reader["pass"].ToString();
             u.Birthdate = (DateTime)reader["birthDate"];
             u.Username = reader["username"].ToString();
+            
+            string imagePath = Path() + "\\PRP\\" + reader["picture"].ToString();
+            string base64String = ImageToBase64Converter.ImageToBase64(imagePath);
+            u.Picture = base64String;
+
             base.CreateModel(entity);
             return u;
         }
@@ -42,7 +47,14 @@ namespace ViewModel
             User g = list.Find(item => item.Id == id);
             return g;
         }
+        public string SelectPRPByUserID(int id)
+        {
+            ListUser uList = SelectAll();
+            User u = uList.Find(item => item.Id == id);
 
+            string pic = u.Picture;
+            return pic;
+        }
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             User u = entity as User;
@@ -59,7 +71,7 @@ namespace ViewModel
             User u = entity as User;
             if (u != null)
             {
-                string sqlStr = $"Insert INTO [User] (FirstName, LastName, PhoneNumber, Email, Username, Pass, Birthdate) VALUES (@firstName, @lastName, @phoneNumber, @email, @username, @pass, @birthdate)";
+                string sqlStr = $"Insert INTO [User] (FirstName, LastName, PhoneNumber, Email, Username, Pass, Birthdate, Picture) VALUES (@firstName, @lastName, @phoneNumber, @email, @username, @pass, @birthdate, @picture)";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@firstName", u.FirstName));
@@ -69,6 +81,7 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@username", u.Username));
                 command.Parameters.Add(new OleDbParameter("@pass", u.Pass));
                 command.Parameters.Add(new OleDbParameter("@birthdate", u.Birthdate));
+                command.Parameters.Add(new OleDbParameter("@picture", u.Picture));
             }
         }
 
@@ -77,7 +90,7 @@ namespace ViewModel
             User u = entity as User;
             if (u != null)
             {
-                string sqlStr = $"UPDATE [User] SET FirstName=@firstName, LastName=@lastName, PhoneNumber=@phoneNumber, Email=@email, Username=@username, Pass=@pass, Birthdate=@birthdate WHERE ID=@id";
+                string sqlStr = $"UPDATE [User] SET FirstName=@firstName, LastName=@lastName, PhoneNumber=@phoneNumber, Email=@email, Username=@username, Pass=@pass, Birthdate=@birthdate, Picture=@picture WHERE ID=@id";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@firstName", u.FirstName));
@@ -87,6 +100,7 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@username", u.Username));
                 command.Parameters.Add(new OleDbParameter("@pass", u.Pass));
                 command.Parameters.Add(new OleDbParameter("@birthdate", u.Birthdate));
+                command.Parameters.Add(new OleDbParameter("@picture", u.Picture));
                 command.Parameters.Add(new OleDbParameter("@id", u.Id));
             }
         }
