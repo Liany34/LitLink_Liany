@@ -1,0 +1,6 @@
+@LitLink_By_Liany_HostAddress = http://localhost:5193
+
+GET {{LitLink_By_Liany_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

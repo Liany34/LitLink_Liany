@@ -10,13 +10,15 @@ namespace Model
     {
         private Book_Series idSeries;
         private Book idBook;
+        private int number;
 
         public Book_Series IdSeries { get => idSeries; set => idSeries = value; }
         public Book IdBook { get => idBook; set => idBook = value; }
+        public int Number { get => number; set => number = value; }
 
         public override string ToString()
         {
-            return $"Series ID: {IdSeries.NameSeries}, Book ID: {IdBook.BookName}";
+            return $"Series: {IdSeries.NameSeries}, The Book: {IdBook.BookName} is number {Number} in the series.";
         }
     }
 }

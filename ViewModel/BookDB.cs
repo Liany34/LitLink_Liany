@@ -30,7 +30,6 @@ namespace ViewModel
                 b.Price = null;
             b.Discount = (bool)reader["discount"];
             b.Information = reader["information"].ToString();
-            b.Cover = reader["cover"].ToString();
             int authorId = (int)reader["idAuthor"];
             b.IdAuthor = AuthorDB.SelectById(authorId);
             int languageId = (int)reader["idLanguage"];
@@ -39,6 +38,11 @@ namespace ViewModel
                 b.BookLink = reader["bookLink"].ToString();
             else
                 b.BookLink = null;
+
+            string imagePath = Path() + "\\BookCovers\\" + reader["cover"].ToString();
+            string base64String = ImageToBase64Converter.ImageToBase64(imagePath);
+            b.Cover = base64String;
+
             base.CreateModel(entity);
             return b;
         }
@@ -55,7 +59,14 @@ namespace ViewModel
             Book g = list.Find(item => item.Id == id);
             return g;
         }
+        public string SelectBookCoverByBookID(int id)
+        {
+            ListBook bList = SelectAll();
+            Book b = bList.Find(item => item.Id == id);
 
+            string pic = b.Cover;
+            return pic;
+        }
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             Book b = entity as Book;

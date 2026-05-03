@@ -21,6 +21,7 @@ namespace ViewModel
             Series_Detail sd = entity as Series_Detail;
             sd.IdSeries = Book_SeriesDB.SelectById((int)reader["idSeries"]);
             sd.IdBook = BookDB.SelectById((int)reader["idBook"]);
+            sd.Number = (int)reader["number"];
             base.CreateModel(entity);
             return sd;
         }
@@ -54,11 +55,12 @@ namespace ViewModel
             Series_Detail sd = entity as Series_Detail;
             if (sd != null)
             {
-                string sqlStr = $"Insert INTO Series_Detail (IdSeries, IdBook) VALUES (@idSeries, @idBook)";
+                string sqlStr = $"Insert INTO Series_Detail (IdSeries, IdBook, [Number]) VALUES (@idSeries, @idBook, @number)";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@idSeries", sd.IdSeries.Id));
                 command.Parameters.Add(new OleDbParameter("@idBook", sd.IdBook.Id));
+                command.Parameters.Add(new OleDbParameter("@number", sd.Number));
             }
         }
 
@@ -67,11 +69,12 @@ namespace ViewModel
             Series_Detail sd = entity as Series_Detail;
             if (sd != null)
             {
-                string sqlStr = $"UPDATE Series_Detail SET IdSeries=@idSeries, IdBook=@idBook WHERE ID=@id";
+                string sqlStr = $"UPDATE Series_Detail SET IdSeries=@idSeries, IdBook=@idBook, [Number]=@number WHERE ID=@id";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@idSeries", sd.IdSeries.Id));
                 command.Parameters.Add(new OleDbParameter("@idBook", sd.IdBook.Id));
+                command.Parameters.Add(new OleDbParameter("@number", sd.Number));
                 command.Parameters.Add(new OleDbParameter("@id", sd.Id));
             }
         }
