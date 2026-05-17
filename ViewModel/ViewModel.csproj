@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.OleDb" Version="9.0.10" />
+    <PackageReference Include="System.Data.OleDb" Version="10.0.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,6 +16,12 @@
 
   <ItemGroup>
     <Folder Include="PRP\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="MyProject1.accdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -17,9 +17,17 @@ namespace Service
         public Apiservice()
         {
             //uri = "http://localhost:5193";
-            uri = "https://hjsm89qq-5193.uks1.devtunnels.ms";
+            uri = "https://mkrq0bm8-5193.uks1.devtunnels.ms";
             client = new HttpClient();
         }
+        //public Apiservice(HttpClient client, string baseUri)
+        //{
+        //    uri = "https://mkrq0bm8-5193.uks1.devtunnels.ms";
+        //    client = new HttpClient();
+        //    this.client = client ?? throw new ArgumentNullException(nameof(client));
+        //    this.uri = baseUri ?? throw new ArgumentNullException(nameof(baseUri));
+        //}
+
 
         public async Task<ListGenre> GetAllGenres()
         {

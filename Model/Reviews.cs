@@ -22,5 +22,13 @@ namespace Model
         {
             return $"{IdReader.Nickname} gave the book - {IdBook.BookName} {Stars} stars, and wrote: {Text}";
         }
+
+        public string StarString
+        {
+            get
+            {
+                return new string('★', Stars).PadRight(5, '☆');
+            }
+        }
     }
 }
