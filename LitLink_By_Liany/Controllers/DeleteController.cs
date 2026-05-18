@@ -43,6 +43,17 @@ namespace LitLink_By_Liany.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ActionName("DiscountCodesDelete")]
+        public int DeleteDiscountCodes(int id)
+        {
+            DiscountCodesDB db = new DiscountCodesDB();
+            DiscountCodes discountCodesToDelete = DiscountCodesDB.SelectById(id);
+            db.Delete(discountCodesToDelete);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+        [HttpDelete("{id}")]
         [ActionName("UserDelete")]
         public int DeleteUser(int id)
         {

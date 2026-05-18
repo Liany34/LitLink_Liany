@@ -12,9 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Model">
-      <HintPath>..\Service\bin\Debug\net8.0\Model.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Model\Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Service">
       <HintPath>..\Service\bin\Debug\net8.0\Service.dll</HintPath>
     </Reference>

@@ -40,6 +40,16 @@ namespace LitLink_By_Liany.Controllers
         }
 
         [HttpPost]
+        [ActionName("DiscountCodesInsert")]
+        public int InsertDiscountCodes([FromBody] DiscountCodes discountCodes)
+        {
+            DiscountCodesDB db = new DiscountCodesDB();
+            db.Insert(discountCodes);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+        [HttpPost]
         [ActionName("UserInsert")]
         public int InsertUser([FromBody] User user)
         {

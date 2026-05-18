@@ -37,6 +37,15 @@ namespace LitLink_By_Liany.Controllers
         }
 
         [HttpGet]
+        [ActionName("DiscountCodesSelector")]
+        public ListDiscountCodes SelectAllDiscountCodes()
+        {
+            DiscountCodesDB db = new DiscountCodesDB();
+            ListDiscountCodes discountCodes = db.SelectAll();
+            return discountCodes;
+        }
+
+        [HttpGet]
         [ActionName("UserSelector")]
         public ListUser SelectAllUsers()
         {

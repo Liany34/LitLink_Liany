@@ -40,6 +40,16 @@ namespace LitLink_By_Liany.Controllers
         }
 
         [HttpPut]
+        [ActionName("DiscountCodesUpdate")]
+        public int UpdateDiscountCodes([FromBody] DiscountCodes discountCodes)
+        {
+            DiscountCodesDB db = new DiscountCodesDB();
+            db.Update(discountCodes);
+            int x = db.SaveChanges();
+            return x;
+        }
+
+        [HttpPut]
         [ActionName("UserUpdate")]
         public int UpdateUser([FromBody] User user)
         {

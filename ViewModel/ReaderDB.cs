@@ -12,7 +12,7 @@ namespace ViewModel
     {
         public ListReader SelectAll()
         {
-            command.CommandText = $"SELECT [User].id, [User].firstName, [User].lastName, [User].phoneNumber, [User].email, [User].username, [User].pass, [User].birthdate, [User].picture, Reader.nickname, Reader.premiumSubscription\r\nFROM   (Reader INNER JOIN\r\n             [User] ON Reader.id = [User].id)";
+            command.CommandText = $"SELECT [User].id, [User].firstName, [User].lastName, [User].phoneNumber, [User].email, [User].username, [User].pass, [User].birthdate, [User].picture, Reader.isFlaged, Reader.nickname, Reader.premiumSubscription\r\nFROM   (Reader INNER JOIN\r\n             [User] ON Reader.id = [User].id)";
             ListReader pList = new ListReader(base.Select());
             return pList;
         }
@@ -21,6 +21,7 @@ namespace ViewModel
             Reader r = entity as Reader;
             r.Nickname = reader["nickname"].ToString();
             r.PremiumSubscription = (bool)reader["premiumSubscription"];
+            r.IsFlaged = (bool)reader["isFlaged"];
             base.CreateModel(entity);
             return r;
         }
@@ -42,11 +43,12 @@ namespace ViewModel
             Reader r = entity as Reader;
             if (r != null)
             {
-                string sqlStr = $"UPDATE Reader SET Nickname=@nickname, PremiumSubscription=@premiumSubscription WHERE ID=@id";
+                string sqlStr = $"UPDATE Reader SET Nickname=@nickname, IsFlaged=@isFlaged, PremiumSubscription=@premiumSubscription WHERE ID=@id";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@nickname", r.Nickname));
-                command.Parameters.Add(new OleDbParameter("@premiumSubsciption", r.PremiumSubscription));
+                command.Parameters.Add(new OleDbParameter("@isFlaged", r.IsFlaged));
+                command.Parameters.Add(new OleDbParameter("@premiumSubscription", r.PremiumSubscription));
                 command.Parameters.Add(new OleDbParameter("@id", r.Id));
             }
         }
@@ -64,11 +66,12 @@ namespace ViewModel
             Reader r = entity as Reader;
             if (r != null)
             {
-                string sqlStr = $"Insert INTO Reader (Id, Nickname, PremiumSubscription) VALUES (@id, @nickname, @premiumSubscription)";
+                string sqlStr = $"Insert INTO Reader (Id, Nickname, IsFlaged, PremiumSubscription) VALUES (@id, @nickname, @isFlaged, @premiumSubscription)";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@id", r.Id));
                 command.Parameters.Add(new OleDbParameter("@nickname", r.Nickname ));
+                command.Parameters.Add(new OleDbParameter("@isFlaged", r.IsFlaged));
                 command.Parameters.Add(new OleDbParameter("@premiumSubscription", r.PremiumSubscription));
             }
         }

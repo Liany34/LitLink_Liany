@@ -28,7 +28,6 @@ namespace ViewModel
                 b.Price = int.Parse(reader["price"].ToString());
             else
                 b.Price = null;
-            b.Discount = (bool)reader["discount"];
             b.Information = reader["information"].ToString();
             int authorId = (int)reader["idAuthor"];
             b.IdAuthor = AuthorDB.SelectById(authorId);
@@ -38,6 +37,7 @@ namespace ViewModel
                 b.BookLink = reader["bookLink"].ToString();
             else
                 b.BookLink = null;
+            b.IsFlaged = (bool)reader["isFlaged"];
 
             //string imagePath = Path() + "\\BookCovers\\" + reader["cover"].ToString();
             //string base64String = ImageToBase64Converter.ImageToBase64(imagePath);
@@ -84,7 +84,7 @@ namespace ViewModel
             Book b = entity as Book;
             if (b != null)
             {
-                string sqlStr = $"Insert INTO Book (BookName, PublicationDate, Price, IdAuthor, IdLanguage, Discount, Information, Cover, BookLink) VALUES (@bookName, @publicationDate, @price, @idAuthor, @idLanguage, @discount, @information, @cover, @bookLink)";
+                string sqlStr = $"Insert INTO Book (BookName, PublicationDate, Price, IdAuthor, IdLanguage, IsFlaged, Information, Cover, BookLink) VALUES (@bookName, @publicationDate, @price, @idAuthor, @idLanguage, @isFlaged, @information, @cover, @bookLink)";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@@bookName", b.BookName));
@@ -92,7 +92,7 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@price", b.Price));
                 command.Parameters.Add(new OleDbParameter("@idAuthor", b.IdAuthor.Id));
                 command.Parameters.Add(new OleDbParameter("@idLanguage", b.IdLanguage.Id));
-                command.Parameters.Add(new OleDbParameter("@discount", b.Discount));
+                command.Parameters.Add(new OleDbParameter("@isFlaged", b.IsFlaged));
                 command.Parameters.Add(new OleDbParameter("@information", b.Information));
                 command.Parameters.Add(new OleDbParameter("@cover", b.Cover));
                 command.Parameters.Add(new OleDbParameter("@bookLink", b.BookLink));
@@ -104,14 +104,14 @@ namespace ViewModel
             Book b = entity as Book;
             if (b != null)
             {
-                string sqlStr = $"UPDATE Book SET bookName=@BookName, publicationDate=@PublicationDate, price=@Price, idAuthor=@IdAuthor, discount=@Discount, information=@Information, cover=@Cover, idLanguage=@IdLanguage, bookLink=@BookLink WHERE ID=@id";
+                string sqlStr = $"UPDATE Book SET bookName=@BookName, publicationDate=@PublicationDate, price=@Price, idAuthor=@IdAuthor, isFlaged=@IsFlaged, information=@Information, cover=@Cover, idLanguage=@IdLanguage, bookLink=@BookLink WHERE ID=@id";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@BookName", b.BookName));
                 command.Parameters.Add(new OleDbParameter("@PublicationDate", b.PublicationDate));
                 command.Parameters.Add(new OleDbParameter("@Price", b.Price));
                 command.Parameters.Add(new OleDbParameter("@IdAuthor", b.IdAuthor.Id));
-                command.Parameters.Add(new OleDbParameter("@Discount", b.Discount));
+                command.Parameters.Add(new OleDbParameter("@IsFlaged", b.IsFlaged));
                 command.Parameters.Add(new OleDbParameter("@Information", b.Information));
                 command.Parameters.Add(new OleDbParameter("@Cover", b.Cover));
                 command.Parameters.Add(new OleDbParameter("@IdLanguage", b.IdLanguage.Id));
