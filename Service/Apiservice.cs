@@ -83,6 +83,24 @@ namespace Service
         }
 
 
+        public async Task<ListDiscountCodes> GetAllDiscountCodes()
+        {
+            return await client.GetFromJsonAsync<ListDiscountCodes>(uri + "/api/Select/DiscountCodesSelector");
+        }
+        public async Task<int> InsertDiscountCode(DiscountCodes dc)
+        {
+            return (await client.PostAsJsonAsync<DiscountCodes>(uri + "/api/Insert/DiscountCodesInsert", dc)).IsSuccessStatusCode ? 1 : 0;
+        }
+        public async Task<int> UpdateDiscountCode(DiscountCodes dc)
+        {
+            return (await client.PutAsJsonAsync<DiscountCodes>(uri + "/api/Update/DiscountCodesInsert", dc)).IsSuccessStatusCode ? 1 : 0;
+        }
+        public async Task<int> DeleteDiscountCode(int id)
+        {
+            return (await client.DeleteAsync(uri + $"/api/Delete/DiscountCodesDelete/{id}")).IsSuccessStatusCode ? 1 : 0;
+        }
+
+
         public async Task<ListUser> GetAllUsers()
         {
             return await client.GetFromJsonAsync<ListUser>(uri + "/api/Select/UserSelector");

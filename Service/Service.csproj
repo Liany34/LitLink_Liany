@@ -10,4 +10,13 @@
     <PackageReference Include="System.Data.OleDb" Version="10.0.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Model">
+      <HintPath>..\ViewModel\bin\Debug\net8.0\Model.dll</HintPath>
+    </Reference>
+    <Reference Include="ViewModel">
+      <HintPath>..\ViewModel\bin\Debug\net8.0\ViewModel.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

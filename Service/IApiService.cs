@@ -27,6 +27,12 @@ namespace Service
         public Task<int> DeleteIntrest(int id);
 
 
+        public Task<ListDiscountCodes> GetAllDiscountCodes();
+        public Task<int> InsertDiscountCode(DiscountCodes discountCode);
+        public Task<int> UpdateDiscountCode(DiscountCodes discountCode);
+        public Task<int> DeleteDiscountCode(int id);
+
+
         public Task<ListUser> GetAllUsers();
         public Task<int> InsertUser(User user);
         public Task<int> UpdateUser(User user);
