@@ -21,6 +21,9 @@ namespace ViewModel
             Cart_Detail cd = entity as Cart_Detail;
             cd.IdCart = CartDB.SelectById((int)reader["idCart"]);
             cd.IdBook = BookDB.SelectById((int)reader["idBook"]);
+            cd.PurchaseDate = (DateTime)reader["purchaseDate"];
+            cd.PurchasePrice = (int)reader["purchasePrice"];
+            cd.IsPurchased = (bool)reader["isPurchased"];
             base.CreateModel(entity);
             return cd;
         }
@@ -43,11 +46,14 @@ namespace ViewModel
             Cart_Detail cd = entity as Cart_Detail;
             if (cd != null)
             {
-                string sqlStr = $"UPDATE Cart_Detail SET IdCart=@idCart, IdBook=@idBook WHERE ID=@id";
+                string sqlStr = $"UPDATE Cart_Detail SET IdCart=@idCart, IdBook=@idBook, PurchasePrice=@purchasePrice, PurchaseDate=@purchaseDate, IsPurchased=@isPurchased WHERE ID=@id";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@idCart", cd.IdCart.Id));
                 command.Parameters.Add(new OleDbParameter("@idBook", cd.IdBook.Id));
+                command.Parameters.Add(new OleDbParameter("@purchasePrice", cd.PurchasePrice));
+                command.Parameters.Add(new OleDbParameter("@purchaseDate", cd.PurchaseDate));
+                command.Parameters.Add(new OleDbParameter("@isPurchased", cd.IsPurchased));
                 command.Parameters.Add(new OleDbParameter("@id", cd.Id));
             }
         }
@@ -56,11 +62,14 @@ namespace ViewModel
             Cart_Detail cd = entity as Cart_Detail;
             if (cd != null)
             {
-                string sqlStr = $"INSERT INTO Cart_Detail (IdCart, IdBook) VALUES (@idCart, @idBook)";
+                string sqlStr = $"INSERT INTO Cart_Detail (IdCart, IdBook, PurchasePrice, PurchaseDate, IsPurchased) VALUES (@idCart, @idBook, @purchasePrice, @purchaseDate, @isPurchased)";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@idCart", cd.IdCart.Id));
                 command.Parameters.Add(new OleDbParameter("@idBook", cd.IdBook.Id));
+                command.Parameters.Add(new OleDbParameter("@purchasePrice", cd.PurchasePrice));
+                command.Parameters.Add(new OleDbParameter("@purchaseDate", cd.PurchaseDate));
+                command.Parameters.Add(new OleDbParameter("@isPurchased", cd.IsPurchased));
             }
         }
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
