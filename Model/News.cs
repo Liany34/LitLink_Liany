@@ -9,16 +9,18 @@ namespace Model
     public class News : BaseEntity
     {
         private User idUser;
-        private string text;
-        private DateTime time;
+        private string content;
+        private DateTime publishDate;
+        private string titel;
 
         public User IdUser { get => idUser; set => idUser = value; }
-        public string Text { get => text; set => text = value; }
-        public DateTime Time { get => time; set => time = value; }
+        public string Content { get => content; set => content = value; }
+        public DateTime PublishDate { get => publishDate; set => publishDate = value; }
+        public string Titel { get => titel; set => titel = value; }
 
         public override string ToString()
         {
-            return $"News by {IdUser.Username} at {Time}: {Text}";
+            return $"{Titel} by {IdUser.Username} at {PublishDate}: {Content}";
         }
     }
 }

@@ -19,8 +19,9 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             News news = entity as News;
-            news.Text = reader["text"].ToString();
-            news.Time = DateTime.Parse(reader["time"].ToString());
+            news.Content = reader["Content"].ToString();
+            news.PublishDate = DateTime.Parse(reader["PublishDate"].ToString());
+            news.Titel = reader["Titel"].ToString();
             news.IdUser = UserDB.SelectById((int)(reader["idUser"]));
             base.CreateModel(entity);
             return news;
@@ -55,11 +56,12 @@ namespace ViewModel
             News n = entity as News;
             if (n != null)
             {
-                string sqlStr = $"INSERT INTO News ([Text], [Time], IdUser) VALUES (@text, @time, @idUser)";
+                string sqlStr = $"INSERT INTO News (Content, PublishDate, Titel, IdUser) VALUES (@content, @publishDate, @titel, @idUser)";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@text", n.Text));
-                command.Parameters.Add(new OleDbParameter("@time", n.Time));
+                command.Parameters.Add(new OleDbParameter("@content", n.Content));
+                command.Parameters.Add(new OleDbParameter("@publishDate", n.PublishDate));
+                command.Parameters.Add(new OleDbParameter("@titel", n.Titel));
                 command.Parameters.Add(new OleDbParameter("@idUser", n.IdUser.Id));
             }
         }
@@ -68,11 +70,12 @@ namespace ViewModel
             News n = entity as News;
             if (n != null)
             {
-                string sqlStr = $"UPDATE News SET [Text]=@text, [Time]=@time, IdUser=@idUser WHERE id=@id";
+                string sqlStr = $"UPDATE News SET Content=@content, PublishDate=@publishDate, Titel=@titel, IdUser=@idUser WHERE id=@id";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@text", n.Text));
-                command.Parameters.Add(new OleDbParameter("@time", n.Time));
+                command.Parameters.Add(new OleDbParameter("@content", n.Content));
+                command.Parameters.Add(new OleDbParameter("@publishDate", n.PublishDate));
+                command.Parameters.Add(new OleDbParameter("@titel", n.Titel));
                 command.Parameters.Add(new OleDbParameter("@idUser", n.IdUser.Id));
                 command.Parameters.Add(new OleDbParameter("@id", n.Id));
             }
