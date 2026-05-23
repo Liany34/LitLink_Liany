@@ -13,10 +13,10 @@
 
   <ItemGroup>
     <Reference Include="Model">
-      <HintPath>..\ViewModel\bin\Debug\net8.0\Model.dll</HintPath>
+      <HintPath>..\Test\bin\Debug\net8.0\Model.dll</HintPath>
     </Reference>
     <Reference Include="ViewModel">
-      <HintPath>..\ViewModel\bin\Debug\net8.0\ViewModel.dll</HintPath>
+      <HintPath>..\Test\bin\Debug\net8.0\ViewModel.dll</HintPath>
     </Reference>
   </ItemGroup>
 
