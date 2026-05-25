@@ -7,23 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="BookCovers\To_be_revealed.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Data.OleDb" Version="10.0.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="PRP\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="BookCovers\To_be_revealed.png" />
   </ItemGroup>
 
   <ItemGroup>

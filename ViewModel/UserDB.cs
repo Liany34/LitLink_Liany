@@ -27,9 +27,11 @@ namespace ViewModel
             u.Birthdate = (DateTime)reader["birthDate"];
             u.Username = reader["username"].ToString();
 
-            string imagePath = Path() + "\\PRP\\" + reader["picture"].ToString();
-            string base64String = ImageToBase64Converter.ImageToBase64(imagePath);
-            u.Picture = base64String;
+            //string imagePath = Path() + "\\PRP\\" + reader["picture"].ToString();
+            //string base64String = ImageToBase64Converter.ImageToBase64(imagePath);
+            //u.Picture = base64String;
+
+            u.Picture = reader["picture"].ToString();
 
             base.CreateModel(entity);
             return u;
@@ -47,14 +49,14 @@ namespace ViewModel
             User g = list.Find(item => item.Id == id);
             return g;
         }
-        public string SelectPRPByUserID(int id)
-        {
-            ListUser uList = SelectAll();
-            User u = uList.Find(item => item.Id == id);
+        //public string SelectPRPByUserID(int id)
+        //{
+        //    ListUser uList = SelectAll();
+        //    User u = uList.Find(item => item.Id == id);
 
-            string pic = u.Picture;
-            return pic;
-        }
+        //    string pic = u.Picture;
+        //    return pic;
+        //}
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             User u = entity as User;

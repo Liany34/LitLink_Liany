@@ -15,9 +15,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj" />
-    <ProjectReference Include="..\Service\Service.csproj" />
-    <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
+    <Reference Include="Model">
+      <HintPath>..\Service\bin\Debug\net8.0\Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Service">
+      <HintPath>..\Service\bin\Debug\net8.0\Service.dll</HintPath>
+    </Reference>
+    <Reference Include="ViewModel">
+      <HintPath>..\Service\bin\Debug\net8.0\ViewModel.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
