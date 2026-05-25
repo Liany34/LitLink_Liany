@@ -9,14 +9,14 @@ namespace Model
     public class Book_Series : BaseEntity
     {
         private string nameSeries;
-        private Author idAuthor;
+        private User idUser;
 
         public string NameSeries { get => nameSeries; set => nameSeries = value; }
-        public Author IdAuthor { get => idAuthor; set => idAuthor = value; }
+        public User IdUser { get => idUser; set => idUser = value; }
 
         public override string ToString()
         {
-            return $"Book Series: {NameSeries}, Author: {IdAuthor.PenName}";
+            return $"Book Series: {NameSeries}, Author: {IdUser.Username}";
         }
     }
 }

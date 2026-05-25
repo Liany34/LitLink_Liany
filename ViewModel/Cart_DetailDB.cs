@@ -21,7 +21,10 @@ namespace ViewModel
             Cart_Detail cd = entity as Cart_Detail;
             cd.IdCart = CartDB.SelectById((int)reader["idCart"]);
             cd.IdBook = BookDB.SelectById((int)reader["idBook"]);
-            cd.PurchaseDate = (DateTime)reader["purchaseDate"];
+            if (reader["purchaseDate"] != DBNull.Value)
+                cd.PurchaseDate = (DateTime)reader["purchaseDate"];
+            else
+                 cd.PurchaseDate = null;
             cd.PurchasePrice = (int)reader["purchasePrice"];
             cd.IsPurchased = (bool)reader["isPurchased"];
             base.CreateModel(entity);

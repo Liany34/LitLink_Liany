@@ -37,7 +37,7 @@ namespace ViewModel
             }
             string[] st = s.Split('\\');
             int x = st.Length - 6;
-            st[x] = "VViewModel";
+            st[x] = "ViewModel";
             Array.Resize(ref st, x + 1);
             string str = String.Join('\\', st);
             return str;

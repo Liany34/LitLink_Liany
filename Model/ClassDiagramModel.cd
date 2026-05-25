@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Model.Admin">
+    <Position X="10.25" Y="6.25" Width="1.5" />
+    <InheritanceLine Type="Model.User" FixedToPoint="true">
+      <Path>
+        <Point X="14.25" Y="5.54" />
+        <Point X="14.25" Y="5.815" />
+        <Point X="10.938" Y="5.815" />
+        <Point X="10.938" Y="6.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Admin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Author">
+    <Position X="12.25" Y="6" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAABAAEAAIAIAACAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Author.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.BaseEntity">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>BaseEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Book">
+    <Position X="8.5" Y="2.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAIBEAgAARQIAAAECAAAAAAAAACAAAAAoAAAACACABA=</HashCode>
+      <FileName>Book.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Book_Genre">
+    <Position X="7" Y="5.75" Width="1.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAgAAAAIAAAACAAAAAgAA=</HashCode>
+      <FileName>Book_Genre.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Book_Series">
+    <Position X="5.25" Y="5.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAACAAACAgAAAgEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Book_Series.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Cart">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAEAAAAAEAAAAAAAAAABAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Cart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Cart_Detail">
+    <Position X="3.75" Y="2.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAgEAGAIBAAAAAAAAAAAAAAACQAAAAkAA=</HashCode>
+      <FileName>Cart_Detail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.DiscountCodes">
+    <Position X="7" Y="2.75" Width="1.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ACAAEAAgABAAAAAEEAAAABCAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DiscountCodes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Following">
+    <Position X="2" Y="5.25" Width="1.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAADAAAAAwAAAAAAAAAA=</HashCode>
+      <FileName>Following.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Genre">
+    <Position X="3.5" Y="5.75" Width="1.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Genre.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Language">
+    <Position X="0.5" Y="5.25" Width="1.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Language.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListAdmin" Collapsed="true">
+    <Position X="16" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListAdmin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListAuthor" Collapsed="true">
+    <Position X="16" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListAuthor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListBook" Collapsed="true">
+    <Position X="17.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListBook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListBook_Genre" Collapsed="true">
+    <Position X="19.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListBook_Genre.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListBook_Series" Collapsed="true">
+    <Position X="17.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListBook_Series.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListCart" Collapsed="true">
+    <Position X="16" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListCart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListCart_Detail" Collapsed="true">
+    <Position X="17.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListCart_Detail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListDiscountCodes" Collapsed="true">
+    <Position X="19.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListDiscountCodes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListFollowing" Collapsed="true">
+    <Position X="17.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListFollowing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListGenre" Collapsed="true">
+    <Position X="19.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListGenre.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListLanguage" Collapsed="true">
+    <Position X="19.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListLanguage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListNews" Collapsed="true">
+    <Position X="16" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListNews.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListReader" Collapsed="true">
+    <Position X="16" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListReviews" Collapsed="true">
+    <Position X="17.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListReviews.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListSeries_Detail" Collapsed="true">
+    <Position X="19.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListSeries_Detail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListUser" Collapsed="true">
+    <Position X="16" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.News">
+    <Position X="5.5" Y="2.75" Width="1.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAACgAIAAgECAAAAAAAAAAAAAAAABAAAAAQAAA=</HashCode>
+      <FileName>News.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Reader">
+    <Position X="14.25" Y="6" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAABEAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAARA=</HashCode>
+      <FileName>Reader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Reviews">
+    <Position X="10.25" Y="2.75" Width="1.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AEAAEABAAAAAAAAEAAEAAAAAAABAAAAIQACACAAAgBA=</HashCode>
+      <FileName>Reviews.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Series_Detail">
+    <Position X="11.75" Y="2.75" Width="1.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAEAEAAAAAAAAAAEAAAABCAAAAAgAA=</HashCode>
+      <FileName>Series_Detail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.User">
+    <Position X="13.5" Y="2.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <InheritanceLine Type="Model.BaseEntity" FixedToPoint="true">
+      <Path>
+        <Point X="9.25" Y="2.315" />
+        <Point X="9.25" Y="2.51" />
+        <Point X="10.24" Y="2.51" />
+        <Point X="10.24" Y="2.01" />
+        <Point X="13.5" Y="2.01" />
+        <Point X="13.5" Y="2.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAgEAAAKRAAAAkBQAAQAUAAEAAAAAAAAAACAAAAAg=</HashCode>
+      <FileName>User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Genre_Reader">
+    <Position X="2.25" Y="2.75" Width="1.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAgABAAIAAQAAAAAAAAAA=</HashCode>
+      <FileName>Genre_Reader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ListGenre_Reader" Collapsed="true">
+    <Position X="17.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListGenre_Reader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using ViewModel;
-using static System.Net.WebRequestMethods;
+using System.Text;
+using System.Text.Json.Serialization;
+using System.Net.Http;
 
 namespace Service
 {
@@ -117,6 +120,28 @@ namespace Service
         {
             return (await client.DeleteAsync(uri + $"/api/Delete/UserDelete/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
+        public async Task<string> GetPRPByUserIDByte64(int id)
+        {
+            HttpClient client = new HttpClient();
+
+            string st = null;
+            string URI = $"{uri}/api/Select/UserPictureSelectore64Byt{id}";
+            HttpResponseMessage response = await client.GetAsync(URI);
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                json = '"' + json + '"';
+                try
+                {
+                    st = JsonSerializer.Deserialize<string>(json);
+                }
+                catch(Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine("JSON Error: " + e.Message);
+                }
+            }
+            return st;
+        }
 
 
         public async Task<ListAuthor> GetAllAuthors()
@@ -163,10 +188,6 @@ namespace Service
         {
             return (await client.PostAsJsonAsync<Admin>(uri + "/api/Insert/AdminInsert", a)).IsSuccessStatusCode ? 1 : 0;
         }
-        public async Task<int> UpdateAdmin(Admin a)
-        {
-            return (await client.PutAsJsonAsync<Admin>(uri + "/api/Update/AdminInsert", a)).IsSuccessStatusCode ? 1 : 0;
-        }
         public async Task<int> DeleteAdmin(int id)
         {
             return (await client.DeleteAsync(uri + $"/api/Delete/AdminDelete/{id}")).IsSuccessStatusCode ? 1 : 0;
@@ -188,6 +209,28 @@ namespace Service
         public async Task<int> DeleteBook(int id)
         {
             return (await client.DeleteAsync(uri + $"/api/Delete/BookDelete/{id}")).IsSuccessStatusCode ? 1 : 0;
+        }
+        public async Task<string> GetBookCoverByBookIDByte64(int id)
+        {
+            HttpClient client = new HttpClient();
+
+            string st = null;
+            string URI = $"{uri}/api/Select/BookCoverSelectore64Byt{id}";
+            HttpResponseMessage response = await client.GetAsync(URI);
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                json = '"' + json + '"';
+                try
+                {
+                    st = JsonSerializer.Deserialize<string>(json);
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine("JSON Error: " + e.Message);
+                }
+            }
+            return st;
         }
 
 
@@ -245,17 +288,17 @@ namespace Service
         }
 
 
-        public async Task<ListIntrest_Reader> GetAllIntrestReaders()
+        public async Task<ListGenre_Reader> GetAllIntrestReaders()
         {
-            return await client.GetFromJsonAsync<ListIntrest_Reader>(uri + "/api/Select/IntrestReaderSelector");
+            return await client.GetFromJsonAsync<ListGenre_Reader>(uri + "/api/Select/IntrestReaderSelector");
         }
-        public async Task<int> InsertIntrestReader(Intrest_Reader ir)
+        public async Task<int> InsertIntrestReader(Genre_Reader ir)
         {
-            return (await client.PostAsJsonAsync<Intrest_Reader>(uri + "/api/Insert/IntrestReaderInsert", ir)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PostAsJsonAsync<Genre_Reader>(uri + "/api/Insert/IntrestReaderInsert", ir)).IsSuccessStatusCode ? 1 : 0;
         }
-        public async Task<int> UpdateIntrestReader(Intrest_Reader ir)
+        public async Task<int> UpdateIntrestReader(Genre_Reader ir)
         {
-            return (await client.PutAsJsonAsync<Intrest_Reader>(uri + "/api/Update/IntrestReaderUpdate", ir)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Genre_Reader>(uri + "/api/Update/IntrestReaderUpdate", ir)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteIntrestReader(int id)
         {

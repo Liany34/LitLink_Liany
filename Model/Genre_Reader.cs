@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Book_List : BaseEntity
+    public class Genre_Reader : BaseEntity
     {
         private Reader idReader;
-        private string listName;
+        private Genre idGenre;
 
         public Reader IdReader { get => idReader; set => idReader = value; }
-        public string ListName { get => listName; set => listName = value; }
+        public Genre IdGenre { get => idGenre; set => idGenre = value; }
 
         public override string ToString()
         {
-            return $"List Name: {ListName}, Reader: {IdReader.Username}";
+            return $"Reader Id: {IdReader.Nickname}, Intrest Id: {IdGenre.Name}";
         }
     }
 }

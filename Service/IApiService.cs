@@ -37,6 +37,7 @@ namespace Service
         public Task<int> InsertUser(User user);
         public Task<int> UpdateUser(User user);
         public Task<int> DeleteUser(int id);
+        public Task<string> GetPRPByUserIDByte64(int id);
 
 
         public Task<ListAuthor> GetAllAuthors();
@@ -53,7 +54,6 @@ namespace Service
 
         public Task<ListAdmin> GetAllAdmins();
         public Task<int> InsertAdmin(Admin admin);
-        public Task<int> UpdateAdmin(Admin admin);
         public Task<int> DeleteAdmin(int id);
 
 
@@ -61,6 +61,7 @@ namespace Service
         public Task<int> InsertBook(Book book);
         public Task<int> UpdateBook(Book book);
         public Task<int> DeleteBook(int id);
+        public Task<string> GetBookCoverByBookIDByte64(int id);
 
 
         public Task<ListBook_Series> GetAllBookSeries();
@@ -81,9 +82,9 @@ namespace Service
         public Task<int> DeleteBookGenre(int id);
 
 
-        public Task<ListIntrest_Reader> GetAllIntrestReaders();
-        public Task<int> InsertIntrestReader(Intrest_Reader intrest_reader);
-        public Task<int> UpdateIntrestReader(Intrest_Reader intrest_reader);
+        public Task<ListGenre_Reader> GetAllIntrestReaders();
+        public Task<int> InsertIntrestReader(Genre_Reader intrest_reader);
+        public Task<int> UpdateIntrestReader(Genre_Reader intrest_reader);
         public Task<int> DeleteIntrestReader(int id);
 
 

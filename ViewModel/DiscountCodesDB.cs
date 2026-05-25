@@ -20,7 +20,10 @@ namespace ViewModel
         {
             DiscountCodes dc = entity as DiscountCodes;
             dc.CodeText = reader["codeText"].ToString();
-            dc.ValidUntil = DateTime.Parse(reader["validUntil"].ToString());
+            if (reader["validUntil"] != DBNull.Value)
+                dc.ValidUntil = DateTime.Parse(reader["validUntil"].ToString());
+            else
+                dc.ValidUntil = null;
             dc.Amount = int.Parse(reader["amount"].ToString());
             dc.IsActive = (bool)reader["isActive"];
        
@@ -79,6 +82,7 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@ValidUntil", dc.ValidUntil));
                 command.Parameters.Add(new OleDbParameter("@Amount", dc.Amount));
                 command.Parameters.Add(new OleDbParameter("@IsActive", dc.IsActive));
+                command.Parameters.Add(new OleDbParameter("@id", dc.Id));
             }
         }
     }

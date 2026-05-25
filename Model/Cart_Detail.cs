@@ -11,18 +11,22 @@ namespace Model
         private Cart idCart;
         private Book idBook;
         private int purchasePrice;
-        private DateTime purchaseDate;
+        private DateTime? purchaseDate = null;
         private bool isPurchased;
 
         public Cart IdCart { get => idCart; set => idCart = value; }
         public Book IdBook { get => idBook; set => idBook = value; }
         public int PurchasePrice { get => purchasePrice; set => purchasePrice = value; }
-        public DateTime PurchaseDate { get => purchaseDate; set => purchaseDate = value; }
+        public DateTime? PurchaseDate { get => purchaseDate; set => purchaseDate = value; }
         public bool IsPurchased { get => isPurchased; set => isPurchased = value; }
 
         public override string ToString()
         {
-            return $"Cart Id: {idCart.Id}, Book Title: {idBook.BookName}, Purchase Price: {purchasePrice}, Purchase Date: {purchaseDate}, Is Purchased: {isPurchased}";
+            if(isPurchased)
+            {
+                return $"Cart Id: {idCart.Id}, Book Title: {idBook.BookName}, Purchase Price: {purchasePrice}, Purchase Date: {purchaseDate}";
+            }
+            return $"Cart Id: {idCart.Id}, Book Title: {idBook.BookName}, Purchase Price: {purchasePrice}, Is Purchased: Not Yet";
         }
     }
 }

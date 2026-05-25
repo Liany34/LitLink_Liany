@@ -80,16 +80,6 @@ namespace LitLink_By_Liany.Controllers
         }
 
         [HttpPut]
-        [ActionName("AdminUpdate")]
-        public int UpdateAdmin([FromBody] Admin admin)
-        {
-            AdminDB db = new AdminDB();
-            db.Update(admin);
-            int x = db.SaveChanges();
-            return x;
-        }
-
-        [HttpPut]
         [ActionName("BookUpdate")]
         public int UpdateBook([FromBody] Book book)
         {

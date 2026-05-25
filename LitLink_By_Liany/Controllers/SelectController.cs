@@ -53,6 +53,14 @@ namespace LitLink_By_Liany.Controllers
             ListUser users = db.SelectAll();
             return users;
         }
+        [HttpGet]
+        [ActionName("UserPictureSelectore64Byte")]
+        public string GetPRPByUserIDByte64(int id)
+        {
+            UserDB db = new UserDB();
+            string pic = db.SelectPRPByUserID(id);
+            return pic;
+        }
 
         [HttpGet]
         [ActionName("AuthorSelector")]
@@ -88,6 +96,14 @@ namespace LitLink_By_Liany.Controllers
             BookDB db = new BookDB();
             ListBook books = db.SelectAll();
             return books;
+        }
+        [HttpGet]
+        [ActionName("BookCoverSelectore64Byte")]
+        public string GetBookCoverByBookIDByte64(int id)
+        {
+            BookDB db = new BookDB();
+            string pic = db.SelectBookCoverByBookID(id);
+            return pic;
         }
 
         [HttpGet]

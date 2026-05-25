@@ -9,13 +9,13 @@ namespace Model
     public class Book : BaseEntity
     {
         private string bookName;
-        private DateTime? publicationDate;
-        private double? price;
+        private DateTime? publicationDate = null;
+        private double? price = null;
         private Author idAuthor;
         private string information;
         private string cover;
         private Language idLanguage;
-        private string? bookLink;
+        private string? bookLink = null;
         private bool isFlaged;
 
         public string BookName { get => bookName; set => bookName = value; }
