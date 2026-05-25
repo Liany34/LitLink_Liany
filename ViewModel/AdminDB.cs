@@ -13,7 +13,7 @@ namespace ViewModel
         public ListAdmin SelectAll()
         {
             command.CommandText = $"SELECT [User].id, [User].firstName, [User].lastName, [User].phoneNumber, [User].email, [User].username, [User].birthdate, [User].picture, [User].pass " +
-                $"FROM ([User] INNER JOIN Admin ON [User].id = Admin.id)";
+                $"FROM ([User] INNER JOIN [Admin] ON [User].id = [Admin].id)";
             ListAdmin aList = new ListAdmin(base.Select());
             return aList;
         }

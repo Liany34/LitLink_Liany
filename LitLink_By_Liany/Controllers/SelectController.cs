@@ -28,15 +28,6 @@ namespace LitLink_By_Liany.Controllers
         }
 
         [HttpGet]
-        [ActionName("IntrestSelector")]
-        public ListIntrest SelectAllIntrests()
-        {
-            IntrestDB db = new IntrestDB();
-            ListIntrest intrests = db.SelectAll();
-            return intrests;
-        }
-
-        [HttpGet]
         [ActionName("DiscountCodesSelector")]
         public ListDiscountCodes SelectAllDiscountCodes()
         {
@@ -134,30 +125,12 @@ namespace LitLink_By_Liany.Controllers
         }
 
         [HttpGet]
-        [ActionName("IntrestReaderSelector")]
-        public ListIntrest_Reader SelectAllIntrestReaders()
+        [ActionName("GenreReaderSelector")]
+        public ListGenre_Reader SelectAllGenreReaders()
         {
-            Intrest_ReaderDB db = new Intrest_ReaderDB();
-            ListIntrest_Reader intrestReaders = db.SelectAll();
-            return intrestReaders;
-        }
-
-        [HttpGet]
-        [ActionName("BookListSelector")]
-        public ListBook_List SelectAllBookLists()
-        {
-            Book_ListDB db = new Book_ListDB();
-            ListBook_List bookLists = db.SelectAll();
-            return bookLists;
-        }
-
-        [HttpGet]
-        [ActionName("ListDetailSelector")]
-        public ListList_Detail SelectAllListDitails()
-        {
-            List_DetailDB db = new List_DetailDB();
-            ListList_Detail listDetails = db.SelectAll();
-            return listDetails;
+            Genre_ReaderDB db = new Genre_ReaderDB();
+            ListGenre_Reader genreReaders = db.SelectAll();
+            return genreReaders;
         }
 
         [HttpGet]

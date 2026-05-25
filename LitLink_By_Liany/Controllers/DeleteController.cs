@@ -32,17 +32,6 @@ namespace LitLink_By_Liany.Controllers
         }
 
         [HttpDelete("{id}")]
-        [ActionName("IntrestDelete")]
-        public int DeleteIntrest(int id)
-        {
-            IntrestDB db = new IntrestDB();
-            Intrest intrestToDelete = IntrestDB.SelectById(id);
-            db.Delete(intrestToDelete);
-            int x = db.SaveChanges();
-            return x;
-        }
-
-        [HttpDelete("{id}")]
         [ActionName("DiscountCodesDelete")]
         public int DeleteDiscountCodes(int id)
         {
@@ -142,34 +131,12 @@ namespace LitLink_By_Liany.Controllers
         }
 
         [HttpDelete("{id}")]
-        [ActionName("IntrestReaderDelete")]
-        public int DeleteIntrestReader(int id)
+        [ActionName("GenreReaderDelete")]
+        public int DeleteGenreReader(int id)
         {
-            Intrest_ReaderDB db = new Intrest_ReaderDB();
-            Intrest_Reader intrestReaderToDelete = Intrest_ReaderDB.SelectById(id);
-            db.Delete(intrestReaderToDelete);
-            int x = db.SaveChanges();
-            return x;
-        }
-
-        [HttpDelete("{id}")]
-        [ActionName("BookListDelete")]
-        public int DeleteBookList(int id)
-        {
-            Book_ListDB db = new Book_ListDB();
-            Book_List bookListToDelete = Book_ListDB.SelectById(id);
-            db.Delete(bookListToDelete);
-            int x = db.SaveChanges();
-            return x;
-        }
-
-        [HttpDelete("{id}")]
-        [ActionName("ListDetailDelete")]
-        public int DeleteListDetail(int id)
-        {
-            List_DetailDB db = new List_DetailDB();
-            List_Detail listDetailToDelete = List_DetailDB.SelectById(id);
-            db.Delete(listDetailToDelete);
+            Genre_ReaderDB db = new Genre_ReaderDB();
+            Genre_Reader genreReaderToDelete = Genre_ReaderDB.SelectById(id);
+            db.Delete(genreReaderToDelete);
             int x = db.SaveChanges();
             return x;
         }

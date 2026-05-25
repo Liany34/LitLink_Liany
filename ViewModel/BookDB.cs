@@ -39,8 +39,7 @@ namespace ViewModel
                 b.BookLink = null;
             b.IsFlaged = (bool)reader["isFlaged"];
 
-            //string imagePath = Path() + "\\BookCovers\\" + reader["cover"].ToString();
-            string imagePath = "C:\\Users\\yahal\\source\\repos\\Liany34\\LitLink_Liany\\ViewModel\\BookCovers\\To_be_revealed.png";
+            string imagePath = Path() + "\\BookCovers\\" + reader["cover"].ToString();
             string base64String = ImageToBase64Converter.ImageToBase64(imagePath);
             b.Cover = base64String;
 

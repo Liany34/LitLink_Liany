@@ -30,16 +30,6 @@ namespace LitLink_By_Liany.Controllers
         }
 
         [HttpPost]
-        [ActionName("IntrestInsert")]
-        public int InsertIntrest([FromBody] Intrest intrest)
-        {
-            IntrestDB db = new IntrestDB();
-            db.Insert(intrest);
-            int x = db.SaveChanges();
-            return x;
-        }
-
-        [HttpPost]
         [ActionName("DiscountCodesInsert")]
         public int InsertDiscountCodes([FromBody] DiscountCodes discountCodes)
         {
@@ -130,31 +120,11 @@ namespace LitLink_By_Liany.Controllers
         }
 
         [HttpPost]
-        [ActionName("IntrestReaderInsert")]
-        public int InsertIntrestReader([FromBody] Intrest_Reader intrestReader)
+        [ActionName("GenreReaderInsert")]
+        public int InsertGenreReader([FromBody] Genre_Reader genreReader)
         {
-            Intrest_ReaderDB db = new Intrest_ReaderDB();
-            db.Insert(intrestReader);
-            int x = db.SaveChanges();
-            return x;
-        }
-
-        [HttpPost]
-        [ActionName("BookListInsert")]
-        public int InsertBookList([FromBody] Book_List bookList)
-        {
-            Book_ListDB db = new Book_ListDB();
-            db.Insert(bookList);
-            int x = db.SaveChanges();
-            return x;
-        }
-
-        [HttpPost]
-        [ActionName("ListDetailInsert")]
-        public int InsertListDetail([FromBody] List_Detail listDetail)
-        {
-            List_DetailDB db = new List_DetailDB();
-            db.Insert(listDetail);
+            Genre_ReaderDB db = new Genre_ReaderDB();
+            db.Insert(genreReader);
             int x = db.SaveChanges();
             return x;
         }

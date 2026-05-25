@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ViewModel.AdminDB">
+    <Position X="4.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAkAAACACAAAAAAAAAAAAAgEAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>AdminDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.AuthorDB">
+    <Position X="8.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAkAAAKACAAAAAAAAAAAAAgEAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>AuthorDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.BaseDB" Collapsed="true">
+    <Position X="13" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAEAAAIACAAoICAABAAAAAhUAIAAAAAAAQEASAAA=</HashCode>
+      <FileName>BaseDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.Book_GenreDB">
+    <Position X="17.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>Book_GenreDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.Book_SeriesDB">
+    <Position X="22.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>Book_SeriesDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.BookDB">
+    <Position X="1.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAKACAAAAAAAAAAEAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>BookDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.Cart_DetailDB">
+    <Position X="8.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>Cart_DetailDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.CartDB">
+    <Position X="13.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>CartDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.ChangeEntity" Collapsed="true">
+    <Position X="1.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAABAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>ChangeEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.DiscountCodesDB">
+    <Position X="3.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>DiscountCodesDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.FollowingDB">
+    <Position X="10.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>FollowingDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.Genre_ReaderDB">
+    <Position X="15.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>Genre_ReaderDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.GenreDB">
+    <Position X="19" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>GenreDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.ImageToBase64Converter" Collapsed="true">
+    <Position X="1.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ImageToBase64Converter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.LanguageDB">
+    <Position X="5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>LanguageDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.NewsDB">
+    <Position X="12" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>NewsDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.ReaderDB">
+    <Position X="6.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAkAAAKACAAAAAAAAAAAAAgEAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>ReaderDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.ReviewsDB">
+    <Position X="20.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>ReviewsDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.Series_DetailDB">
+    <Position X="24.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>Series_DetailDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.UserDB">
+    <Position X="6.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAQACAAA=</HashCode>
+      <FileName>UserDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Delegate Name="ViewModel.CreateSql" Collapsed="true">
+    <Position X="1.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChangeEntity.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

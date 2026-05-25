@@ -21,7 +21,7 @@ namespace ViewModel
         {
             Book_Series bs = entity as Book_Series;
             bs.NameSeries = reader["nameSeries"].ToString();
-            bs.IdAuthor = AuthorDB.SelectById((int)(reader["idAuthor"]));
+            bs.IdUser = UserDB.SelectById((int)(reader["idUser"]));
             base.CreateModel(entity);
             return bs;
         }
@@ -55,11 +55,11 @@ namespace ViewModel
             Book_Series bs = entity as Book_Series;
             if (bs != null)
             {
-                string sqlStr = $"Insert INTO Book_Series (NameSeries, IdAuthor) VALUES (@nameSeries, @idAuthor)";
+                string sqlStr = $"Insert INTO Book_Series (NameSeries, IdUser) VALUES (@nameSeries, @idUser)";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@nameSeries", bs.NameSeries));
-                command.Parameters.Add(new OleDbParameter("@idAuthor", bs.IdAuthor.Id));
+                command.Parameters.Add(new OleDbParameter("@idUser", bs.IdUser.Id));
             }
         }
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
@@ -67,11 +67,11 @@ namespace ViewModel
             Book_Series bs = entity as Book_Series;
             if (bs != null)
             {
-                string sqlStr = $"UPDATE Book_Series SET nameSeries=@nameSeries, idAuthor=@idAuthor WHERE id=@id";
+                string sqlStr = $"UPDATE Book_Series SET nameSeries=@nameSeries, idUser=@idUser WHERE id=@id";
                 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@nameSeries", bs.NameSeries));
-                command.Parameters.Add(new OleDbParameter("@idAuthor", bs.IdAuthor.Id));
+                command.Parameters.Add(new OleDbParameter("@idUser", bs.IdUser.Id));
                 command.Parameters.Add(new OleDbParameter("@id", bs.Id));
             }
         }

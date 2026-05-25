@@ -27,8 +27,7 @@ namespace ViewModel
             u.Birthdate = (DateTime)reader["birthDate"];
             u.Username = reader["username"].ToString();
 
-            //string imagePath = Path() + "\\BookCovers\\" + reader["picture"].ToString();
-            string imagePath = "C:\\Users\\yahal\\source\\repos\\Liany34\\LitLink_Liany\\ViewModel\\BookCovers\\To_be_revealed.png";
+            string imagePath = Path() + "\\PRP\\" + reader["picture"].ToString();
             string base64String = ImageToBase64Converter.ImageToBase64(imagePath);
             u.Picture = base64String;
 

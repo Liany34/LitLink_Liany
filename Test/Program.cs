@@ -79,37 +79,6 @@ public class Program
         //Console.WriteLine();
 
 
-        //Console.WriteLine("Intrest:");
-
-        IntrestDB idb = new IntrestDB();
-        ListIntrest iList = idb.SelectAll();
-        //foreach (Intrest i in iList)
-        //    Console.WriteLine(i);
-        //Console.WriteLine();
-
-        //Intrest iInsert = new Intrest();
-        //iInsert.Name = "Mystery";
-        //idb.Insert(iInsert);
-        //x = idb.SaveChanges();
-        //Console.WriteLine($"{x} rows were inserted");
-        //Console.WriteLine();
-
-        //Intrest iUpdate = iList.Last();
-        //iUpdate.Name = "update";
-        //idb.Update(iUpdate);
-        //y = idb.SaveChanges();
-        //Console.WriteLine($"{y} rows were updated");
-        //Console.WriteLine();
-
-        //Intrest iDelete = iList.Last();
-        //idb.Delete(iDelete);
-        //z = idb.SaveChanges();
-        //Console.WriteLine($"{z} rows were deleted");
-        //Console.WriteLine();
-
-        //Console.WriteLine();
-        //Console.WriteLine();
-
 
         //Console.WriteLine("DiscountCodes:");
 
@@ -296,6 +265,7 @@ public class Program
 
         AdminDB addb = new AdminDB();
         ListAdmin adList = addb.SelectAll();
+        Console.WriteLine(adList.Count);
         //foreach (Admin a in adList)
         //    Console.WriteLine(a);
         //Console.WriteLine();
@@ -439,9 +409,9 @@ public class Program
 
         //Console.WriteLine("Book_Genre:");
 
-        Book_GenreDB bgdb = new Book_GenreDB();
-        ListBook_Genre bgList = bgdb.SelectAll();
-        //foreach (Book_Genre bg in bgList)
+        //Book_GenreDB bgdb = new Book_GenreDB();
+        //ListBook_Genre bgList = bgdb.SelectAll();
+        ////foreach (Book_Genre bg in bgList)
         //    Console.WriteLine(bg);
         //Console.WriteLine();
 
@@ -453,13 +423,13 @@ public class Program
         //Console.WriteLine($"{x} rows were inserted");
         //Console.WriteLine();
 
-        Book_Genre bgUpdate = bgList.Last();
-        bgUpdate.IdGenre = gList.Last();
-        bgUpdate.IdBook = bList.Last();
-        bgdb.Update(bgUpdate);
-        y = bgdb.SaveChanges();
-        Console.WriteLine($"{y} rows were updated");
-        Console.WriteLine();
+        //Book_Genre bgUpdate = bgList.Last();
+        //bgUpdate.IdGenre = gList.Last();
+        //bgUpdate.IdBook = bList.Last();
+        //bgdb.Update(bgUpdate);
+        //y = bgdb.SaveChanges();
+        //Console.WriteLine($"{y} rows were updated");
+        //Console.WriteLine();
 
         ////Book_Genre bgDelete = Book_GenreDB.SelectById(2);
         ////bgdb.Delete(bgDelete);

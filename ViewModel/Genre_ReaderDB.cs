@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace ViewModel
 {
-    public class Intrest_ReaderDB : BaseDB
+    public class Genre_ReaderDB : BaseDB
     {
         public ListGenre_Reader SelectAll()
         {
-            command.CommandText = $"SELECT * FROM Intrest_Reader";
+            command.CommandText = $"SELECT * FROM Genre_Reader";
             ListGenre_Reader irList = new ListGenre_Reader(base.Select());
             return irList;
         }
@@ -21,7 +21,7 @@ namespace ViewModel
         {
             Genre_Reader ir = entity as Genre_Reader;
             ir.IdReader = ReaderDB.SelectById((int)reader["idReader"]);
-            ir.IdIntrest = IntrestDB.SelectById((int)reader["idIntrest"]);
+            ir.IdGenre = GenreDB.SelectById((int)reader["idGenre"]);
             base.CreateModel(entity);
             return ir;
         }
@@ -32,7 +32,7 @@ namespace ViewModel
         static private ListGenre_Reader list = new ListGenre_Reader();
         public static Genre_Reader SelectById(int id)
         {
-            Intrest_ReaderDB db = new Intrest_ReaderDB();
+            Genre_ReaderDB db = new Genre_ReaderDB();
             list = db.SelectAll();
 
             Genre_Reader g = list.Find(item => item.Id == id);
@@ -44,7 +44,7 @@ namespace ViewModel
             Genre_Reader ir = entity as Genre_Reader;
             if (ir != null)
             {
-                string sqlStr = $"DELETE FROM Intrest_Reader WHERE ID=@id";
+                string sqlStr = $"DELETE FROM Genre_Reader WHERE ID=@id";
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@id", ir.Id));
             }
@@ -55,11 +55,11 @@ namespace ViewModel
             Genre_Reader ir = entity as Genre_Reader;
             if (ir != null)
             {
-                string sqlStr = $"Insert INTO Intrest_Reader (IdReader, IdIntrest) VALUES (@idReader, @idIntrest)";
+                string sqlStr = $"Insert INTO Genre_Reader (IdReader, IdGenre) VALUES (@idReader, @idGenre)";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@idReader", ir.IdReader.Id));
-                command.Parameters.Add(new OleDbParameter("@idIntrest", ir.IdIntrest.Id));
+                command.Parameters.Add(new OleDbParameter("@idGenre", ir.IdGenre.Id));
             }
         }
 
@@ -68,11 +68,11 @@ namespace ViewModel
             Genre_Reader ir = entity as Genre_Reader;
             if (ir != null)
             {
-                string sqlStr = $"UPDATE Intrest_Reader SET idReader=@IdReader, idIntrest=@IdIntrest WHERE ID=@id";
+                string sqlStr = $"UPDATE Genre_Reader SET idReader=@IdReader, idGenre=@IdGenre WHERE ID=@id";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@IdReader", ir.IdReader.Id));
-                command.Parameters.Add(new OleDbParameter("@IdIntrest", ir.IdIntrest.Id));
+                command.Parameters.Add(new OleDbParameter("@IdGenre", ir.IdGenre.Id));
                 command.Parameters.Add(new OleDbParameter("@id", ir.Id));
             }
         }

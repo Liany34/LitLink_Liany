@@ -21,12 +21,6 @@ namespace Service
         public Task<int> DeleteLanguage(int id);
 
 
-        public Task<ListIntrest> GetAllIntrests();
-        public Task<int> InsertIntrest(Intrest intrest);
-        public Task<int> UpdateIntrest(Intrest intrest);
-        public Task<int> DeleteIntrest(int id);
-
-
         public Task<ListDiscountCodes> GetAllDiscountCodes();
         public Task<int> InsertDiscountCode(DiscountCodes discountCode);
         public Task<int> UpdateDiscountCode(DiscountCodes discountCode);
@@ -82,22 +76,10 @@ namespace Service
         public Task<int> DeleteBookGenre(int id);
 
 
-        public Task<ListGenre_Reader> GetAllIntrestReaders();
-        public Task<int> InsertIntrestReader(Genre_Reader intrest_reader);
-        public Task<int> UpdateIntrestReader(Genre_Reader intrest_reader);
-        public Task<int> DeleteIntrestReader(int id);
-
-
-        public Task<ListBook_List> GetAllBookLists();
-        public Task<int> InsertBookList(Book_List book_list);
-        public Task<int> UpdateBookList(Book_List book_list);
-        public Task<int> DeleteBookList(int id);
-
-
-        public Task<ListList_Detail> GetAllListDetails();
-        public Task<int> InsertListDetail(List_Detail list_detail);
-        public Task<int> UpdateListDetail(List_Detail list_detail);
-        public Task<int> DeleteListDetail(int id);
+        public Task<ListGenre_Reader> GetAllGenreReaders();
+        public Task<int> InsertGenreReader(Genre_Reader genre_reader);
+        public Task<int> UpdateGenreReader(Genre_Reader genre_reader);
+        public Task<int> DeleteGenreReader(int id);
 
 
         public Task<ListCart> GetAllCarts();
