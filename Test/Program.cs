@@ -261,11 +261,10 @@ public class Program
         //Console.WriteLine();
 
 
-        //Console.WriteLine("Admin:");
+        Console.WriteLine("Admin:");
 
         AdminDB addb = new AdminDB();
         ListAdmin adList = addb.SelectAll();
-        Console.WriteLine(adList.Count);
         //foreach (Admin a in adList)
         //    Console.WriteLine(a);
         //Console.WriteLine();
@@ -329,7 +328,7 @@ public class Program
         //Console.WriteLine($"{y} rows were updated");
         //Console.WriteLine();
 
-        //Book bDelete = BookDB.SelectById(154);
+        //Book bDelete = BookDB.SelectById(155);
         //bdb.Delete(bDelete);
         //z = bdb.SaveChanges();
         //Console.WriteLine($"{z} rows were deleted");
@@ -349,21 +348,21 @@ public class Program
 
         //Book_Series bsInsert = new Book_Series();
         //bsInsert.NameSeries = "nEWS";
-        //bsInsert.IdAuthor = aList.First();
+        //bsInsert.IdUser = uList.First();
         //bsdb.Insert(bsInsert);
         //x = bsdb.SaveChanges();
         //Console.WriteLine($"{x} rows were inserted");
         //Console.WriteLine();
 
-        //Book_Series bsUpdate = Book_SeriesDB.SelectById(134);
+        //Book_Series bsUpdate = Book_SeriesDB.SelectById(137);
         //bsUpdate.NameSeries = "Update";
-        //bsUpdate.IdAuthor = aList.First();
+        //bsUpdate.IdUser = uList.First();
         //bsdb.Update(bsUpdate);
         //y = bsdb.SaveChanges();
         //Console.WriteLine($"{y} rows were updated");
         //Console.WriteLine();
 
-        //Book_Series bsDelete = Book_SeriesDB.SelectById(136);
+        //Book_Series bsDelete = Book_SeriesDB.SelectById(137);
         //bsdb.Delete(bsDelete);
         //z = bsdb.SaveChanges();
         //Console.WriteLine($"{z} rows were deleted");
@@ -377,18 +376,18 @@ public class Program
 
         Series_DetailDB sddb = new Series_DetailDB();
         ListSeries_Detail sdList = sddb.SelectAll();
-        //foreach (Series_Detail sd in sdList)
-        //    Console.WriteLine(sd);
-        //Console.WriteLine();
+        foreach (Series_Detail sd in sdList)
+            Console.WriteLine(sd);
+        Console.WriteLine();
 
-        //Series_Detail sdInsert = new Series_Detail();
-        //sdInsert.IdSeries = bsList.First();
-        //sdInsert.IdBook = bList.First();
-        //sdInsert.Number = 2;
-        //sddb.Insert(sdInsert);
-        //x = sddb.SaveChanges();
-        //Console.WriteLine($"{x} rows were inserted");
-        //Console.WriteLine();
+        Series_Detail sdInsert = new Series_Detail();
+        sdInsert.IdSeries = bsList.First();
+        sdInsert.IdBook = bList.First();
+        sdInsert.Number = 2;
+        sddb.Insert(sdInsert);
+        x = sddb.SaveChanges();
+        Console.WriteLine($"{x} rows were inserted");
+        Console.WriteLine();
 
         //Series_Detail sdUpdate = sdList.Last();
         //sdUpdate.IdSeries = bsList.Last();

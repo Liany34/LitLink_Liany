@@ -12,8 +12,7 @@ namespace ViewModel
     {
         public ListAdmin SelectAll()
         {
-            command.CommandText = $"SELECT [User].id, [User].firstName, [User].lastName, [User].phoneNumber, [User].email, [User].username, [User].birthdate, [User].picture, [User].pass " +
-                $"FROM ([User] INNER JOIN [Admin] ON [User].id = [Admin].id)";
+            command.CommandText = $"SELECT Admin.id, [User].firstName, [User].lastName, [User].phoneNumber, [User].email, [User].username, [User].pass, [User].birthdate, [User].picture\r\nFROM   (Admin INNER JOIN\r\n             [User] ON Admin.id = [User].id)";
             ListAdmin aList = new ListAdmin(base.Select());
             return aList;
         }
