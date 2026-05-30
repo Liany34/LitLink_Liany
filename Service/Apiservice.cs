@@ -15,7 +15,7 @@ namespace Service
 {
     public class Apiservice : IApiService
     {
-        string uri;
+        public string uri;
         public HttpClient client;
         public Apiservice()
         {
@@ -29,6 +29,17 @@ namespace Service
             this.client = client ?? throw new ArgumentNullException(nameof(client));
             this.uri = baseUri ?? throw new ArgumentNullException(nameof(baseUri));
         }
+
+        //public Apiservice()
+        //{
+        //    this.uri = "https://mkrq0bm8-5193.uks1.devtunnels.ms";
+
+        //    // יצירה ישירה עם Timeout מוגדר מראש
+        //    this.client = new HttpClient()
+        //    {
+        //        Timeout = TimeSpan.FromMinutes(5)
+        //    };
+        //}
 
 
         public async Task<ListGenre> GetAllGenres()
@@ -106,7 +117,7 @@ namespace Service
             HttpClient client = new HttpClient();
 
             string st = null;
-            string URI = $"{uri}/api/Select/UserPictureSelectore64Byte";
+            string URI = $"{uri}/api/Select/UserPictureSelectore64Byte" + id;
             HttpResponseMessage response = await client.GetAsync(URI);
             if (response.IsSuccessStatusCode)
             {
@@ -196,7 +207,7 @@ namespace Service
             HttpClient client = new HttpClient();
 
             string st = null;
-            string URI = $"{uri}/api/Select/BookCoverSelectore64Byte";
+            string URI = $"{uri}/api/Select/BookCoverSelectore64Byte" + id;
             HttpResponseMessage response = await client.GetAsync(URI);
             if (response.IsSuccessStatusCode)
             {

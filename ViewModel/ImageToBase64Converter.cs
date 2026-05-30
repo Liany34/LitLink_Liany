@@ -8,17 +8,14 @@ public class ImageToBase64Converter
     {
         try
         {
-            // תיקון קריטי: במקום GetExecutingAssembly, אנחנו לוקחים את ה-Assembly שבו המחלקה הזו יושבת
             var assembly = typeof(ImageToBase64Converter).Assembly;
 
-            // נתיב ה-Resource בתוך פרויקט ViewModel
             string resourcePath = $"ViewModel.PRP.{fileName}";
 
             using (Stream stream = assembly.GetManifestResourceStream(resourcePath))
             {
                 if (stream == null)
                 {
-                    // אם זה עדיין לא מוצא, זה ידפיס לחלון ה-Output את השמות המדויקים
                     Console.WriteLine($"[שגיאה] ה-Resource לא נמצא בנתיב: {resourcePath}");
                     Console.WriteLine("הנה הרשימה האמיתית של ה-Resources בתוך ViewModel:");
                     foreach (string name in assembly.GetManifestResourceNames())
