@@ -101,11 +101,12 @@ namespace ViewModel
             User u = entity as User;
             if (u != null)
             {
-                string sqlStr = $"UPDATE [User] SET FirstName=@firstName, LastName=@lastName, PhoneNumber=@phoneNumber, Email=@email, Username=@username, Pass=@pass, Picture=@picture WHERE ID=@id";
+                string sqlStr = $"UPDATE [User] SET FirstName=@firstName, LastName=@lastName, Birthdate=@birthdate, PhoneNumber=@phoneNumber, Email=@email, Username=@username, Pass=@pass, Picture=@picture WHERE ID=@id";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@firstName", u.FirstName));
                 command.Parameters.Add(new OleDbParameter("@lastName", u.LastName));
+                command.Parameters.Add(new OleDbParameter("@birthdate", u.Birthdate));
                 command.Parameters.Add(new OleDbParameter("@phoneNumber", u.PhoneNumber));
                 command.Parameters.Add(new OleDbParameter("@email", u.Email));
                 command.Parameters.Add(new OleDbParameter("@username", u.Username));

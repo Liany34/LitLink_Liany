@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Covers\DefaultCover.png" />
+    <None Remove="PRP\DefaultUser.png" />
     <None Remove="PRP\To_be_revealed.png" />
   </ItemGroup>
 
@@ -19,7 +21,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="PRP\DefaultUser.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="PRP\To_be_revealed.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Covers\DefaultCover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

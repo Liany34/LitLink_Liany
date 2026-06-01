@@ -1075,7 +1075,7 @@ public class Program
         //////Console.WriteLine();
 
 
-        ////Console.WriteLine("Book_Genre:");
+        Console.WriteLine("Book_Genre:");
 
         var bookGenre = await buyerService.GetAllBookGenres();
         Console.WriteLine(bookGenre.Count);
