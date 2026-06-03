@@ -7,9 +7,41 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Covers\DefaultCover.png" />
-    <None Remove="PRP\DefaultUser.png" />
+    <None Remove="Covers\ACourtOfFrostAndStarlight.png" />
+    <None Remove="Covers\ACourtOfMistAndFury.png" />
+    <None Remove="Covers\ACourtOfSilverFlames.png" />
+    <None Remove="Covers\ACourtOfWingsAndRuin.png" />
+    <None Remove="Covers\AgainstAllOdds.png" />
+    <None Remove="Covers\AntiHero.png" />
+    <None Remove="Covers\BeachRead.png" />
+    <None Remove="Covers\BookLovers.png" />
+    <None Remove="Covers\CruelSummer.png" />
+    <None Remove="Covers\FakeEmpire.png" />
+    <None Remove="Covers\FalseGod.png" />
+    <None Remove="Covers\FamousLastWords.png" />
+    <None Remove="Covers\ForNowNotForever.png" />
+    <None Remove="Covers\ForthWing.png" />
+    <None Remove="Covers\FromNowOn.png" />
+    <None Remove="Covers\IronFlame.png" />
+    <None Remove="Covers\ItEndsWithUs.png" />
+    <None Remove="Covers\ItStartsWithUs.png" />
+    <None Remove="Covers\KissNowLieLater.png" />
+    <None Remove="Covers\LeftFieldLove.pmg.png" />
+    <None Remove="Covers\OnyxStorm.png" />
+    <None Remove="Covers\PeopleWeMeetOnVacatuon.png" />
+    <None Remove="Covers\RealRegrets.png" />
+    <None Remove="Covers\RemindersOfHim.png" />
+    <None Remove="Covers\Verity.png" />
     <None Remove="PRP\To_be_revealed.png" />
+    <None Remove="PRP\UserPicture1.png" />
+    <None Remove="PRP\UserPicture2.png" />
+    <None Remove="PRP\UserPicture3.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="PRP\UserPicture2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -21,18 +53,90 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="PRP\DefaultUser.png">
+    <Resource Include="Covers\ACourtOfFrostAndStarlight.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PRP\To_be_revealed.png">
+    </Resource>
+    <Resource Include="Covers\ACourtOfMistAndFury.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Covers\DefaultCover.png">
+    </Resource>
+    <Resource Include="Covers\ACourtOfSilverFlames.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Resource>
+    <Resource Include="Covers\ACourtOfWingsAndRuin.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\AgainstAllOdds.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\AntiHero.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\BeachRead.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\BookLovers.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\CruelSummer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\FakeEmpire.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\FalseGod.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\FamousLastWords.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\ForNowNotForever.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\ForthWing.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\FromNowOn.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\IronFlame.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\ItEndsWithUs.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\ItStartsWithUs.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\KissNowLieLater.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\LeftFieldLove.pmg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\OnyxStorm.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\PeopleWeMeetOnVacatuon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\RealRegrets.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\RemindersOfHim.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\To_be_revealed.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Covers\Verity.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="PRP\UserPicture1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="PRP\UserPicture3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
