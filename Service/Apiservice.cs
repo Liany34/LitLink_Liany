@@ -107,27 +107,25 @@ namespace Service
         {
             return (await client.DeleteAsync(uri + $"/api/Delete/UserDelete/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
-        public async Task<string> GetPRPByUserIDByte64(int id)
+        public async Task<string> GetPictureByUserIDByte64(int id)
         {
-            HttpClient client = new HttpClient();
+            string URI = $"{uri}/api/Select/UserPictureSelectore64Byte?id={id}";
 
-            string st = null;
-            string URI = $"{uri}/api/Select/UserPictureSelectore64Byte" + id;
             HttpResponseMessage response = await client.GetAsync(URI);
+
             if (response.IsSuccessStatusCode)
             {
-                string json = await response.Content.ReadAsStringAsync();
-                json = '"' + json + '"';
-                try
-                {
-                    st = JsonSerializer.Deserialize<string>(json);
-                }
-                catch(Exception e)
-                {
-                    System.Diagnostics.Debug.WriteLine("JSON Error: " + e.Message);
-                }
+                return await response.Content.ReadAsStringAsync();
             }
-            return st;
+
+            return null;
+        }
+        public async Task<int> UpdateUserPictureJson(ImageJsonDto imageData)
+        {
+            HttpResponseMessage response =
+                await client.PutAsJsonAsync(uri + "/api/Update/UserPictureJsonUpdate", imageData);
+
+            return response.IsSuccessStatusCode ? 1 : 0;
         }
 
 
@@ -199,25 +197,45 @@ namespace Service
         }
         public async Task<string> GetBookCoverByBookIDByte64(int id)
         {
-            HttpClient client = new HttpClient();
+            string URI = $"{uri}/api/Select/BookCoverSelectore64Byte?id={id}";
 
-            string st = null;
-            string URI = $"{uri}/api/Select/BookCoverSelectore64Byte" + id;
             HttpResponseMessage response = await client.GetAsync(URI);
+
             if (response.IsSuccessStatusCode)
             {
-                string json = await response.Content.ReadAsStringAsync();
-                json = '"' + json + '"';
-                try
-                {
-                    st = JsonSerializer.Deserialize<string>(json);
-                }
-                catch (Exception e)
-                {
-                    System.Diagnostics.Debug.WriteLine("JSON Error: " + e.Message);
-                }
+                return await response.Content.ReadAsStringAsync();
             }
-            return st;
+
+            return null;
+        }
+        //public async Task<string> GetBookCoverByBookIDByte64(int id)
+        //{
+        //    HttpClient client = new HttpClient();
+
+        //    string st = null;
+        //    string URI = $"{uri}/api/Select/BookCoverSelectore64Byte" + id;
+        //    HttpResponseMessage response = await client.GetAsync(URI);
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        string json = await response.Content.ReadAsStringAsync();
+        //        json = '"' + json + '"';
+        //        try
+        //        {
+        //            st = JsonSerializer.Deserialize<string>(json);
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            System.Diagnostics.Debug.WriteLine("JSON Error: " + e.Message);
+        //        }
+        //    }
+        //    return st;
+        //}
+        public async Task<int> UpdateBookCoverJson(ImageJsonDto imageData)
+        {
+            HttpResponseMessage response =
+                await client.PutAsJsonAsync(uri + "/api/Update/BookCoverJsonUpdate", imageData);
+
+            return response.IsSuccessStatusCode ? 1 : 0;
         }
 
 

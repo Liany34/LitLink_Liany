@@ -31,7 +31,8 @@ namespace Service
         public Task<int> InsertUser(User user);
         public Task<int> UpdateUser(User user);
         public Task<int> DeleteUser(int id);
-        public Task<string> GetPRPByUserIDByte64(int id);
+        public Task<string> GetPictureByUserIDByte64(int id);
+        Task<int> UpdateUserPictureJson(ImageJsonDto imageData);
 
 
         public Task<ListAuthor> GetAllAuthors();
@@ -56,6 +57,7 @@ namespace Service
         public Task<int> UpdateBook(Book book);
         public Task<int> DeleteBook(int id);
         public Task<string> GetBookCoverByBookIDByte64(int id);
+        Task<int> UpdateBookCoverJson(ImageJsonDto imageData);
 
 
         public Task<ListBook_Series> GetAllBookSeries();

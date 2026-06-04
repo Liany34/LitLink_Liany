@@ -723,9 +723,9 @@ public class Program
         Apiservice buyerService = new Apiservice();
         int id;
 
-        ////Console.WriteLine("Genre:");
+        Console.WriteLine("Genre:");
 
-        ////var genre = await buyerService.GetAllGenres();
+        var genre = await buyerService.GetAllGenres();
         ////Console.WriteLine(genre.Count);
 
         //////Genre insertG = new Genre
@@ -852,26 +852,26 @@ public class Program
 
         ////Console.WriteLine("Author:");
 
-        ////var author = await buyerService.GetAllAuthors();
+        var author = await buyerService.GetAllAuthors();
         ////Console.WriteLine(author.Count);
 
-        ////////Author insertA = new Author
-        ////////{
-        ////////    FirstName = "Alice",
-        ////////    LastName = "Johnson",
-        ////////    PhoneNumber = "0567284932",
-        ////////    Email = "aliceJhon22@gmail.com",
-        ////////    Username = "aliceJhon22",
-        ////////    Pass = "alicePass22",
-        ////////    Birthdate = new DateTime(1992, 7, 15),
-        ////////    Picture = "alice.jpg",
-        ////////    PenName = "Mark Twain",
-        ////////    Genre = genre.Last(),
-        ////////    InformationAboutAuthor = "Famous American author"
-        ////////};
-        ////////await buyerService.InsertAuthor(insertA);
-        ////////author = await buyerService.GetAllAuthors();
-        ////////Console.WriteLine(author.Count);
+        Author insertA = new Author
+        {
+            FirstName = "Alice",
+            LastName = "Johnson",
+            PhoneNumber = "0567284932",
+            Email = "aliceJhon22@gmail.com",
+            Username = "aliceJhon22",
+            Pass = "alicePass22",
+            Birthdate = new DateTime(1992, 7, 15),
+            Picture = "alice.jpg",
+            PenName = "Mark Twain",
+            Genre = genre.Last(),
+            InformationAboutAuthor = "Famous American author"
+        };
+        await buyerService.InsertAuthor(insertA);
+        author = await buyerService.GetAllAuthors();
+        Console.WriteLine(author.Count);
 
         //////Author updateA = author.Last();
         //////updateA.FirstName = "updated Alice";

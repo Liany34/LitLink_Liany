@@ -115,7 +115,9 @@ namespace ViewModel
             finally
             {
                 if (reader != null) reader.Close();
-                if (connection.State == ConnectionState.Open) connection.Close();
+
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
             }
             return list;
         }
@@ -223,14 +225,25 @@ namespace ViewModel
             finally
             {
                 inserted.Clear();
-
                 updated.Clear();
-
                 deleted.Clear();
 
-                //if (connection.State == System.Data.ConnectionState.Open)
-                //    connection.Close();
+                command.Transaction = null;
+
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
             }
+            //finally
+            //{
+            //    inserted.Clear();
+
+            //    updated.Clear();
+
+            //    deleted.Clear();
+
+            //    //if (connection.State == System.Data.ConnectionState.Open)
+            //    //    connection.Close();
+            //}
 
             return records_affected;
         }

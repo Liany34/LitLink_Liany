@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ViewModel
 {
@@ -27,20 +28,41 @@ namespace ViewModel
             u.Birthdate = (DateTime)reader["birthDate"];
             u.Username = reader["username"].ToString();
 
-            string fileName = reader["picture"]?.ToString() ?? "";
-            if (!string.IsNullOrEmpty(fileName))
-            {
-                string base64Result = ImageToBase64Converter.ImageFromResourceToBase64(fileName);
+            string fileName = reader["picture"]?.ToString();
 
-                if (!string.IsNullOrEmpty(base64Result))
-                {
-                    u.Picture = base64Result;
-                }
-                else
-                {
-                    u.Picture = "Missing resource: " + fileName;
-                }
+            string imagePath = System.IO.Path.Combine(
+                @"C:\Users\yahal\source\repos\Liany34\LitLink_Liany\ViewModel\Covers",
+                fileName
+            );
+
+            Console.WriteLine("fileName = " + fileName);
+            Console.WriteLine("imagePath = " + imagePath);
+            Console.WriteLine("exists = " + File.Exists(imagePath));
+
+            if (File.Exists(imagePath))
+            {
+                string base64String = ImageToBase64Converter.ImageToBase64(imagePath);
+                u.Picture = base64String;
             }
+            else
+            {
+                u.Picture = null;
+            }
+
+            //string fileName = reader["picture"]?.ToString() ?? "";
+            //if (!string.IsNullOrEmpty(fileName))
+            //{
+            //    string base64Result = ImageToBase64Converter.ImageFromResourceToBase64(fileName);
+
+            //    if (!string.IsNullOrEmpty(base64Result))
+            //    {
+            //        u.Picture = base64Result;
+            //    }
+            //    else
+            //    {
+            //        u.Picture = "Missing resource: " + fileName;
+            //    }
+            //}
 
             base.CreateModel(entity);
             return u;
@@ -63,8 +85,10 @@ namespace ViewModel
             ListUser uList = SelectAll();
             User u = uList.Find(item => item.Id == id);
 
-            string pic = u.Picture;
-            return pic;
+            if (u == null)
+                return null;
+
+            return u.Picture;
         }
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
@@ -114,6 +138,18 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@picture", u.Picture));
                 command.Parameters.Add(new OleDbParameter("@id", u.Id));
             }
+        }
+        public int UpdateUserPictureFileName(int userId, string fileName)
+        {
+            command.CommandText = "UPDATE [User] SET Picture=@picture WHERE ID=@id";
+            command.Parameters.Clear();
+            command.Parameters.Add(new OleDbParameter("@picture", fileName));
+            command.Parameters.Add(new OleDbParameter("@id", userId));
+
+            if (connection.State != System.Data.ConnectionState.Open)
+                connection.Open();
+
+            return command.ExecuteNonQuery();
         }
     }
 }

@@ -1,41 +1,63 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System;
 using System.IO;
 using System.Reflection;
 
-public class ImageToBase64Converter
+namespace ViewModel
 {
-    public static string ImageFromResourceToBase64(string fileName)
+    public class ImageToBase64Converter
     {
-        try
+
+        public static string ImageToBase64(string imagePath)
         {
-            var assembly = typeof(ImageToBase64Converter).Assembly;
-
-            string resourcePath = $"ViewModel.PRP.{fileName}";
-
-            using (Stream stream = assembly.GetManifestResourceStream(resourcePath))
+            try
             {
-                if (stream == null)
-                {
-                    Console.WriteLine($"[שגיאה] ה-Resource לא נמצא בנתיב: {resourcePath}");
-                    Console.WriteLine("הנה הרשימה האמיתית של ה-Resources בתוך ViewModel:");
-                    foreach (string name in assembly.GetManifestResourceNames())
-                    {
-                        Console.WriteLine("-> " + name);
-                    }
-                    return "";
-                }
-
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    stream.CopyTo(ms);
-                    return Convert.ToBase64String(ms.ToArray());
-                }
+                byte[] imageBytes = File.ReadAllBytes(imagePath);
+                string base64String = Convert.ToBase64String(imageBytes);
+                return base64String;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                return null;
             }
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error: " + ex.Message);
-            return null;
-        }
+        //public static string ImageFromResourceToBase64(string Photos)
+        //{
+        //    try
+        //    {
+        //        var assembly = typeof(ImageToBase64Converter).Assembly;
+
+        //        string resourcePath = $"ViewModel.Covers.{Photos}";
+
+        //        using (Stream stream = assembly.GetManifestResourceStream(resourcePath))
+        //        {
+        //            if (stream == null)
+        //            {
+        //                Console.WriteLine($"[שגיאה] ה-Resource לא נמצא בנתיב: {resourcePath}");
+        //                Console.WriteLine("הנה הרשימה האמיתית של ה-Resources בתוך ViewModel:");
+        //                foreach (string name in assembly.GetManifestResourceNames())
+        //                {
+        //                    Console.WriteLine("-> " + name);
+        //                }
+        //                return "";
+        //            }
+
+        //            using (MemoryStream ms = new MemoryStream())
+        //            {
+        //                stream.CopyTo(ms);
+        //                return Convert.ToBase64String(ms.ToArray());
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine("Error: " + ex.Message);
+        //        return null;
+        //    }
+        //}
     }
 }

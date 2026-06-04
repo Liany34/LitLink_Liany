@@ -48,6 +48,37 @@ namespace LitLink_By_Liany.Controllers
             int x = db.SaveChanges();
             return x;
         }
+        [HttpPut]
+        [ActionName("UserPictureJsonUpdate")]
+        public int UpdateUserPictureJson([FromBody] ImageJsonDto imageData)
+        {
+            try
+            {
+                UserDB db = new UserDB();
+
+                string coversFolder = BaseDB.Path() + "\\Covers";
+
+                if (!Directory.Exists(coversFolder))
+                    Directory.CreateDirectory(coversFolder);
+
+                string extension = ".png";
+
+                if (!string.IsNullOrEmpty(imageData.FileName))
+                    extension = Path.GetExtension(imageData.FileName);
+
+                string newFileName = "book_" + imageData.Id + "_" + DateTime.Now.Ticks + extension;
+                string fullPath = Path.Combine(coversFolder, newFileName);
+
+                byte[] imageBytes = Convert.FromBase64String(imageData.Base64Image);
+                System.IO.File.WriteAllBytes(fullPath, imageBytes);
+
+                return db.UpdateUserPictureFileName(imageData.Id, newFileName);
+            }
+            catch
+            {
+                return 0;
+            }
+        }
 
         [HttpPut]
         [ActionName("AuthorUpdate")]
@@ -77,6 +108,37 @@ namespace LitLink_By_Liany.Controllers
             db.Update(book);
             int x = db.SaveChanges();
             return x;
+        }
+        [HttpPut]
+        [ActionName("BookCoverJsonUpdate")]
+        public int UpdateBookCoverJson([FromBody] ImageJsonDto imageData)
+        {
+            try
+            {
+                BookDB db = new BookDB();
+
+                string coversFolder = BaseDB.Path() + "\\Covers";
+
+                if (!Directory.Exists(coversFolder))
+                    Directory.CreateDirectory(coversFolder);
+
+                string extension = ".png";
+
+                if (!string.IsNullOrEmpty(imageData.FileName))
+                    extension = Path.GetExtension(imageData.FileName);
+
+                string newFileName = "user_" + imageData.Id + "_" + DateTime.Now.Ticks + extension;
+                string fullPath = Path.Combine(coversFolder, newFileName);
+
+                byte[] imageBytes = Convert.FromBase64String(imageData.Base64Image);
+                System.IO.File.WriteAllBytes(fullPath, imageBytes);
+
+                return db.UpdateBookCoverFileName(imageData.Id, newFileName);
+            }
+            catch
+            {
+                return 0;
+            }
         }
 
         [HttpPut]

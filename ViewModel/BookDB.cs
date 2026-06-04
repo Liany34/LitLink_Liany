@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ViewModel
 {
@@ -39,20 +40,41 @@ namespace ViewModel
                 b.BookLink = null;
             b.IsFlaged = (bool)reader["isFlaged"];
 
-            string fileName = reader["cover"]?.ToString() ?? "";
-            if (!string.IsNullOrEmpty(fileName))
-            {
-                string base64Result = ImageToBase64Converter.ImageFromResourceToBase64(fileName);
+            string fileName = reader["cover"]?.ToString();
 
-                if (!string.IsNullOrEmpty(base64Result))
-                {
-                    b.Cover = base64Result;
-                }
-                else
-                {
-                    b.Cover = "Missing resource: " + fileName;
-                }
+            string imagePath = System.IO.Path.Combine(
+                @"C:\Users\yahal\source\repos\Liany34\LitLink_Liany\ViewModel\Covers",
+                fileName
+            );
+
+            Console.WriteLine("fileName = " + fileName);
+            Console.WriteLine("imagePath = " + imagePath);
+            Console.WriteLine("exists = " + File.Exists(imagePath));
+
+            if (File.Exists(imagePath))
+            {
+                string base64String = ImageToBase64Converter.ImageToBase64(imagePath);
+                b.Cover = base64String;
             }
+            else
+            {
+                b.Cover = null;
+            }
+
+            //string fileName = reader["cover"]?.ToString() ?? "";
+            //if (!string.IsNullOrEmpty(fileName))
+            //{
+            //    string base64Result = ImageToBase64Converter.ImageFromResourceToBase64(fileName);
+
+            //    if (!string.IsNullOrEmpty(base64Result))
+            //    {
+            //        b.Cover = base64Result;
+            //    }
+            //    else
+            //    {
+            //        b.Cover = "Missing resource: " + fileName;
+            //    }
+            //}
 
             base.CreateModel(entity);
             return b;
@@ -75,8 +97,10 @@ namespace ViewModel
             ListBook bList = SelectAll();
             Book b = bList.Find(item => item.Id == id);
 
-            string pic = b.Cover;
-            return pic;
+            if (b == null)
+                return null;
+
+            return b.Cover;
         }
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
@@ -128,6 +152,18 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@BookLink", b.BookLink));
                 command.Parameters.Add(new OleDbParameter("@id", b.Id));
             }
+        }
+        public int UpdateBookCoverFileName(int bookId, string fileName)
+        {
+            command.CommandText = "UPDATE Book SET cover=@cover WHERE ID=@id";
+            command.Parameters.Clear();
+            command.Parameters.Add(new OleDbParameter("@cover", fileName));
+            command.Parameters.Add(new OleDbParameter("@id", bookId));
+
+            if (connection.State != System.Data.ConnectionState.Open)
+                connection.Open();
+
+            return command.ExecuteNonQuery();
         }
     }
 }

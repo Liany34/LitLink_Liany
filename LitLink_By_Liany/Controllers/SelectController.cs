@@ -46,11 +46,15 @@ namespace LitLink_By_Liany.Controllers
         }
         [HttpGet]
         [ActionName("UserPictureSelectore64Byte")]
-        public string GetPRPByUserIDByte64(int id)
+        public IActionResult GetPictureByUserIDByte64(int id)
         {
             UserDB db = new UserDB();
             string pic = db.SelectPRPByUserID(id);
-            return pic;
+
+            if (string.IsNullOrEmpty(pic))
+                return NotFound("Cover not found");
+
+            return Ok(pic);
         }
 
         [HttpGet]
@@ -90,11 +94,15 @@ namespace LitLink_By_Liany.Controllers
         }
         [HttpGet]
         [ActionName("BookCoverSelectore64Byte")]
-        public string GetBookCoverByBookIDByte64(int id)
+        public IActionResult GetBookCoverByBookIDByte64(int id)
         {
             BookDB db = new BookDB();
             string pic = db.SelectBookCoverByBookID(id);
-            return pic;
+
+            if (string.IsNullOrEmpty(pic))
+                return NotFound("Cover not found");
+
+            return Ok(pic);
         }
 
         [HttpGet]
