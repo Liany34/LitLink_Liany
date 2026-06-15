@@ -40,10 +40,10 @@ namespace ViewModel
             Admin a = entity as Admin;
             if (a != null)
             {
-                string sqlStr = $"INSERT INTO Admin (Id) VALUES (@id)";
+                string sqlStr = $"INSERT INTO [Admin] (Id) VALUES (@id)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", a.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", a.Id));
             }
         }
         public override void Insert(BaseEntity entity)
@@ -60,9 +60,10 @@ namespace ViewModel
             Admin a = entity as Admin;
             if (a != null)
             {
-                string sqlStr = $"DELETE FROM Admin WHERE ID=@id";
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", a.Id));
+                string sqlStr = $"DELETE FROM [Admin] WHERE ID=@id";
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", a.Id));
             }
         }
         public override void Delete(BaseEntity entity)

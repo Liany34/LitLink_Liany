@@ -20,8 +20,11 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Cart c = entity as Cart;
-            c.IdReader = ReaderDB.SelectById((int)reader["idReader"]);
-            if(reader["discountCode"] != DBNull.Value)
+            c.IdReader = new Reader
+            {
+                Id = Convert.ToInt32(reader["idReader"])
+            };
+            if (reader["discountCode"] != DBNull.Value)
                 c.DiscountCode = reader["discountCode"].ToString();
             else
                 c.DiscountCode = null;
@@ -51,8 +54,9 @@ namespace ViewModel
             if (c != null)
             {
                 string sqlStr = $"DELETE FROM Cart WHERE ID=@id";
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", c.Id));
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", c.Id));
             }
         }
 
@@ -61,11 +65,14 @@ namespace ViewModel
             Cart c = entity as Cart;
             if (c != null)
             {
-                string sqlStr = $"Insert INTO Cart (IdReader, DiscountCode) VALUES (@idReader, @discountCode)";
+                string sqlStr = $"INSERT INTO Cart (IdReader, DiscountCode) VALUES (@idReader, @discountCode)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@idReader", c.IdReader.Id));
-                command.Parameters.Add(new OleDbParameter("@discountCode", c.DiscountCode));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@idReader", c.IdReader.Id));
+                if (c.DiscountCode != null)
+                    cmd.Parameters.Add("@discountCode", OleDbType.VarChar).Value = c.DiscountCode;
+                else
+                    cmd.Parameters.Add("@discountCode", OleDbType.VarChar).Value = DBNull.Value;
             }
         }
 
@@ -76,10 +83,13 @@ namespace ViewModel
             {
                 string sqlStr = $"UPDATE Cart SET IdReader=@idReader, DiscountCode=@discountCode WHERE ID=@id";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@idReader", c.IdReader.Id));
-                command.Parameters.Add(new OleDbParameter("@discountCode", c.DiscountCode));
-                command.Parameters.Add(new OleDbParameter("@id", c.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@idReader", c.IdReader.Id));
+                if (c.DiscountCode != null)
+                    cmd.Parameters.Add("@discountCode", OleDbType.VarChar).Value = c.DiscountCode;
+                else
+                    cmd.Parameters.Add("@discountCode", OleDbType.VarChar).Value = DBNull.Value;
+                cmd.Parameters.Add(new OleDbParameter("@id", c.Id));
             }
         }
     }

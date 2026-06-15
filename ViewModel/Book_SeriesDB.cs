@@ -21,7 +21,10 @@ namespace ViewModel
         {
             Book_Series bs = entity as Book_Series;
             bs.NameSeries = reader["nameSeries"].ToString();
-            bs.IdUser = UserDB.SelectById((int)(reader["idUser"]));
+            bs.IdUser = new User
+            {
+                Id = Convert.ToInt32(reader["idUser"])
+            };
             base.CreateModel(entity);
             return bs;
         }
@@ -45,8 +48,9 @@ namespace ViewModel
             if (bs != null)
             {
                 string sqlStr = $"DELETE FROM Book_Series WHERE ID=@id";
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", bs.Id));
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", bs.Id));
             }
         }
 
@@ -55,11 +59,11 @@ namespace ViewModel
             Book_Series bs = entity as Book_Series;
             if (bs != null)
             {
-                string sqlStr = $"Insert INTO Book_Series (NameSeries, IdUser) VALUES (@nameSeries, @idUser)";
+                string sqlStr = $"INSERT INTO Book_Series (NameSeries, IdUser) VALUES (@nameSeries, @idUser)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@nameSeries", bs.NameSeries));
-                command.Parameters.Add(new OleDbParameter("@idUser", bs.IdUser.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@nameSeries", bs.NameSeries));
+                cmd.Parameters.Add(new OleDbParameter("@idUser", bs.IdUser.Id));
             }
         }
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
@@ -69,10 +73,10 @@ namespace ViewModel
             {
                 string sqlStr = $"UPDATE Book_Series SET nameSeries=@nameSeries, idUser=@idUser WHERE id=@id";
                 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@nameSeries", bs.NameSeries));
-                command.Parameters.Add(new OleDbParameter("@idUser", bs.IdUser.Id));
-                command.Parameters.Add(new OleDbParameter("@id", bs.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@nameSeries", bs.NameSeries));
+                cmd.Parameters.Add(new OleDbParameter("@idUser", bs.IdUser.Id));
+                cmd.Parameters.Add(new OleDbParameter("@id", bs.Id));
             }
         }
     }

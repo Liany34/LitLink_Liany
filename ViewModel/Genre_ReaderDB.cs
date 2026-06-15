@@ -20,8 +20,14 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Genre_Reader ir = entity as Genre_Reader;
-            ir.IdReader = ReaderDB.SelectById((int)reader["idReader"]);
-            ir.IdGenre = GenreDB.SelectById((int)reader["idGenre"]);
+            ir.IdReader = new Reader
+            {
+                Id = Convert.ToInt32(reader["idReader"])
+            };
+            ir.IdGenre = new Genre
+            {
+                Id = Convert.ToInt32(reader["idGenre"])
+            };
             base.CreateModel(entity);
             return ir;
         }
@@ -45,8 +51,9 @@ namespace ViewModel
             if (ir != null)
             {
                 string sqlStr = $"DELETE FROM Genre_Reader WHERE ID=@id";
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", ir.Id));
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", ir.Id));
             }
         }
 
@@ -55,11 +62,11 @@ namespace ViewModel
             Genre_Reader ir = entity as Genre_Reader;
             if (ir != null)
             {
-                string sqlStr = $"Insert INTO Genre_Reader (IdReader, IdGenre) VALUES (@idReader, @idGenre)";
+                string sqlStr = $"INSERT INTO Genre_Reader (IdReader, IdGenre) VALUES (@idReader, @idGenre)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@idReader", ir.IdReader.Id));
-                command.Parameters.Add(new OleDbParameter("@idGenre", ir.IdGenre.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@idReader", ir.IdReader.Id));
+                cmd.Parameters.Add(new OleDbParameter("@idGenre", ir.IdGenre.Id));
             }
         }
 
@@ -70,10 +77,10 @@ namespace ViewModel
             {
                 string sqlStr = $"UPDATE Genre_Reader SET idReader=@IdReader, idGenre=@IdGenre WHERE ID=@id";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@IdReader", ir.IdReader.Id));
-                command.Parameters.Add(new OleDbParameter("@IdGenre", ir.IdGenre.Id));
-                command.Parameters.Add(new OleDbParameter("@id", ir.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@IdReader", ir.IdReader.Id));
+                cmd.Parameters.Add(new OleDbParameter("@IdGenre", ir.IdGenre.Id));
+                cmd.Parameters.Add(new OleDbParameter("@id", ir.Id));
             }
         }
     }

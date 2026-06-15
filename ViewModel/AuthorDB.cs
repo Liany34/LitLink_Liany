@@ -13,16 +13,18 @@ namespace ViewModel
     {
         public ListAuthor SelectAll()
         {
-            command.CommandText = $"SELECT [User].id, [User].firstName, [User].lastName, [User].phoneNumber, [User].email, [User].username, [User].birthdate, [User].picture, [User].pass, Author.penName, Author.genre, Author.informationAboutAuthor " +
-                $"FROM ([User] INNER JOIN Author ON [User].id = Author.id)";
-            ListAuthor aList = new ListAuthor(base.Select());
-            return aList;
+            command.CommandText = $"SELECT [User].id, [User].pass, [User].firstName, [User].lastName, [User].phoneNumber, [User].email, [User].username, [User].birthdate, [User].picture, Author.penName, Author.genre, Author.informationAboutAuthor\r\nFROM   (Author INNER JOIN\r\n             [User] ON Author.id = [User].id)";
+            ListAuthor pList = new ListAuthor(base.Select());
+            return pList;
         }
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Author a = entity as Author;
             a.PenName = reader["penName"].ToString();
-            a.Genre = GenreDB.SelectById((int)reader["genre"]);
+            a.Genre = new Genre
+            {
+                Id = Convert.ToInt32(reader["genre"])
+            };
             a.InformationAboutAuthor = reader["informationAboutAuthor"].ToString();
             base.CreateModel(entity);
             return a;
@@ -48,11 +50,11 @@ namespace ViewModel
             {
                 string sqlStr = $"UPDATE Author SET PenName=@penName, Genre=@genre, InformationAboutAuthor=@informationAboutAuthor WHERE ID=@id";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@penName", a.PenName));
-                command.Parameters.Add(new OleDbParameter("@genre", a.Genre.Id));
-                command.Parameters.Add(new OleDbParameter("@informationAboutAuthor", a.InformationAboutAuthor));
-                command.Parameters.Add(new OleDbParameter("@id", a.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@penName", a.PenName));
+                cmd.Parameters.Add(new OleDbParameter("@genre", a.Genre.Id));
+                cmd.Parameters.Add(new OleDbParameter("@informationAboutAuthor", a.InformationAboutAuthor));
+                cmd.Parameters.Add(new OleDbParameter("@id", a.Id));
             }
         }
         public override void Update(BaseEntity entity)

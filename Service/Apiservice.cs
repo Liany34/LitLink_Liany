@@ -397,7 +397,7 @@ namespace Service
         }
         public async Task<int> DeleteFollowing(int id)
         {
-            return (await client.DeleteAsync(uri + $"/api/Delete/ReviewsDelete/{id}")).IsSuccessStatusCode ? 1 : 0;
+            return (await client.DeleteAsync(uri + $"/api/Delete/FollowingDelete/{id}")).IsSuccessStatusCode ? 1 : 0;
         }
     }
 }

@@ -19,8 +19,14 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Book_Genre bg = entity as Book_Genre;
-            bg.IdGenre = GenreDB.SelectById((int)(reader["idGenre"]));
-            bg.IdBook = BookDB.SelectById((int)(reader["idBook"]));
+            bg.IdGenre = new Genre
+            {
+                Id = Convert.ToInt32(reader["idGenre"])
+            };
+            bg.IdBook = new Book
+            {
+                Id = Convert.ToInt32(reader["idBook"])
+            };
             base.CreateModel(entity);
             return bg;
         }
@@ -44,8 +50,9 @@ namespace ViewModel
             if (bg != null)
             {
                 string sqlStr = $"DELETE FROM Book_Genre WHERE ID=@id";
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", bg.Id));
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", bg.Id));
             }
         }
 
@@ -56,9 +63,9 @@ namespace ViewModel
             {
                 string sqlStr = $"Insert INTO Book_Genre (IdGenre, IdBook) VALUES (@idGenre, @idBook)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@idGenre", bg.IdGenre.Id));
-                command.Parameters.Add(new OleDbParameter("@idBook", bg.IdBook.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@idGenre", bg.IdGenre.Id));
+                cmd.Parameters.Add(new OleDbParameter("@idBook", bg.IdBook.Id));
             }
         }
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
@@ -68,10 +75,10 @@ namespace ViewModel
             {
                 string sqlStr = $"UPDATE Book_Genre SET IdGenre=@idGenre, IdBook=@idBook WHERE id=@id";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@idGenre", bg.IdGenre.Id));
-                command.Parameters.Add(new OleDbParameter("@idBook", bg.IdBook.Id));
-                command.Parameters.Add(new OleDbParameter("@id", bg.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@idGenre", bg.IdGenre.Id));
+                cmd.Parameters.Add(new OleDbParameter("@idBook", bg.IdBook.Id));
+                cmd.Parameters.Add(new OleDbParameter("@id", bg.Id));
             }
         }
     }

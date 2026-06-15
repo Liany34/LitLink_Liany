@@ -19,8 +19,14 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Series_Detail sd = entity as Series_Detail;
-            sd.IdSeries = Book_SeriesDB.SelectById((int)reader["idSeries"]);
-            sd.IdBook = BookDB.SelectById((int)reader["idBook"]);
+            sd.IdSeries = new Book_Series
+            {
+                Id = Convert.ToInt32(reader["idSeries"])
+            };
+            sd.IdBook = new Book
+            {
+                Id = Convert.ToInt32(reader["idBook"])
+            };
             sd.Number = (int)reader["number"];
             base.CreateModel(entity);
             return sd;
@@ -45,8 +51,9 @@ namespace ViewModel
             if(sd != null)
             {
                 string sqlStr = $"DELETE FROM Series_Detail WHERE ID=@id";
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", sd.Id));
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", sd.Id));
             }
         }
 
@@ -55,12 +62,12 @@ namespace ViewModel
             Series_Detail sd = entity as Series_Detail;
             if (sd != null)
             {
-                string sqlStr = $"Insert INTO Series_Detail (IdSeries, IdBook, [Number]) VALUES (@idSeries, @idBook, @number)";
+                string sqlStr = $"INSERT INTO Series_Detail (IdSeries, IdBook, [Number]) VALUES (@idSeries, @idBook, @number)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@idSeries", sd.IdSeries.Id));
-                command.Parameters.Add(new OleDbParameter("@idBook", sd.IdBook.Id));
-                command.Parameters.Add(new OleDbParameter("@number", sd.Number));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@idSeries", sd.IdSeries.Id));
+                cmd.Parameters.Add(new OleDbParameter("@idBook", sd.IdBook.Id));
+                cmd.Parameters.Add(new OleDbParameter("@number", sd.Number));
             }
         }
 
@@ -71,11 +78,11 @@ namespace ViewModel
             {
                 string sqlStr = $"UPDATE Series_Detail SET IdSeries=@idSeries, IdBook=@idBook, [Number]=@number WHERE ID=@id";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@idSeries", sd.IdSeries.Id));
-                command.Parameters.Add(new OleDbParameter("@idBook", sd.IdBook.Id));
-                command.Parameters.Add(new OleDbParameter("@number", sd.Number));
-                command.Parameters.Add(new OleDbParameter("@id", sd.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@idSeries", sd.IdSeries.Id));
+                cmd.Parameters.Add(new OleDbParameter("@idBook", sd.IdBook.Id));
+                cmd.Parameters.Add(new OleDbParameter("@number", sd.Number));
+                cmd.Parameters.Add(new OleDbParameter("@id", sd.Id));
             }
         }
     }

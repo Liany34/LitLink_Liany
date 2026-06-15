@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Data;
 
 namespace ViewModel
 {
@@ -21,19 +22,23 @@ namespace ViewModel
         {
             Book b = entity as Book;
             b.BookName = reader["bookName"].ToString();
-            if(reader["publicationDate"] != DBNull.Value)
-                b.PublicationDate = DateTime.Parse(reader["publicationDate"].ToString());
+            if (reader["publicationDate"] != DBNull.Value)
+                b.PublicationDate = Convert.ToDateTime(reader["publicationDate"]).Date;
             else
                 b.PublicationDate = null;
-            if(reader["price"] != DBNull.Value)
+            if (reader["price"] != DBNull.Value)
                 b.Price = int.Parse(reader["price"].ToString());
             else
                 b.Price = null;
             b.Information = reader["information"].ToString();
-            int authorId = (int)reader["idAuthor"];
-            b.IdAuthor = AuthorDB.SelectById(authorId);
-            int languageId = (int)reader["idLanguage"];
-            b.IdLanguage = LanguageDB.SelectById(languageId);
+            b.IdAuthor = new Author
+            {
+                Id = Convert.ToInt32(reader["idAuthor"])
+            };
+            b.IdLanguage = new Language
+            {
+                Id = Convert.ToInt32(reader["idLanguage"])
+            };
             if (reader["bookLink"] != DBNull.Value)
                 b.BookLink = reader["bookLink"].ToString();
             else
@@ -60,21 +65,6 @@ namespace ViewModel
             {
                 b.Cover = null;
             }
-
-            //string fileName = reader["cover"]?.ToString() ?? "";
-            //if (!string.IsNullOrEmpty(fileName))
-            //{
-            //    string base64Result = ImageToBase64Converter.ImageFromResourceToBase64(fileName);
-
-            //    if (!string.IsNullOrEmpty(base64Result))
-            //    {
-            //        b.Cover = base64Result;
-            //    }
-            //    else
-            //    {
-            //        b.Cover = "Missing resource: " + fileName;
-            //    }
-            //}
 
             base.CreateModel(entity);
             return b;
@@ -108,8 +98,9 @@ namespace ViewModel
             if (b != null)
             {
                 string sqlStr = $"DELETE FROM Book WHERE ID=@id";
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", b.Id));
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", b.Id));
             }
         }
 
@@ -120,16 +111,25 @@ namespace ViewModel
             {
                 string sqlStr = $"Insert INTO Book (BookName, PublicationDate, Price, IdAuthor, IdLanguage, IsFlaged, Information, Cover, BookLink) VALUES (@bookName, @publicationDate, @price, @idAuthor, @idLanguage, @isFlaged, @information, @cover, @bookLink)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@@bookName", b.BookName));
-                command.Parameters.Add(new OleDbParameter("@publicationDate", b.PublicationDate));
-                command.Parameters.Add(new OleDbParameter("@price", b.Price));
-                command.Parameters.Add(new OleDbParameter("@idAuthor", b.IdAuthor.Id));
-                command.Parameters.Add(new OleDbParameter("@idLanguage", b.IdLanguage.Id));
-                command.Parameters.Add(new OleDbParameter("@isFlaged", b.IsFlaged));
-                command.Parameters.Add(new OleDbParameter("@information", b.Information));
-                command.Parameters.Add(new OleDbParameter("@cover", b.Cover));
-                command.Parameters.Add(new OleDbParameter("@bookLink", b.BookLink));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@bookName", b.BookName));
+                if (b.PublicationDate.HasValue)
+                    cmd.Parameters.Add("@publicationDate", OleDbType.Date).Value = b.PublicationDate.Value.Date;
+                else
+                    cmd.Parameters.Add("@publicationDate", OleDbType.Date).Value = DBNull.Value;
+                if (b.Price.HasValue)
+                    cmd.Parameters.Add("@price", OleDbType.Double).Value = b.Price.Value;
+                else
+                    cmd.Parameters.Add("@price", OleDbType.Double).Value = DBNull.Value;
+                cmd.Parameters.Add(new OleDbParameter("@idAuthor", b.IdAuthor.Id));
+                cmd.Parameters.Add(new OleDbParameter("@idLanguage", b.IdLanguage.Id));
+                cmd.Parameters.Add(new OleDbParameter("@isFlaged", b.IsFlaged));
+                cmd.Parameters.Add(new OleDbParameter("@information", b.Information));
+                cmd.Parameters.Add(new OleDbParameter("@cover", b.Cover));
+                if (b.BookLink != null)
+                    cmd.Parameters.Add("@bookLink", OleDbType.VarChar).Value = b.BookLink;
+                else
+                    cmd.Parameters.Add("@bookLink", OleDbType.VarChar).Value = DBNull.Value;
             }
         }
 
@@ -138,32 +138,45 @@ namespace ViewModel
             Book b = entity as Book;
             if (b != null)
             {
-                string sqlStr = $"UPDATE Book SET bookName=@BookName, publicationDate=@PublicationDate, price=@Price, idAuthor=@IdAuthor, isFlaged=@IsFlaged, information=@Information, cover=@Cover, idLanguage=@IdLanguage, bookLink=@BookLink WHERE ID=@id";
+                string sqlStr = $"UPDATE Book SET BookName=@bookName, PublicationDate=@publicationDate, Price=@price, IdAuthor=@idAuthor, IsFlaged=@isFlaged, Information=@information, IdLanguage=@idLanguage, BookLink=@bookLink WHERE ID=@id";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@BookName", b.BookName));
-                command.Parameters.Add(new OleDbParameter("@PublicationDate", b.PublicationDate));
-                command.Parameters.Add(new OleDbParameter("@Price", b.Price));
-                command.Parameters.Add(new OleDbParameter("@IdAuthor", b.IdAuthor.Id));
-                command.Parameters.Add(new OleDbParameter("@IsFlaged", b.IsFlaged));
-                command.Parameters.Add(new OleDbParameter("@Information", b.Information));
-                command.Parameters.Add(new OleDbParameter("@Cover", b.Cover));
-                command.Parameters.Add(new OleDbParameter("@IdLanguage", b.IdLanguage.Id));
-                command.Parameters.Add(new OleDbParameter("@BookLink", b.BookLink));
-                command.Parameters.Add(new OleDbParameter("@id", b.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@bookName", b.BookName));
+                if (b.PublicationDate.HasValue)
+                    cmd.Parameters.Add("@publicationDate", OleDbType.Date).Value = b.PublicationDate.Value.Date;
+                else
+                    cmd.Parameters.Add("@publicationDate", OleDbType.Date).Value = DBNull.Value;
+                if (b.Price.HasValue)
+                    cmd.Parameters.Add("@price", OleDbType.Double).Value = b.Price.Value;
+                else
+                    cmd.Parameters.Add("@price", OleDbType.Double).Value = DBNull.Value;
+                cmd.Parameters.Add(new OleDbParameter("@idAuthor", b.IdAuthor.Id));
+                cmd.Parameters.Add(new OleDbParameter("@isFlaged", b.IsFlaged));
+                cmd.Parameters.Add(new OleDbParameter("@information", b.Information));
+                cmd.Parameters.Add(new OleDbParameter("@idLanguage", b.IdLanguage.Id));
+                if (b.BookLink != null)
+                    cmd.Parameters.Add("@bookLink", OleDbType.VarChar).Value = b.BookLink;
+                else
+                    cmd.Parameters.Add("@bookLink", OleDbType.VarChar).Value = DBNull.Value;
+                cmd.Parameters.Add(new OleDbParameter("@id", b.Id));
             }
         }
         public int UpdateBookCoverFileName(int bookId, string fileName)
         {
-            command.CommandText = "UPDATE Book SET cover=@cover WHERE ID=@id";
-            command.Parameters.Clear();
-            command.Parameters.Add(new OleDbParameter("@cover", fileName));
-            command.Parameters.Add(new OleDbParameter("@id", bookId));
+            using (OleDbConnection con = new OleDbConnection(connectionString))
+            {
+                using (OleDbCommand cmd = new OleDbCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = "UPDATE Book SET Cover=@cover WHERE ID=@id";
 
-            if (connection.State != System.Data.ConnectionState.Open)
-                connection.Open();
+                    cmd.Parameters.Add(new OleDbParameter("@cover", fileName ?? ""));
+                    cmd.Parameters.Add(new OleDbParameter("@id", bookId));
 
-            return command.ExecuteNonQuery();
+                    con.Open();
+                    return cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

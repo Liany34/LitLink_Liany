@@ -5,6 +5,7 @@ using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace ViewModel
 {
@@ -20,10 +21,7 @@ namespace ViewModel
         {
             DiscountCodes dc = entity as DiscountCodes;
             dc.CodeText = reader["codeText"].ToString();
-            if (reader["validUntil"] != DBNull.Value)
-                dc.ValidUntil = DateTime.Parse(reader["validUntil"].ToString());
-            else
-                dc.ValidUntil = null;
+            dc.ValidUntil = Convert.ToDateTime(reader["validUntil"]).Date;
             dc.Amount = int.Parse(reader["amount"].ToString());
             dc.IsActive = (bool)reader["isActive"];
        
@@ -50,8 +48,9 @@ namespace ViewModel
             if (dc != null)
             {
                 string sqlStr = $"DELETE FROM DiscountCodes WHERE ID=@id";
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", dc.Id));
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", dc.Id));
             }
         }
 
@@ -60,13 +59,13 @@ namespace ViewModel
             DiscountCodes dc = entity as DiscountCodes;
             if (dc != null)
             {
-                string sqlStr = $"Insert INTO DiscountCodes (CodeText, ValidUntil, Amount, IsActive) VALUES (@codeText, @validUntil, @amount, @isActive)";
+                string sqlStr = $"INSERT INTO DiscountCodes (CodeText, ValidUntil, Amount, IsActive) VALUES (@codeText, @validUntil, @amount, @isActive)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@codeText", dc.CodeText));
-                command.Parameters.Add(new OleDbParameter("@validUntil", dc.ValidUntil));
-                command.Parameters.Add(new OleDbParameter("@amount", dc.Amount));
-                command.Parameters.Add(new OleDbParameter("@isActive", dc.IsActive));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@codeText", dc.CodeText));
+                cmd.Parameters.Add("@validUntil", OleDbType.Date).Value = dc.ValidUntil.Date;
+                cmd.Parameters.Add(new OleDbParameter("@amount", dc.Amount));
+                cmd.Parameters.Add(new OleDbParameter("@isActive", dc.IsActive));
             }
         }
 
@@ -75,14 +74,14 @@ namespace ViewModel
             DiscountCodes dc = entity as DiscountCodes;
             if (dc != null)
             {
-                string sqlStr = $"UPDATE DiscountCodes SET CodeText=@CodeText, ValidUntil=@ValidUntil, Amount=@Amount, IsActive=@IsActive WHERE ID=@id";
+                string sqlStr = $"UPDATE DiscountCodes SET CodeText=@codeText, ValidUntil=@validUntil, Amount=@amount, IsActive=@isActive WHERE ID=@id";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@CodeText", dc.CodeText));
-                command.Parameters.Add(new OleDbParameter("@ValidUntil", dc.ValidUntil));
-                command.Parameters.Add(new OleDbParameter("@Amount", dc.Amount));
-                command.Parameters.Add(new OleDbParameter("@IsActive", dc.IsActive));
-                command.Parameters.Add(new OleDbParameter("@id", dc.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@codeText", dc.CodeText));
+                cmd.Parameters.Add("@validUntil", OleDbType.Date).Value = dc.ValidUntil.Date;
+                cmd.Parameters.Add(new OleDbParameter("@amount", dc.Amount));
+                cmd.Parameters.Add(new OleDbParameter("@isActive", dc.IsActive));
+                cmd.Parameters.Add(new OleDbParameter("@id", dc.Id));
             }
         }
     }

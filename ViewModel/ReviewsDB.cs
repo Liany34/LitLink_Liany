@@ -20,9 +20,15 @@ namespace ViewModel
         {
             Reviews r = entity as Reviews;
             r.Text = reader["text"].ToString();
-            r.IdReader = ReaderDB.SelectById((int)(reader["idReader"]));
+            r.IdReader = new Reader
+            {
+                Id = Convert.ToInt32(reader["idReader"])
+            };
             r.Stars = (int)(reader["stars"]);
-            r.IdBook = BookDB.SelectById((int)(reader["idBook"]));
+            r.IdBook = new Book
+            {
+                Id = Convert.ToInt32(reader["idBook"])
+            };
             r.IsFlaged = (bool)(reader["isFlaged"]);
             base.CreateModel(entity);
             return r;
@@ -47,8 +53,9 @@ namespace ViewModel
             if (r != null)
             {
                 string sqlStr = $"DELETE FROM Reviews WHERE ID=@id";
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", r.Id));
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", r.Id));
             }
         }
 
@@ -57,14 +64,14 @@ namespace ViewModel
             Reviews r = entity as Reviews;
             if (r != null)
             {
-                string sqlStr = $"Insert INTO Reviews ([Text], IdReader, Stars, IdBook, IsFlaged) VALUES (@text, @idReader, @stars, @idBook, @isFlaged)";
+                string sqlStr = $"INSERT INTO Reviews ([Text], IdReader, Stars, IdBook, IsFlaged) VALUES (@text, @idReader, @stars, @idBook, @isFlaged)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@text", r.Text));
-                command.Parameters.Add(new OleDbParameter("@idReader", r.IdReader.Id));
-                command.Parameters.Add(new OleDbParameter("@stars", r.Stars));
-                command.Parameters.Add(new OleDbParameter("@isFlaged", r.IsFlaged));
-                command.Parameters.Add(new OleDbParameter("@idBook", r.IdBook.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@text", r.Text));
+                cmd.Parameters.Add(new OleDbParameter("@idReader", r.IdReader.Id));
+                cmd.Parameters.Add(new OleDbParameter("@stars", r.Stars));
+                cmd.Parameters.Add(new OleDbParameter("@idBook", r.IdBook.Id));
+                cmd.Parameters.Add(new OleDbParameter("@isFlaged", r.IsFlaged));
             }
         }
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
@@ -74,13 +81,13 @@ namespace ViewModel
             {
                 string sqlStr = $"UPDATE Reviews SET [Text]=@text, IdReader=@idReader, Stars=@stars, IdBook=@idBook, IsFlaged=@isFlaged WHERE id=@id";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@text", r.Text));
-                command.Parameters.Add(new OleDbParameter("@idReader", r.IdReader.Id));
-                command.Parameters.Add(new OleDbParameter("@stars", r.Stars));
-                command.Parameters.Add(new OleDbParameter("@idBook", r.IdBook.Id));
-                command.Parameters.Add(new OleDbParameter("@isFlaged", r.IsFlaged));
-                command.Parameters.Add(new OleDbParameter("@id", r.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@text", r.Text));
+                cmd.Parameters.Add(new OleDbParameter("@idReader", r.IdReader.Id));
+                cmd.Parameters.Add(new OleDbParameter("@stars", r.Stars));
+                cmd.Parameters.Add(new OleDbParameter("@idBook", r.IdBook.Id));
+                cmd.Parameters.Add(new OleDbParameter("@isFlaged", r.IsFlaged));
+                cmd.Parameters.Add(new OleDbParameter("@id", r.Id));
             }
         }
     }

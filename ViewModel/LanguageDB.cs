@@ -45,8 +45,9 @@ namespace ViewModel
             if (l != null)
             {
                 string sqlStr = $"DELETE FROM [Language] WHERE ID=@id";
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", l.Id));
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", l.Id));
             }
         }
 
@@ -55,10 +56,10 @@ namespace ViewModel
             Language l = entity as Language;
             if (l != null)
             {
-                string sqlStr = $"Insert INTO [Language] (Name) VALUES (@name)";
+                string sqlStr = $"INSERT INTO [Language] ([Name]) VALUES (@name)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@name", l.Name));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@name", l.Name));
             }
         }
 
@@ -67,11 +68,11 @@ namespace ViewModel
             Language l = entity as Language;
             if (l != null)
             {
-                string sqlStr = $"UPDATE [Language] SET Name=@name WHERE ID=@id";
+                string sqlStr = $"UPDATE [Language] SET [Name]=@name WHERE ID=@id";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@name", l.Name));
-                command.Parameters.Add(new OleDbParameter("@id", l.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@name", l.Name));
+                cmd.Parameters.Add(new OleDbParameter("@id", l.Id));
             }
         }
     }

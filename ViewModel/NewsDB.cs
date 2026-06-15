@@ -5,6 +5,7 @@ using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace ViewModel
 {
@@ -18,13 +19,16 @@ namespace ViewModel
         }
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
-            News news = entity as News;
-            news.Content = reader["Content"].ToString();
-            news.PublishDate = DateTime.Parse(reader["PublishDate"].ToString());
-            news.Titel = reader["Titel"].ToString();
-            news.IdUser = UserDB.SelectById((int)(reader["idUser"]));
+            News n = entity as News;
+            n.Content = reader["content"].ToString();
+            n.PublishDate = Convert.ToDateTime(reader["publishDate"]).Date;
+            n.Titel = reader["titel"].ToString();
+            n.IdUser = new User
+            {
+                Id = Convert.ToInt32(reader["idUser"])
+            };
             base.CreateModel(entity);
-            return news;
+            return n;
         }
         public override BaseEntity NewEntity()
         {
@@ -46,23 +50,28 @@ namespace ViewModel
             if (n != null)
             {
                 string sqlStr = $"DELETE FROM News WHERE ID=@id";
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", n.Id));
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", n.Id));
             }
         }
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
             News n = entity as News;
+
             if (n != null)
             {
-                string sqlStr = $"INSERT INTO News (Content, PublishDate, Titel, IdUser) VALUES (@content, @publishDate, @titel, @idUser)";
+                string sqlStr = @"INSERT INTO [News] 
+                          ([content], [publishDate], [Titel], [idUser]) 
+                          VALUES (@content, @publishDate, @titel, @idUser)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@content", n.Content));
-                command.Parameters.Add(new OleDbParameter("@publishDate", n.PublishDate));
-                command.Parameters.Add(new OleDbParameter("@titel", n.Titel));
-                command.Parameters.Add(new OleDbParameter("@idUser", n.IdUser.Id));
+                cmd.CommandText = sqlStr;
+
+                cmd.Parameters.Add("@content", OleDbType.LongVarWChar).Value = n.Content ?? "";
+                cmd.Parameters.Add("@publishDate", OleDbType.Date).Value = n.PublishDate.Date;
+                cmd.Parameters.Add("@titel", OleDbType.VarWChar).Value = n.Titel ?? "";
+                cmd.Parameters.Add("@idUser", OleDbType.Integer).Value = n.IdUser.Id;
             }
         }
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
@@ -72,12 +81,12 @@ namespace ViewModel
             {
                 string sqlStr = $"UPDATE News SET Content=@content, PublishDate=@publishDate, Titel=@titel, IdUser=@idUser WHERE id=@id";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@content", n.Content));
-                command.Parameters.Add(new OleDbParameter("@publishDate", n.PublishDate));
-                command.Parameters.Add(new OleDbParameter("@titel", n.Titel));
-                command.Parameters.Add(new OleDbParameter("@idUser", n.IdUser.Id));
-                command.Parameters.Add(new OleDbParameter("@id", n.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@content", n.Content));
+                cmd.Parameters.Add("@publishDate", OleDbType.Date).Value = n.PublishDate.Date;
+                cmd.Parameters.Add(new OleDbParameter("@titel", n.Titel));
+                cmd.Parameters.Add(new OleDbParameter("@idUser", n.IdUser.Id));
+                cmd.Parameters.Add(new OleDbParameter("@id", n.Id));
             }
         }
     }

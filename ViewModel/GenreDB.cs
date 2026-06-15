@@ -45,8 +45,9 @@ namespace ViewModel
             if (g != null)
             {
                 string sqlStr = $"DELETE FROM Genre WHERE ID=@id";
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", g.Id));
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", g.Id));
             }
         }
 
@@ -55,10 +56,10 @@ namespace ViewModel
             Genre g = entity as Genre;
             if (g != null)
             {
-                string sqlStr = $"Insert INTO Genre (Name) VALUES (@name)";
+                string sqlStr = $"INSERT INTO Genre ([Name]) VALUES (@name)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@name", g.Name));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@name", g.Name));
             }
         }
 
@@ -67,11 +68,11 @@ namespace ViewModel
             Genre g = entity as Genre;
             if (g != null)
             {
-                string sqlStr = $"UPDATE Genre SET Name=@name WHERE ID=@id";
+                string sqlStr = $"UPDATE Genre SET [Name]=@name WHERE ID=@id";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@name", g.Name));
-                command.Parameters.Add(new OleDbParameter("@id", g.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@name", g.Name));
+                cmd.Parameters.Add(new OleDbParameter("@id", g.Id));
             }
         }
     }

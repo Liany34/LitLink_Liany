@@ -19,8 +19,14 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Following f = entity as Following;
-            f.IdReader = ReaderDB.SelectById((int)reader["idReader"]);
-            f.IdAuthor = AuthorDB.SelectById((int)reader["idAuthor"]);
+            f.IdReader = new Reader
+            {
+                Id = Convert.ToInt32(reader["idReader"])
+            };
+            f.IdAuthor = new Author
+            {
+                Id = Convert.ToInt32(reader["idAuthor"])
+            };
             base.CreateModel(entity);
             return f;
         }
@@ -44,8 +50,9 @@ namespace ViewModel
             if (f != null)
             {
                 string sqlStr = $"DELETE FROM Following WHERE ID=@id";
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", f.Id));
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", f.Id));
             }
         }
 
@@ -54,11 +61,11 @@ namespace ViewModel
             Following  f = entity as Following;
             if (f != null)
             {
-                string sqlStr = $"Insert INTO Following (IdReader, IdAuthor) VALUES (@idReader, @idAuthor)";
+                string sqlStr = $"INSERT INTO Following (IdReader, IdAuthor) VALUES (@idReader, @idAuthor)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@idReader", f.IdReader.Id));
-                command.Parameters.Add(new OleDbParameter("@idAuthor", f.IdAuthor.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@idReader", f.IdReader.Id));
+                cmd.Parameters.Add(new OleDbParameter("@idAuthor", f.IdAuthor.Id));
             }
         }
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
@@ -68,10 +75,10 @@ namespace ViewModel
             {
                 string sqlStr = $"UPDATE Following SET idReader=@idReader, idAuthor=@idAuthor WHERE id=@id";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@idReader", f.IdReader.Id));
-                command.Parameters.Add(new OleDbParameter("@idAuthor", f.IdAuthor.Id));
-                command.Parameters.Add(new OleDbParameter("@id", f.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@idReader", f.IdReader.Id));
+                cmd.Parameters.Add(new OleDbParameter("@idAuthor", f.IdAuthor.Id));
+                cmd.Parameters.Add(new OleDbParameter("@id", f.Id));
             }
         }
     }

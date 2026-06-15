@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace ViewModel
 {
@@ -19,10 +20,16 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Cart_Detail cd = entity as Cart_Detail;
-            cd.IdCart = CartDB.SelectById((int)reader["idCart"]);
-            cd.IdBook = BookDB.SelectById((int)reader["idBook"]);
+            cd.IdCart = new Cart
+            {
+                Id = Convert.ToInt32(reader["idCart"])
+            };
+            cd.IdBook = new Book
+            {
+                Id = Convert.ToInt32(reader["idBook"])
+            };
             if (reader["purchaseDate"] != DBNull.Value)
-                cd.PurchaseDate = (DateTime)reader["purchaseDate"];
+                cd.PurchaseDate = Convert.ToDateTime(reader["purchaseDate"]).Date;
             else
                  cd.PurchaseDate = null;
             cd.PurchasePrice = (int)reader["purchasePrice"];
@@ -51,13 +58,16 @@ namespace ViewModel
             {
                 string sqlStr = $"UPDATE Cart_Detail SET IdCart=@idCart, IdBook=@idBook, PurchasePrice=@purchasePrice, PurchaseDate=@purchaseDate, IsPurchased=@isPurchased WHERE ID=@id";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@idCart", cd.IdCart.Id));
-                command.Parameters.Add(new OleDbParameter("@idBook", cd.IdBook.Id));
-                command.Parameters.Add(new OleDbParameter("@purchasePrice", cd.PurchasePrice));
-                command.Parameters.Add(new OleDbParameter("@purchaseDate", cd.PurchaseDate));
-                command.Parameters.Add(new OleDbParameter("@isPurchased", cd.IsPurchased));
-                command.Parameters.Add(new OleDbParameter("@id", cd.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@idCart", cd.IdCart.Id));
+                cmd.Parameters.Add(new OleDbParameter("@idBook", cd.IdBook.Id));
+                cmd.Parameters.Add(new OleDbParameter("@purchasePrice", cd.PurchasePrice));
+                if (cd.PurchaseDate.HasValue)
+                    cmd.Parameters.Add("@purchaseDate", OleDbType.Date).Value = cd.PurchaseDate.Value.Date;
+                else
+                    cmd.Parameters.Add("@purchaseDate", OleDbType.Date).Value = DBNull.Value;
+                cmd.Parameters.Add(new OleDbParameter("@isPurchased", cd.IsPurchased));
+                cmd.Parameters.Add(new OleDbParameter("@id", cd.Id));
             }
         }
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
@@ -67,12 +77,15 @@ namespace ViewModel
             {
                 string sqlStr = $"INSERT INTO Cart_Detail (IdCart, IdBook, PurchasePrice, PurchaseDate, IsPurchased) VALUES (@idCart, @idBook, @purchasePrice, @purchaseDate, @isPurchased)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@idCart", cd.IdCart.Id));
-                command.Parameters.Add(new OleDbParameter("@idBook", cd.IdBook.Id));
-                command.Parameters.Add(new OleDbParameter("@purchasePrice", cd.PurchasePrice));
-                command.Parameters.Add(new OleDbParameter("@purchaseDate", cd.PurchaseDate));
-                command.Parameters.Add(new OleDbParameter("@isPurchased", cd.IsPurchased));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@idCart", cd.IdCart.Id));
+                cmd.Parameters.Add(new OleDbParameter("@idBook", cd.IdBook.Id));
+                cmd.Parameters.Add(new OleDbParameter("@purchasePrice", cd.PurchasePrice));
+                if (cd.PurchaseDate.HasValue)
+                    cmd.Parameters.Add("@purchaseDate", OleDbType.Date).Value = cd.PurchaseDate.Value.Date;
+                else
+                    cmd.Parameters.Add("@purchaseDate", OleDbType.Date).Value = DBNull.Value;
+                cmd.Parameters.Add(new OleDbParameter("@isPurchased", cd.IsPurchased));
             }
         }
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
@@ -81,8 +94,9 @@ namespace ViewModel
             if (cd != null)
             {
                 string sqlStr = $"DELETE FROM Cart_Detail WHERE ID=@id";
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", cd.Id));
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", cd.Id));
             }
         }
     }

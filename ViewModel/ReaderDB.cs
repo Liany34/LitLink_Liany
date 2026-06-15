@@ -42,12 +42,12 @@ namespace ViewModel
             Reader r = entity as Reader;
             if (r != null)
             {
-                string sqlStr = $"UPDATE Reader SET Nickname=@nickname, IsFlaged=@isFlaged WHERE ID=@id";
+                string sqlStr = $"UPDATE [Reader] SET Nickname=@nickname, IsFlaged=@isFlaged WHERE ID=@id";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@nickname", r.Nickname));
-                command.Parameters.Add(new OleDbParameter("@isFlaged", r.IsFlaged));
-                command.Parameters.Add(new OleDbParameter("@id", r.Id));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@nickname", r.Nickname));
+                cmd.Parameters.Add(new OleDbParameter("@isFlaged", r.IsFlaged));
+                cmd.Parameters.Add(new OleDbParameter("@id", r.Id));
             }
         }
         public override void Update(BaseEntity entity)
@@ -64,12 +64,12 @@ namespace ViewModel
             Reader r = entity as Reader;
             if (r != null)
             {
-                string sqlStr = $"Insert INTO Reader (Id, Nickname, IsFlaged) VALUES (@id, @nickname, @isFlaged)";
+                string sqlStr = $"INSERT INTO [Reader] (Id, Nickname, IsFlaged) VALUES (@id, @nickname, @isFlaged)";
 
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", r.Id));
-                command.Parameters.Add(new OleDbParameter("@nickname", r.Nickname ));
-                command.Parameters.Add(new OleDbParameter("@isFlaged", r.IsFlaged));
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", r.Id));
+                cmd.Parameters.Add(new OleDbParameter("@nickname", r.Nickname ));
+                cmd.Parameters.Add(new OleDbParameter("@isFlaged", r.IsFlaged));
             }
         }
         public override void Insert(BaseEntity entity)
@@ -86,9 +86,10 @@ namespace ViewModel
             Reader r = entity as Reader;
             if (r != null)
             {
-                string sqlStr = $"DELETE FROM Reader WHERE ID=@id";
-                command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@id", r.Id));
+                string sqlStr = $"DELETE FROM [Reader] WHERE ID=@id";
+
+                cmd.CommandText = sqlStr;
+                cmd.Parameters.Add(new OleDbParameter("@id", r.Id));
             }
         }
         public override void Delete(BaseEntity entity)
