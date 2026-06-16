@@ -29,29 +29,56 @@ namespace ViewModel
             u.Birthdate = Convert.ToDateTime(reader["birthDate"]).Date;
             u.Username = reader["username"].ToString();
 
-            if(reader["picture"] == DBNull.Value)
+            string savedPicturePath = reader["picturePath"] == DBNull.Value
+            ? ""
+            : reader["picturePath"].ToString();
+
+            if (string.IsNullOrWhiteSpace(savedPicturePath))
             {
-                u.Picture = reader["picture"]?.ToString() ?? "";
+                u.Picture = null;
                 u.PicturePath = null;
             }
             else
             {
-                u.PicturePath = Path() + "\\Covers\\" + reader["picturePath"].ToString();
-                string fileName = u.PicturePath;
-                if(!string.IsNullOrEmpty(fileName))
-                {
-                    string base64Result = ImageToBase64Converter.ImageToBase64(fileName);
+                string fileName = System.IO.Path.GetFileName(savedPicturePath);
 
-                    if(!string.IsNullOrEmpty(base64Result))
-                    {
-                        u.Picture = base64Result;
-                    }
-                    else
-                    {
-                        u.Picture = "Missing resource" + fileName;
-                    }
+                string fullPath = System.IO.Path.Combine(BaseDB.Path(), "Covers", fileName);
+
+                u.PicturePath = fileName;
+
+                if (File.Exists(fullPath))
+                {
+                    u.Picture = ImageToBase64Converter.ImageToBase64(fullPath);
+                }
+                else
+                {
+                    u.Picture = null;
+                    System.Diagnostics.Debug.WriteLine("User image not found: " + fullPath);
                 }
             }
+
+            //if(reader["picture"] == DBNull.Value)
+            //{
+            //    u.Picture = reader["picture"]?.ToString() ?? "";
+            //    u.PicturePath = null;
+            //}
+            //else
+            //{
+            //    u.PicturePath = Path() + "\\Covers\\" + reader["picturePath"].ToString();
+            //    string fileName = u.PicturePath;
+            //    if(!string.IsNullOrEmpty(fileName))
+            //    {
+            //        string base64Result = ImageToBase64Converter.ImageToBase64(fileName);
+
+            //        if(!string.IsNullOrEmpty(base64Result))
+            //        {
+            //            u.Picture = base64Result;
+            //        }
+            //        else
+            //        {
+            //            u.Picture = "Missing resource" + fileName;
+            //        }
+            //    }
             //string fileName = reader["picture"]?.ToString();
 
             //string imagePath = System.IO.Path.Combine(
@@ -128,7 +155,11 @@ namespace ViewModel
                 cmd.Parameters.Add(new OleDbParameter("@username", u.Username));
                 cmd.Parameters.Add(new OleDbParameter("@pass", u.Pass));
                 cmd.Parameters.Add("@birthdate", OleDbType.Date).Value = u.Birthdate.Date;
-                cmd.Parameters.Add(new OleDbParameter("@picture", !string.IsNullOrEmpty(u.Picture) ? u.Picture : (object)DBNull.Value));
+                string pictureFileName = string.IsNullOrEmpty(u.PicturePath)
+                ? null
+                : System.IO.Path.GetFileName(u.PicturePath);
+                cmd.Parameters.Add(new OleDbParameter("@picturePath",
+                    !string.IsNullOrEmpty(pictureFileName) ? pictureFileName : (object)DBNull.Value));
                 cmd.Parameters.Add(new OleDbParameter("@picturePath", !string.IsNullOrEmpty(u.PicturePath) ? u.PicturePath : (object)DBNull.Value));
             }
         }
@@ -136,11 +167,28 @@ namespace ViewModel
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             User u = entity as User;
+
             if (u != null)
             {
-                string sqlStr = $"UPDATE [User] SET FirstName=@firstName, LastName=@lastName, Birthdate=@birthdate, PhoneNumber=@phoneNumber, Email=@email, Username=@username, Pass=@pass, Picture=@picture, PicturePath=@picturePath WHERE ID=@id";
+                string sqlStr =
+                    "UPDATE [User] SET " +
+                    "FirstName=@firstName, " +
+                    "LastName=@lastName, " +
+                    "Birthdate=@birthdate, " +
+                    "PhoneNumber=@phoneNumber, " +
+                    "Email=@email, " +
+                    "Username=@username, " +
+                    "Pass=@pass, " +
+                    "PicturePath=@picturePath " +
+                    "WHERE ID=@id";
 
                 cmd.CommandText = sqlStr;
+                cmd.Parameters.Clear();
+
+                string pictureFileName = string.IsNullOrEmpty(u.PicturePath)
+                    ? null
+                    : System.IO.Path.GetFileName(u.PicturePath);
+
                 cmd.Parameters.Add(new OleDbParameter("@firstName", u.FirstName));
                 cmd.Parameters.Add(new OleDbParameter("@lastName", u.LastName));
                 cmd.Parameters.Add("@birthdate", OleDbType.Date).Value = u.Birthdate.Date;
@@ -148,26 +196,9 @@ namespace ViewModel
                 cmd.Parameters.Add(new OleDbParameter("@email", u.Email));
                 cmd.Parameters.Add(new OleDbParameter("@username", u.Username));
                 cmd.Parameters.Add(new OleDbParameter("@pass", u.Pass));
-                cmd.Parameters.Add(new OleDbParameter("@picture", !string.IsNullOrEmpty(u.Picture) ? u.Picture : (object)DBNull.Value));
-                cmd.Parameters.Add(new OleDbParameter("@picturePath", !string.IsNullOrEmpty(u.PicturePath) ? u.PicturePath : (object)DBNull.Value));
+                cmd.Parameters.Add(new OleDbParameter("@picturePath",
+                    !string.IsNullOrEmpty(pictureFileName) ? pictureFileName : (object)DBNull.Value));
                 cmd.Parameters.Add(new OleDbParameter("@id", u.Id));
-            }
-        }
-        public int UpdateUserPictureFileName(int userId, string fileName)
-        {
-            using (OleDbConnection con = new OleDbConnection(connectionString))
-            {
-                using (OleDbCommand cmd = new OleDbCommand())
-                {
-                    cmd.Connection = con;
-                    cmd.CommandText = "UPDATE [User] SET [Picture]=@picture WHERE [ID]=@id";
-
-                    cmd.Parameters.Add(new OleDbParameter("@picture", fileName ?? ""));
-                    cmd.Parameters.Add(new OleDbParameter("@id", userId));
-
-                    con.Open();
-                    return cmd.ExecuteNonQuery();
-                }
             }
         }
     }

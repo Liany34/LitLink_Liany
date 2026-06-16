@@ -105,9 +105,11 @@ namespace Service
         {
             return (await client.PostAsJsonAsync<User>(uri + "/api/Insert/UserInsert", u)).IsSuccessStatusCode ? 1 : 0;
         }
-        public async Task<int> UpdateUser(User u)
+        public async Task<bool> UpdateUser(UserUpdateDto userDto)
         {
-            return (await client.PutAsJsonAsync<User>(uri + "/api/Update/UserUpdate", u, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
+            string url = uri + "/api/Update/UserUpdate";
+            HttpResponseMessage response = await client.PutAsJsonAsync(url, userDto, JsonOptions);
+            return response.IsSuccessStatusCode;
         }
         public async Task<int> DeleteUser(int id)
         {
@@ -126,13 +128,6 @@ namespace Service
 
             return null;
         }
-        public async Task<int> UpdateUserPictureJson(ImageJsonDto imageData)
-        {
-            HttpResponseMessage response =
-                await client.PutAsJsonAsync(uri + "/api/Update/UserPictureJsonUpdate", imageData, JsonOptions);
-
-            return response.IsSuccessStatusCode ? 1 : 0;
-        }
 
 
         public async Task<ListAuthor> GetAllAuthors()
@@ -143,9 +138,13 @@ namespace Service
         {
             return (await client.PostAsJsonAsync<Author>(uri + "/api/Insert/AuthorInsert", a)).IsSuccessStatusCode ? 1 : 0;
         }
-        public async Task<int> UpdateAuthor(Author a)
+        public async Task<bool> UpdateAuthor(AuthorUpdateDto dto)
         {
-            return (await client.PutAsJsonAsync<Author>(uri + "/api/Update/AuthorUpdate", a, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
+            string url = uri + "/api/Author/UpdateAuthor";
+
+            HttpResponseMessage response = await client.PutAsJsonAsync(url, dto, JsonOptions);
+
+            return response.IsSuccessStatusCode;
         }
         public async Task<int> DeleteAuthor(int id)
         {
@@ -161,9 +160,13 @@ namespace Service
         {
             return (await client.PostAsJsonAsync<Reader>(uri + "/api/Insert/ReaderInsert", r)).IsSuccessStatusCode ? 1 : 0;
         }
-        public async Task<int> UpdateReader(Reader r)
+        public async Task<bool> UpdateReader(ReaderUpdateDto dto)
         {
-            return (await client.PutAsJsonAsync<Reader>(uri + "/api/Update/ReaderUpdate", r, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
+            string url = uri + "/api/Reader/UpdateReader";
+
+            HttpResponseMessage response = await client.PutAsJsonAsync(url, dto, JsonOptions);
+
+            return response.IsSuccessStatusCode;
         }
         public async Task<int> DeleteReader(int id)
         {
@@ -193,9 +196,13 @@ namespace Service
         {
             return (await client.PostAsJsonAsync<Book>(uri + "/api/Insert/BookInsert", b)).IsSuccessStatusCode ? 1 : 0;
         }
-        public async Task<int> UpdateBook(Book b)
+        public async Task<bool> UpdateBook(BookUpdateDto bookDto)
         {
-            return (await client.PutAsJsonAsync<Book>(uri + "/api/Update/BookUpdate", b, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
+            string url = uri+ "/api/Book/BookFullUpdate";
+
+            HttpResponseMessage response = await client.PutAsJsonAsync(url, bookDto);
+
+            return response.IsSuccessStatusCode;
         }
         public async Task<int> DeleteBook(int id)
         {
@@ -213,14 +220,6 @@ namespace Service
             }
 
             return null;
-        }
-        
-        public async Task<int> UpdateBookCoverJson(ImageJsonDto imageData)
-        {
-            HttpResponseMessage response =
-                await client.PutAsJsonAsync(uri + "/api/Update/BookCoverJsonUpdate", imageData, JsonOptions);
-
-            return response.IsSuccessStatusCode ? 1 : 0;
         }
 
 

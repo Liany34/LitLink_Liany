@@ -49,29 +49,57 @@ namespace ViewModel
                 b.BookLink = null;
             b.IsFlaged = (bool)reader["isFlaged"];
 
-            if (reader["cover"] == DBNull.Value)
+            string savedPicturePath = reader["coverPath"] == DBNull.Value
+            ? ""
+            : reader["coverPath"].ToString();
+
+            if (string.IsNullOrWhiteSpace(savedPicturePath))
             {
-                b.Cover = reader["cover"]?.ToString() ?? "";
+                b.Cover = null;
                 b.CoverPath = null;
             }
             else
             {
-                b.CoverPath = Path() + "\\Covers\\" + reader["coverPath"].ToString();
-                string fileName = b.CoverPath;
-                if (!string.IsNullOrEmpty(fileName))
-                {
-                    string base64Result = ImageToBase64Converter.ImageToBase64(fileName);
+                string fileName = System.IO.Path.GetFileName(savedPicturePath);
 
-                    if (!string.IsNullOrEmpty(base64Result))
-                    {
-                        b.Cover = base64Result;
-                    }
-                    else
-                    {
-                        b.Cover = "Missing resource" + fileName;
-                    }
+                string fullPath = System.IO.Path.Combine(BaseDB.Path(), "Covers", fileName);
+
+                b.CoverPath = fileName;
+
+                if (File.Exists(fullPath))
+                {
+                    b.Cover = ImageToBase64Converter.ImageToBase64(fullPath);
+                }
+                else
+                {
+                    b.Cover = null;
+                    System.Diagnostics.Debug.WriteLine("Book cover not found: " + fullPath);
                 }
             }
+
+            //if (reader["cover"] == DBNull.Value)
+            //{
+            //    b.Cover = reader["cover"]?.ToString() ?? "";
+            //    b.CoverPath = null;
+            //}
+            //else
+            //{
+            //    b.CoverPath = Path() + "\\Covers\\" + reader["coverPath"].ToString();
+            //    string fileName = b.CoverPath;
+            //    if (!string.IsNullOrEmpty(fileName))
+            //    {
+            //        string base64Result = ImageToBase64Converter.ImageToBase64(fileName);
+
+            //        if (!string.IsNullOrEmpty(base64Result))
+            //        {
+            //            b.Cover = base64Result;
+            //        }
+            //        else
+            //        {
+            //            b.Cover = "Missing resource" + fileName;
+            //        }
+            //    }
+            //}
 
             //string fileName = reader["cover"]?.ToString();
 
@@ -165,48 +193,55 @@ namespace ViewModel
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             Book b = entity as Book;
+
             if (b != null)
             {
-                string sqlStr = $"UPDATE Book SET BookName=@bookName, PublicationDate=@publicationDate, Price=@price, IdAuthor=@idAuthor, IsFlaged=@isFlaged, Information=@information, IdLanguage=@idLanguage, BookLink=@bookLink, Cover=@cover, CoverPath=@coverPath WHERE ID=@id";
+                string sqlStr =
+                    "UPDATE Book SET " +
+                    "BookName=@bookName, " +
+                    "PublicationDate=@publicationDate, " +
+                    "Price=@price, " +
+                    "IdAuthor=@idAuthor, " +
+                    "IdLanguage=@idLanguage, " +
+                    "IsFlaged=@isFlaged, " +
+                    "Information=@information, " +
+                    "BookLink=@bookLink, " +
+                    "CoverPath=@coverPath " +
+                    "WHERE ID=@id";
 
                 cmd.CommandText = sqlStr;
+                cmd.Parameters.Clear();
+
                 cmd.Parameters.Add(new OleDbParameter("@bookName", b.BookName));
+
                 if (b.PublicationDate.HasValue)
                     cmd.Parameters.Add("@publicationDate", OleDbType.Date).Value = b.PublicationDate.Value.Date;
                 else
                     cmd.Parameters.Add("@publicationDate", OleDbType.Date).Value = DBNull.Value;
+
                 if (b.Price.HasValue)
                     cmd.Parameters.Add("@price", OleDbType.Double).Value = b.Price.Value;
                 else
                     cmd.Parameters.Add("@price", OleDbType.Double).Value = DBNull.Value;
+
                 cmd.Parameters.Add(new OleDbParameter("@idAuthor", b.IdAuthor.Id));
+                cmd.Parameters.Add(new OleDbParameter("@idLanguage", b.IdLanguage.Id));
                 cmd.Parameters.Add(new OleDbParameter("@isFlaged", b.IsFlaged));
                 cmd.Parameters.Add(new OleDbParameter("@information", b.Information));
-                cmd.Parameters.Add(new OleDbParameter("@idLanguage", b.IdLanguage.Id));
-                if (b.BookLink != null)
+
+                if (!string.IsNullOrWhiteSpace(b.BookLink))
                     cmd.Parameters.Add("@bookLink", OleDbType.VarChar).Value = b.BookLink;
                 else
                     cmd.Parameters.Add("@bookLink", OleDbType.VarChar).Value = DBNull.Value;
-                cmd.Parameters.Add(new OleDbParameter("@cover", !string.IsNullOrEmpty(b.Cover) ? b.Cover : (object)DBNull.Value));
-                cmd.Parameters.Add(new OleDbParameter("@coverPath", !string.IsNullOrEmpty(b.CoverPath) ? b.CoverPath : (object)DBNull.Value));
+
+                string coverFileName = string.IsNullOrEmpty(b.CoverPath)
+                    ? null
+                    : System.IO.Path.GetFileName(b.CoverPath);
+
+                cmd.Parameters.Add(new OleDbParameter("@coverPath",
+                    !string.IsNullOrEmpty(coverFileName) ? coverFileName : (object)DBNull.Value));
+
                 cmd.Parameters.Add(new OleDbParameter("@id", b.Id));
-            }
-        }
-        public int UpdateBookCoverFileName(int bookId, string fileName)
-        {
-            using (OleDbConnection con = new OleDbConnection(connectionString))
-            {
-                using (OleDbCommand cmd = new OleDbCommand())
-                {
-                    cmd.Connection = con;
-                    cmd.CommandText = "UPDATE Book SET Cover=@cover WHERE ID=@id";
-
-                    cmd.Parameters.Add(new OleDbParameter("@cover", fileName ?? ""));
-                    cmd.Parameters.Add(new OleDbParameter("@id", bookId));
-
-                    con.Open();
-                    return cmd.ExecuteNonQuery();
-                }
             }
         }
     }

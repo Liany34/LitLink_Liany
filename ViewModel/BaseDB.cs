@@ -14,6 +14,8 @@ namespace ViewModel
                     System.Reflection.Assembly.GetExecutingAssembly().Location
                     + "/../../../../../ViewModel/MyProject1.accdb");
 
+        private static readonly object dbLock = new object();
+
         protected OleDbConnection connection;
         protected OleDbCommand command;
         protected OleDbDataReader reader;
@@ -58,45 +60,50 @@ namespace ViewModel
 
         protected List<BaseEntity> Select()
         {
-            List<BaseEntity> list = new List<BaseEntity>();
-
-            try
+            lock (dbLock)
             {
-                command.Connection = connection;
+                List<BaseEntity> list = new List<BaseEntity>();
 
-                if (connection.State != ConnectionState.Open)
+                try
                 {
-                    connection.Open();
+                    command.Connection = connection;
+
+                    if (connection.State != ConnectionState.Open)
+                    {
+                        connection.Open();
+                    }
+
+                    reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        BaseEntity entity = NewEntity();
+                        list.Add(CreateModel(entity));
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine("BASEDB SELECT ERROR:");
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                    System.Diagnostics.Debug.WriteLine("SQL: " + command.CommandText);
+                }
+                finally
+                {
+                    if (reader != null)
+                    {
+                        reader.Close();
+                        reader.Dispose();
+                        reader = null;
+                    }
+
+                    if (connection != null && connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
                 }
 
-                reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    BaseEntity entity = NewEntity();
-                    list.Add(CreateModel(entity));
-                }
+                return list;
             }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(
-                    e.Message + "\nSQL:" + command.CommandText);
-            }
-            finally
-            {
-                if (reader != null)
-                {
-                    reader.Close();
-                    reader = null;
-                }
-
-                if (connection != null && connection.State == ConnectionState.Open)
-                {
-                    connection.Close();
-                }
-            }
-
-            return list;
         }
 
         protected async Task<List<BaseEntity>> SelectAsync(string sqlStr)
@@ -124,8 +131,9 @@ namespace ViewModel
                 }
                 catch (Exception e)
                 {
-                    System.Diagnostics.Debug.WriteLine(
-                        e.Message + "\nSQL:" + sqlStr);
+                    System.Diagnostics.Debug.WriteLine("BASEDB SELECT ASYNC ERROR:");
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                    System.Diagnostics.Debug.WriteLine("SQL: " + sqlStr);
                 }
                 finally
                 {
@@ -180,93 +188,102 @@ namespace ViewModel
 
         public int SaveChanges()
         {
-            OleDbTransaction trans = null;
-            int recordsAffected = 0;
-
-            try
+            lock (dbLock)
             {
-                command.Connection = connection;
+                OleDbTransaction trans = null;
+                int recordsAffected = 0;
 
-                if (connection.State != ConnectionState.Open)
+                try
                 {
-                    connection.Open();
-                }
+                    command.Connection = connection;
 
-                trans = connection.BeginTransaction();
-                command.Transaction = trans;
+                    if (connection.State != ConnectionState.Open)
+                    {
+                        connection.Open();
+                    }
 
-                foreach (var entity in inserted)
-                {
-                    command.Parameters.Clear();
+                    trans = connection.BeginTransaction();
+                    command.Transaction = trans;
 
-                    entity.CreateSql(entity.Entity, command);
-
-                    recordsAffected += command.ExecuteNonQuery();
-
-                    if (entity.Entity.Id == 0)
+                    foreach (var entity in inserted)
                     {
                         command.Parameters.Clear();
-                        command.CommandText = "SELECT @@IDENTITY";
 
-                        entity.Entity.Id = Convert.ToInt32(command.ExecuteScalar());
+                        entity.CreateSql(entity.Entity, command);
+
+                        recordsAffected += command.ExecuteNonQuery();
+
+                        if (entity.Entity.Id == 0)
+                        {
+                            command.Parameters.Clear();
+                            command.CommandText = "SELECT @@IDENTITY";
+
+                            object scalar = command.ExecuteScalar();
+
+                            if (scalar != null && scalar != DBNull.Value)
+                            {
+                                entity.Entity.Id = Convert.ToInt32(scalar);
+                            }
+                        }
                     }
-                }
 
-                foreach (var entity in updated)
-                {
-                    command.Parameters.Clear();
-
-                    entity.CreateSql(entity.Entity, command);
-
-                    recordsAffected += command.ExecuteNonQuery();
-                }
-
-                foreach (var entity in deleted)
-                {
-                    command.Parameters.Clear();
-
-                    entity.CreateSql(entity.Entity, command);
-
-                    recordsAffected += command.ExecuteNonQuery();
-                }
-
-                trans.Commit();
-            }
-            catch (Exception ex)
-            {
-                if (trans != null)
-                {
-                    try
+                    foreach (var entity in updated)
                     {
-                        trans.Rollback();
+                        command.Parameters.Clear();
+
+                        entity.CreateSql(entity.Entity, command);
+
+                        recordsAffected += command.ExecuteNonQuery();
                     }
-                    catch
+
+                    foreach (var entity in deleted)
                     {
+                        command.Parameters.Clear();
+
+                        entity.CreateSql(entity.Entity, command);
+
+                        recordsAffected += command.ExecuteNonQuery();
+                    }
+
+                    trans.Commit();
+                }
+                catch (Exception ex)
+                {
+                    if (trans != null)
+                    {
+                        try
+                        {
+                            trans.Rollback();
+                        }
+                        catch
+                        {
+                        }
+                    }
+
+                    System.Diagnostics.Debug.WriteLine("BASEDB SAVECHANGES ERROR:");
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                    System.Diagnostics.Debug.WriteLine("SQL: " + command.CommandText);
+                }
+                finally
+                {
+                    inserted.Clear();
+                    updated.Clear();
+                    deleted.Clear();
+
+                    if (command != null)
+                    {
+                        command.Parameters.Clear();
+                        command.Transaction = null;
+                    }
+
+                    if (connection != null && connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
                     }
                 }
 
-                System.Diagnostics.Debug.WriteLine(
-                    ex.Message + "\n SQL:" + command.CommandText);
+                return recordsAffected;
             }
-            finally
-            {
-                inserted.Clear();
-                updated.Clear();
-                deleted.Clear();
-
-                if (command != null)
-                {
-                    command.Parameters.Clear();
-                    command.Transaction = null;
-                }
-
-                if (connection != null && connection.State == ConnectionState.Open)
-                {
-                    connection.Close();
-                }
-            }
-
-            return recordsAffected;
         }
     }
 }

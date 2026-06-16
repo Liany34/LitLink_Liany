@@ -9,7 +9,6 @@
   <ItemGroup>
     <None Remove="Covers\ACourtOfFrostAndStarlight.png" />
     <None Remove="Covers\ACourtOfMistAndFury.png" />
-    <None Remove="Covers\ACourtOfSilverFlames.png" />
     <None Remove="Covers\ACourtOfWingsAndRuin.png" />
     <None Remove="Covers\AgainstAllOdds.png" />
     <None Remove="Covers\AntiHero.png" />
@@ -54,7 +53,7 @@
     <Resource Include="Covers\ACourtOfMistAndFury.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Covers\ACourtOfSilverFlames.png">
+    <Resource Include="Covers\ACourtOfSilvetAndFlames.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Covers\ACourtOfWingsAndRuin.png">

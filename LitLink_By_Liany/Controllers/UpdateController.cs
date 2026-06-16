@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Model;
 using ViewModel;
-
+using System;
+using System.IO;
 namespace LitLink_By_Liany.Controllers
 {
     [Route("api/[controller]/[action]")]
@@ -41,103 +42,309 @@ namespace LitLink_By_Liany.Controllers
 
         [HttpPut]
         [ActionName("UserUpdate")]
-        public int UpdateUser([FromBody] User user)
+        public IActionResult UpdateUser([FromBody] UserUpdateDto dto)
         {
-            UserDB db = new UserDB();
-            db.Update(user);
-            int x = db.SaveChanges();
-            return x;
-        }
-        [HttpPut]
-        [ActionName("UserPictureJsonUpdate")]
-        public int UpdateUserPictureJson([FromBody] ImageJsonDto imageData)
-        {
+            if (dto == null)
+                return BadRequest("User data is missing.");
+
             try
             {
+                string pictureFileName = dto.PicturePath;
+
+                if (!string.IsNullOrWhiteSpace(dto.Base64Image))
+                {
+                    string coversFolder = System.IO.Path.Combine(BaseDB.Path(), "Covers");
+
+                    if (!Directory.Exists(coversFolder))
+                        Directory.CreateDirectory(coversFolder);
+
+                    string ext = System.IO.Path.GetExtension(dto.FileName);
+
+                    if (string.IsNullOrWhiteSpace(ext))
+                        ext = ".png";
+
+                    pictureFileName = $"user_{dto.Id}_{DateTime.Now.Ticks}{ext}";
+
+                    string fullPath = System.IO.Path.Combine(coversFolder, pictureFileName);
+
+                    string cleanBase64 = dto.Base64Image;
+
+                    if (cleanBase64.Contains(","))
+                        cleanBase64 = cleanBase64.Split(',')[1];
+
+                    byte[] imageBytes = Convert.FromBase64String(cleanBase64);
+
+                    System.IO.File.WriteAllBytes(fullPath, imageBytes);
+                }
+
+                User user = new User
+                {
+                    Id = dto.Id,
+                    FirstName = dto.FirstName,
+                    LastName = dto.LastName,
+                    PhoneNumber = dto.PhoneNumber,
+                    Email = dto.Email,
+                    Username = dto.Username,
+                    Pass = dto.Pass,
+                    Birthdate = dto.Birthdate,
+                    PicturePath = string.IsNullOrEmpty(pictureFileName)
+                        ? null
+                        : System.IO.Path.GetFileName(pictureFileName)
+                };
+
                 UserDB db = new UserDB();
+                db.Update(user);
 
-                string coversFolder = BaseDB.Path() + "\\Covers";
+                int rows = db.SaveChanges();
 
-                if (!Directory.Exists(coversFolder))
-                    Directory.CreateDirectory(coversFolder);
+                if (rows > 0)
+                    return Ok(user);
 
-                string extension = ".png";
-
-                if (!string.IsNullOrEmpty(imageData.FileName))
-                    extension = Path.GetExtension(imageData.FileName);
-
-                string newFileName = "book_" + imageData.Id + "_" + DateTime.Now.Ticks + extension;
-                string fullPath = Path.Combine(coversFolder, newFileName);
-
-                byte[] imageBytes = Convert.FromBase64String(imageData.Base64Image);
-                System.IO.File.WriteAllBytes(fullPath, imageBytes);
-
-                return db.UpdateUserPictureFileName(imageData.Id, newFileName);
+                return NotFound("User was not updated.");
             }
-            catch
+            catch (Exception ex)
             {
-                return 0;
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpPut]
         [ActionName("AuthorUpdate")]
-        public int UpdateAuthor([FromBody] Author author)
+        public IActionResult UpdateAuthor([FromBody] AuthorUpdateDto dto)
         {
-            AuthorDB db = new AuthorDB();
-            db.Update(author);
-            int x = db.SaveChanges();
-            return x;
+            if (dto == null)
+                return BadRequest("Author data is missing.");
+
+            try
+            {
+                string pictureFileName = dto.PicturePath;
+
+                // אם נבחרה תמונה חדשה מהמחשב
+                if (!string.IsNullOrWhiteSpace(dto.Base64Image))
+                {
+                    string coversFolder = System.IO.Path.Combine(BaseDB.Path(), "Covers");
+
+                    if (!Directory.Exists(coversFolder))
+                        Directory.CreateDirectory(coversFolder);
+
+                    string ext = System.IO.Path.GetExtension(dto.FileName);
+
+                    if (string.IsNullOrWhiteSpace(ext))
+                        ext = ".png";
+
+                    pictureFileName = $"user_{dto.Id}_{DateTime.Now.Ticks}{ext}";
+
+                    string fullPath = System.IO.Path.Combine(coversFolder, pictureFileName);
+
+                    string cleanBase64 = dto.Base64Image;
+
+                    if (cleanBase64.Contains(","))
+                        cleanBase64 = cleanBase64.Split(',')[1];
+
+                    byte[] imageBytes = Convert.FromBase64String(cleanBase64);
+
+                    System.IO.File.WriteAllBytes(fullPath, imageBytes);
+                }
+
+                Author author = new Author
+                {
+                    Id = dto.Id,
+
+                    FirstName = dto.FirstName,
+                    LastName = dto.LastName,
+                    PhoneNumber = dto.PhoneNumber,
+                    Email = dto.Email,
+                    Username = dto.Username,
+                    Pass = dto.Pass,
+                    Birthdate = dto.Birthdate,
+
+                    PicturePath = string.IsNullOrEmpty(pictureFileName)
+                        ? null
+                        : System.IO.Path.GetFileName(pictureFileName),
+
+                    PenName = dto.PenName,
+                    InformationAboutAuthor = dto.InformationAboutAuthor,
+                    Genre = new Genre { Id = dto.IdGenre }
+                };
+
+                AuthorDB db = new AuthorDB();
+                db.Update(author);
+
+                int rows = db.SaveChanges();
+
+                if (rows > 0)
+                    return Ok(rows);
+
+                return NotFound("Author was not updated.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut]
         [ActionName("ReaderUpdate")]
-        public int UpdateReader([FromBody] Reader reader)
+        public IActionResult UpdateReader([FromBody] ReaderUpdateDto dto)
         {
-            ReaderDB db = new ReaderDB();
-            db.Update(reader);
-            int x = db.SaveChanges();
-            return x;
+            if (dto == null)
+                return BadRequest("Reader data is missing.");
+
+            try
+            {
+                string pictureFileName = dto.PicturePath;
+
+                // אם נבחרה תמונה חדשה מהמחשב
+                if (!string.IsNullOrWhiteSpace(dto.Base64Image))
+                {
+                    string coversFolder = System.IO.Path.Combine(BaseDB.Path(), "Covers");
+
+                    if (!Directory.Exists(coversFolder))
+                        Directory.CreateDirectory(coversFolder);
+
+                    string ext = System.IO.Path.GetExtension(dto.FileName);
+
+                    if (string.IsNullOrWhiteSpace(ext))
+                        ext = ".png";
+
+                    pictureFileName = $"user_{dto.Id}_{DateTime.Now.Ticks}{ext}";
+
+                    string fullPath = System.IO.Path.Combine(coversFolder, pictureFileName);
+
+                    string cleanBase64 = dto.Base64Image;
+
+                    if (cleanBase64.Contains(","))
+                        cleanBase64 = cleanBase64.Split(',')[1];
+
+                    byte[] imageBytes = Convert.FromBase64String(cleanBase64);
+
+                    System.IO.File.WriteAllBytes(fullPath, imageBytes);
+                }
+
+                Reader reader = new Reader
+                {
+                    Id = dto.Id,
+
+                    FirstName = dto.FirstName,
+                    LastName = dto.LastName,
+                    PhoneNumber = dto.PhoneNumber,
+                    Email = dto.Email,
+                    Username = dto.Username,
+                    Pass = dto.Pass,
+                    Birthdate = dto.Birthdate,
+
+                    PicturePath = string.IsNullOrEmpty(pictureFileName)
+                        ? null
+                        : System.IO.Path.GetFileName(pictureFileName),
+
+                    Nickname = dto.Nickname,
+                    IsFlaged = dto.IsFlaged
+                };
+
+                ReaderDB db = new ReaderDB();
+                db.Update(reader);
+
+                int rows = db.SaveChanges();
+
+                if (rows > 0)
+                    return Ok(rows);
+
+                return NotFound("Reader was not updated.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
+        //[HttpPut]
+        //[ActionName("AuthorUpdate")]
+        //public int UpdateAuthor([FromBody] Author author)
+        //{
+        //    AuthorDB db = new AuthorDB();
+        //    db.Update(author);
+        //    int x = db.SaveChanges();
+        //    return x;
+        //}
+
+        //[HttpPut]
+        //[ActionName("ReaderUpdate")]
+        //public int UpdateReader([FromBody] Reader reader)
+        //{
+        //    ReaderDB db = new ReaderDB();
+        //    db.Update(reader);
+        //    int x = db.SaveChanges();
+        //    return x;
+        //}
 
         [HttpPut]
         [ActionName("BookUpdate")]
-        public int UpdateBook([FromBody] Book book)
+        public IActionResult UpdateBook([FromBody] BookUpdateDto dto)
         {
-            BookDB db = new BookDB();
-            db.Update(book);
-            int x = db.SaveChanges();
-            return x;
-        }
-        [HttpPut]
-        [ActionName("BookCoverJsonUpdate")]
-        public int UpdateBookCoverJson([FromBody] ImageJsonDto imageData)
-        {
+            if (dto == null)
+                return BadRequest("Book data is missing.");
+
             try
             {
+                string coverFileName = dto.CoverPath;
+
+                if (!string.IsNullOrWhiteSpace(dto.Base64Image))
+                {
+                    string coversFolder = System.IO.Path.Combine(BaseDB.Path(), "Covers");
+
+                    if (!Directory.Exists(coversFolder))
+                        Directory.CreateDirectory(coversFolder);
+
+                    string ext = System.IO.Path.GetExtension(dto.FileName);
+
+                    if (string.IsNullOrWhiteSpace(ext))
+                        ext = ".png";
+
+                    coverFileName = $"book_{dto.Id}_{DateTime.Now.Ticks}{ext}";
+
+                    string fullPath = System.IO.Path.Combine(coversFolder, coverFileName);
+
+                    string cleanBase64 = dto.Base64Image;
+
+                    if (cleanBase64.Contains(","))
+                        cleanBase64 = cleanBase64.Split(',')[1];
+
+                    byte[] imageBytes = Convert.FromBase64String(cleanBase64);
+
+                    System.IO.File.WriteAllBytes(fullPath, imageBytes);
+                }
+
+                Book book = new Book
+                {
+                    Id = dto.Id,
+                    BookName = dto.BookName,
+                    PublicationDate = dto.PublicationDate,
+                    Price = dto.Price,
+                    Information = dto.Information,
+                    BookLink = dto.BookLink,
+                    IsFlaged = dto.IsFlaged,
+
+                    IdAuthor = new Author { Id = dto.IdAuthor },
+                    IdLanguage = new Language { Id = dto.IdLanguage },
+
+                    CoverPath = string.IsNullOrEmpty(coverFileName)
+                        ? null
+                        : System.IO.Path.GetFileName(coverFileName)
+                };
+
                 BookDB db = new BookDB();
+                db.Update(book);
 
-                string coversFolder = BaseDB.Path() + "\\Covers";
+                int rows = db.SaveChanges();
 
-                if (!Directory.Exists(coversFolder))
-                    Directory.CreateDirectory(coversFolder);
+                if (rows > 0)
+                    return Ok(book);
 
-                string extension = ".png";
-
-                if (!string.IsNullOrEmpty(imageData.FileName))
-                    extension = Path.GetExtension(imageData.FileName);
-
-                string newFileName = "user_" + imageData.Id + "_" + DateTime.Now.Ticks + extension;
-                string fullPath = Path.Combine(coversFolder, newFileName);
-
-                byte[] imageBytes = Convert.FromBase64String(imageData.Base64Image);
-                System.IO.File.WriteAllBytes(fullPath, imageBytes);
-
-                return db.UpdateBookCoverFileName(imageData.Id, newFileName);
+                return NotFound("Book was not updated.");
             }
-            catch
+            catch (Exception ex)
             {
-                return 0;
+                return BadRequest(ex.Message);
             }
         }
 

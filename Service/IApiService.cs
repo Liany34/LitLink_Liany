@@ -29,21 +29,20 @@ namespace Service
 
         public Task<ListUser> GetAllUsers();
         public Task<int> InsertUser(User user);
-        public Task<int> UpdateUser(User user);
+        public Task<bool> UpdateUser(UserUpdateDto userDto);
         public Task<int> DeleteUser(int id);
         public Task<string> GetPictureByUserIDByte64(int id);
-        Task<int> UpdateUserPictureJson(ImageJsonDto imageData);
 
 
         public Task<ListAuthor> GetAllAuthors();
         public Task<int> InsertAuthor(Author author);
-        public Task<int> UpdateAuthor(Author author);
+        public Task<bool> UpdateAuthor(AuthorUpdateDto authorDto);
         public Task<int> DeleteAuthor(int id);
 
 
         public Task<ListReader> GetAllReaders();
         public Task<int> InsertReader(Reader reader);
-        public Task<int> UpdateReader(Reader reader);
+        public Task<bool> UpdateReader(ReaderUpdateDto readerDto);
         public Task<int> DeleteReader(int id);
 
 
@@ -54,10 +53,9 @@ namespace Service
 
         public Task<ListBook> GetAllBooks();
         public Task<int> InsertBook(Book book);
-        public Task<int> UpdateBook(Book book);
+        public Task<bool> UpdateBook(BookUpdateDto bookDto);
         public Task<int> DeleteBook(int id);
         public Task<string> GetBookCoverByBookIDByte64(int id);
-        Task<int> UpdateBookCoverJson(ImageJsonDto imageData);
 
 
         public Task<ListBook_Series> GetAllBookSeries();
