@@ -16,6 +16,7 @@ namespace Model
         private string pass;
         private DateTime birthdate;
         private string picture;
+        private string? picturePath = null;
 
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
@@ -25,6 +26,7 @@ namespace Model
         public string Pass { get => pass; set => pass = value; }
         public DateTime Birthdate { get => birthdate; set => birthdate = value; }
         public string Picture { get => picture; set => picture = value; }
+        public string? PicturePath { get => picturePath; set => picturePath = value; }
 
         public override string ToString()
         {

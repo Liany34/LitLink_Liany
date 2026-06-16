@@ -29,26 +29,49 @@ namespace ViewModel
             u.Birthdate = Convert.ToDateTime(reader["birthDate"]).Date;
             u.Username = reader["username"].ToString();
 
-            string fileName = reader["picture"]?.ToString();
-
-            string imagePath = System.IO.Path.Combine(
-                @"C:\Users\yahal\source\repos\Liany34\LitLink_Liany\ViewModel\Covers",
-                fileName
-            );
-
-            Console.WriteLine("fileName = " + fileName);
-            Console.WriteLine("imagePath = " + imagePath);
-            Console.WriteLine("exists = " + File.Exists(imagePath));
-
-            if (File.Exists(imagePath))
+            if(reader["picture"] == DBNull.Value)
             {
-                string base64String = ImageToBase64Converter.ImageToBase64(imagePath);
-                u.Picture = base64String;
+                u.Picture = reader["picture"]?.ToString() ?? "";
+                u.PicturePath = null;
             }
             else
             {
-                u.Picture = null;
+                u.PicturePath = Path() + "\\Covers\\" + reader["picturePath"].ToString();
+                string fileName = u.PicturePath;
+                if(!string.IsNullOrEmpty(fileName))
+                {
+                    string base64Result = ImageToBase64Converter.ImageToBase64(fileName);
+
+                    if(!string.IsNullOrEmpty(base64Result))
+                    {
+                        u.Picture = base64Result;
+                    }
+                    else
+                    {
+                        u.Picture = "Missing resource" + fileName;
+                    }
+                }
             }
+            //string fileName = reader["picture"]?.ToString();
+
+            //string imagePath = System.IO.Path.Combine(
+            //    @"C:\Users\yahal\source\repos\Liany34\LitLink_Liany\ViewModel\Covers",
+            //    fileName
+            //);
+
+            //Console.WriteLine("fileName = " + fileName);
+            //Console.WriteLine("imagePath = " + imagePath);
+            //Console.WriteLine("exists = " + File.Exists(imagePath));
+
+            //if (File.Exists(imagePath))
+            //{
+            //    string base64String = ImageToBase64Converter.ImageToBase64(imagePath);
+            //    u.Picture = base64String;
+            //}
+            //else
+            //{
+            //    u.Picture = null;
+            //}
 
             base.CreateModel(entity);
             return u;
@@ -93,9 +116,11 @@ namespace ViewModel
             User u = entity as User;
             if (u != null)
             {
-                string sqlStr = $"INSERT INTO [User] (FirstName, LastName, PhoneNumber, Email, Username, Pass, Birthdate, Picture) VALUES (@firstName, @lastName, @phoneNumber, @email, @username, @pass, @birthdate, @picture)";
+                string sqlStr = $"INSERT INTO [User] (FirstName, LastName, PhoneNumber, Email, Username, Pass, Birthdate, Picture, PicturePath) VALUES (@firstName, @lastName, @phoneNumber, @email, @username, @pass, @birthdate, @picture, @picturePath)";
 
                 cmd.CommandText = sqlStr;
+                cmd.Parameters.Clear();
+
                 cmd.Parameters.Add(new OleDbParameter("@firstName", u.FirstName));
                 cmd.Parameters.Add(new OleDbParameter("@lastName", u.LastName));
                 cmd.Parameters.Add(new OleDbParameter("@phoneNumber", u.PhoneNumber));
@@ -103,7 +128,8 @@ namespace ViewModel
                 cmd.Parameters.Add(new OleDbParameter("@username", u.Username));
                 cmd.Parameters.Add(new OleDbParameter("@pass", u.Pass));
                 cmd.Parameters.Add("@birthdate", OleDbType.Date).Value = u.Birthdate.Date;
-                cmd.Parameters.Add(new OleDbParameter("@picture", u.Picture));
+                cmd.Parameters.Add(new OleDbParameter("@picture", !string.IsNullOrEmpty(u.Picture) ? u.Picture : (object)DBNull.Value));
+                cmd.Parameters.Add(new OleDbParameter("@picturePath", !string.IsNullOrEmpty(u.PicturePath) ? u.PicturePath : (object)DBNull.Value));
             }
         }
 
@@ -112,7 +138,7 @@ namespace ViewModel
             User u = entity as User;
             if (u != null)
             {
-                string sqlStr = $"UPDATE [User] SET FirstName=@firstName, LastName=@lastName, Birthdate=@birthdate, PhoneNumber=@phoneNumber, Email=@email, Username=@username, Pass=@pass WHERE ID=@id";
+                string sqlStr = $"UPDATE [User] SET FirstName=@firstName, LastName=@lastName, Birthdate=@birthdate, PhoneNumber=@phoneNumber, Email=@email, Username=@username, Pass=@pass, Picture=@picture, PicturePath=@picturePath WHERE ID=@id";
 
                 cmd.CommandText = sqlStr;
                 cmd.Parameters.Add(new OleDbParameter("@firstName", u.FirstName));
@@ -122,6 +148,8 @@ namespace ViewModel
                 cmd.Parameters.Add(new OleDbParameter("@email", u.Email));
                 cmd.Parameters.Add(new OleDbParameter("@username", u.Username));
                 cmd.Parameters.Add(new OleDbParameter("@pass", u.Pass));
+                cmd.Parameters.Add(new OleDbParameter("@picture", !string.IsNullOrEmpty(u.Picture) ? u.Picture : (object)DBNull.Value));
+                cmd.Parameters.Add(new OleDbParameter("@picturePath", !string.IsNullOrEmpty(u.PicturePath) ? u.PicturePath : (object)DBNull.Value));
                 cmd.Parameters.Add(new OleDbParameter("@id", u.Id));
             }
         }

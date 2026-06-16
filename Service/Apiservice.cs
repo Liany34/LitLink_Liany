@@ -25,6 +25,12 @@ namespace Service
             client.Timeout = TimeSpan.FromMinutes(10);
         }
 
+        private static readonly System.Text.Json.JsonSerializerOptions JsonOptions = 
+        new System.Text.Json.JsonSerializerOptions
+        {
+            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never
+        };
+
         public Apiservice(HttpClient client, string baseUri)
         {
             //uri = "https://mkrq0bm8-5193.uks1.devtunnels.ms";
@@ -47,7 +53,7 @@ namespace Service
         }
         public async Task<int> UpdateGenre(Genre g)
         {
-            return (await client.PutAsJsonAsync<Genre>(uri + "/api/Update/GenreUpdate", g)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Genre>(uri + "/api/Update/GenreUpdate", g, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteGenre(int id)
         {
@@ -65,7 +71,7 @@ namespace Service
         }
         public async Task<int> UpdateLanguage(Language l)
         {
-            return (await client.PutAsJsonAsync<Language>(uri + "/api/Update/LanguageUpdate", l)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Language>(uri + "/api/Update/LanguageUpdate", l, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteLanguage(int id)
         {
@@ -83,7 +89,7 @@ namespace Service
         }
         public async Task<int> UpdateDiscountCode(DiscountCodes dc)
         {
-            return (await client.PutAsJsonAsync<DiscountCodes>(uri + "/api/Update/DiscountCodesUpdate", dc)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<DiscountCodes>(uri + "/api/Update/DiscountCodesUpdate", dc, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteDiscountCode(int id)
         {
@@ -101,7 +107,7 @@ namespace Service
         }
         public async Task<int> UpdateUser(User u)
         {
-            return (await client.PutAsJsonAsync<User>(uri + "/api/Update/UserUpdate", u)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<User>(uri + "/api/Update/UserUpdate", u, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteUser(int id)
         {
@@ -123,7 +129,7 @@ namespace Service
         public async Task<int> UpdateUserPictureJson(ImageJsonDto imageData)
         {
             HttpResponseMessage response =
-                await client.PutAsJsonAsync(uri + "/api/Update/UserPictureJsonUpdate", imageData);
+                await client.PutAsJsonAsync(uri + "/api/Update/UserPictureJsonUpdate", imageData, JsonOptions);
 
             return response.IsSuccessStatusCode ? 1 : 0;
         }
@@ -139,7 +145,7 @@ namespace Service
         }
         public async Task<int> UpdateAuthor(Author a)
         {
-            return (await client.PutAsJsonAsync<Author>(uri + "/api/Update/AuthorUpdate", a)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Author>(uri + "/api/Update/AuthorUpdate", a, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteAuthor(int id)
         {
@@ -157,7 +163,7 @@ namespace Service
         }
         public async Task<int> UpdateReader(Reader r)
         {
-            return (await client.PutAsJsonAsync<Reader>(uri + "/api/Update/ReaderUpdate", r)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Reader>(uri + "/api/Update/ReaderUpdate", r, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteReader(int id)
         {
@@ -189,7 +195,7 @@ namespace Service
         }
         public async Task<int> UpdateBook(Book b)
         {
-            return (await client.PutAsJsonAsync<Book>(uri + "/api/Update/BookUpdate", b)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Book>(uri + "/api/Update/BookUpdate", b, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteBook(int id)
         {
@@ -208,32 +214,11 @@ namespace Service
 
             return null;
         }
-        //public async Task<string> GetBookCoverByBookIDByte64(int id)
-        //{
-        //    HttpClient client = new HttpClient();
-
-        //    string st = null;
-        //    string URI = $"{uri}/api/Select/BookCoverSelectore64Byte" + id;
-        //    HttpResponseMessage response = await client.GetAsync(URI);
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        string json = await response.Content.ReadAsStringAsync();
-        //        json = '"' + json + '"';
-        //        try
-        //        {
-        //            st = JsonSerializer.Deserialize<string>(json);
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            System.Diagnostics.Debug.WriteLine("JSON Error: " + e.Message);
-        //        }
-        //    }
-        //    return st;
-        //}
+        
         public async Task<int> UpdateBookCoverJson(ImageJsonDto imageData)
         {
             HttpResponseMessage response =
-                await client.PutAsJsonAsync(uri + "/api/Update/BookCoverJsonUpdate", imageData);
+                await client.PutAsJsonAsync(uri + "/api/Update/BookCoverJsonUpdate", imageData, JsonOptions);
 
             return response.IsSuccessStatusCode ? 1 : 0;
         }
@@ -249,7 +234,7 @@ namespace Service
         }
         public async Task<int> UpdateBookSeries(Book_Series bs)
         {
-            return (await client.PutAsJsonAsync<Book_Series>(uri + "/api/Update/BookSeriesUpdate", bs)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Book_Series>(uri + "/api/Update/BookSeriesUpdate", bs, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteBookSeries(int id)
         {
@@ -267,7 +252,7 @@ namespace Service
         }
         public async Task<int> UpdateSeriesDetail(Series_Detail sd)
         {
-            return (await client.PutAsJsonAsync<Series_Detail>(uri + "/api/Update/SeriesDetailUpdate", sd)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Series_Detail>(uri + "/api/Update/SeriesDetailUpdate", sd, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteSeriesDetail(int id)
         {
@@ -285,7 +270,7 @@ namespace Service
         }
         public async Task<int> UpdateBookGenre(Book_Genre bg)
         {
-            return (await client.PutAsJsonAsync<Book_Genre>(uri + "/api/Update/BookGenreUpdate", bg)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Book_Genre>(uri + "/api/Update/BookGenreUpdate", bg, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteBookGenre(int id)
         {
@@ -303,7 +288,7 @@ namespace Service
         }
         public async Task<int> UpdateGenreReader(Genre_Reader gr)
         {
-            return (await client.PutAsJsonAsync<Genre_Reader>(uri + "/api/Update/GenreReaderUpdate", gr)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Genre_Reader>(uri + "/api/Update/GenreReaderUpdate", gr, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteGenreReader(int id)
         {
@@ -321,7 +306,7 @@ namespace Service
         }
         public async Task<int> UpdateCart(Cart c)
         {
-            return (await client.PutAsJsonAsync<Cart>(uri + "/api/Update/CartUpdate", c)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Cart>(uri + "/api/Update/CartUpdate", c, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteCart(int id)
         {
@@ -339,7 +324,7 @@ namespace Service
         }
         public async Task<int> UpdateCartDetail(Cart_Detail cd)
         {
-            return (await client.PutAsJsonAsync<Cart_Detail>(uri + "/api/Update/CartDetailUpdate", cd)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Cart_Detail>(uri + "/api/Update/CartDetailUpdate", cd, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteCartDetail(int id)
         {
@@ -357,7 +342,7 @@ namespace Service
         }
         public async Task<int> UpdateNews(News n)
         {
-            return (await client.PutAsJsonAsync<News>(uri + "/api/Update/NewsUpdate", n)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<News>(uri + "/api/Update/NewsUpdate", n, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteNews(int id)
         {
@@ -375,7 +360,7 @@ namespace Service
         }
         public async Task<int> UpdateReview(Reviews re)
         {
-            return (await client.PutAsJsonAsync<Reviews>(uri + "/api/Update/ReviewsUpdate", re)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Reviews>(uri + "/api/Update/ReviewsUpdate", re, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteReview(int id)
         {
@@ -393,7 +378,7 @@ namespace Service
         }
         public async Task<int> UpdateFollowing(Following f)
         {
-            return (await client.PutAsJsonAsync<Following>(uri + "/api/Update/FollowingUpdate", f)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PutAsJsonAsync<Following>(uri + "/api/Update/FollowingUpdate", f, JsonOptions)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> DeleteFollowing(int id)
         {

@@ -14,6 +14,7 @@ namespace Model
         private Author idAuthor;
         private string information;
         private string cover;
+        private string? coverPath = null;
         private Language idLanguage;
         private string? bookLink;
         private bool isFlaged;
@@ -27,6 +28,7 @@ namespace Model
         public Language IdLanguage { get => idLanguage; set => idLanguage = value; }
         public string? BookLink { get => bookLink; set => bookLink = value; }
         public bool IsFlaged { get => isFlaged; set => isFlaged = value; }
+        public string? CoverPath { get => coverPath; set => coverPath = value; }
 
         public override string ToString()
         {

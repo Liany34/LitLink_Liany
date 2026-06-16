@@ -49,26 +49,50 @@ namespace ViewModel
                 b.BookLink = null;
             b.IsFlaged = (bool)reader["isFlaged"];
 
-            string fileName = reader["cover"]?.ToString();
-
-            string imagePath = System.IO.Path.Combine(
-                @"C:\Users\yahal\source\repos\Liany34\LitLink_Liany\ViewModel\Covers",
-                fileName
-            );
-
-            Console.WriteLine("fileName = " + fileName);
-            Console.WriteLine("imagePath = " + imagePath);
-            Console.WriteLine("exists = " + File.Exists(imagePath));
-
-            if (File.Exists(imagePath))
+            if (reader["cover"] == DBNull.Value)
             {
-                string base64String = ImageToBase64Converter.ImageToBase64(imagePath);
-                b.Cover = base64String;
+                b.Cover = reader["cover"]?.ToString() ?? "";
+                b.CoverPath = null;
             }
             else
             {
-                b.Cover = null;
+                b.CoverPath = Path() + "\\Covers\\" + reader["coverPath"].ToString();
+                string fileName = b.CoverPath;
+                if (!string.IsNullOrEmpty(fileName))
+                {
+                    string base64Result = ImageToBase64Converter.ImageToBase64(fileName);
+
+                    if (!string.IsNullOrEmpty(base64Result))
+                    {
+                        b.Cover = base64Result;
+                    }
+                    else
+                    {
+                        b.Cover = "Missing resource" + fileName;
+                    }
+                }
             }
+
+            //string fileName = reader["cover"]?.ToString();
+
+            //string imagePath = System.IO.Path.Combine(
+            //    @"C:\Users\yahal\source\repos\Liany34\LitLink_Liany\ViewModel\Covers",
+            //    fileName
+            //);
+
+            //Console.WriteLine("fileName = " + fileName);
+            //Console.WriteLine("imagePath = " + imagePath);
+            //Console.WriteLine("exists = " + File.Exists(imagePath));
+
+            //if (File.Exists(imagePath))
+            //{
+            //    string base64String = ImageToBase64Converter.ImageToBase64(imagePath);
+            //    b.Cover = base64String;
+            //}
+            //else
+            //{
+            //    b.Cover = null;
+            //}
 
             base.CreateModel(entity);
             return b;
@@ -113,7 +137,7 @@ namespace ViewModel
             Book b = entity as Book;
             if (b != null)
             {
-                string sqlStr = $"Insert INTO Book (BookName, PublicationDate, Price, IdAuthor, IdLanguage, IsFlaged, Information, Cover, BookLink) VALUES (@bookName, @publicationDate, @price, @idAuthor, @idLanguage, @isFlaged, @information, @cover, @bookLink)";
+                string sqlStr = $"Insert INTO Book (BookName, PublicationDate, Price, IdAuthor, IdLanguage, IsFlaged, Information, Cover, CoverPath, BookLink) VALUES (@bookName, @publicationDate, @price, @idAuthor, @idLanguage, @isFlaged, @information, @cover, @coverPath, @bookLink)";
 
                 cmd.CommandText = sqlStr;
                 cmd.Parameters.Add(new OleDbParameter("@bookName", b.BookName));
@@ -129,7 +153,8 @@ namespace ViewModel
                 cmd.Parameters.Add(new OleDbParameter("@idLanguage", b.IdLanguage.Id));
                 cmd.Parameters.Add(new OleDbParameter("@isFlaged", b.IsFlaged));
                 cmd.Parameters.Add(new OleDbParameter("@information", b.Information));
-                cmd.Parameters.Add(new OleDbParameter("@cover", b.Cover));
+                cmd.Parameters.Add(new OleDbParameter("@cover", !string.IsNullOrEmpty(b.Cover) ? b.Cover : (object)DBNull.Value));
+                cmd.Parameters.Add(new OleDbParameter("@coverPath", !string.IsNullOrEmpty(b.CoverPath) ? b.CoverPath : (object)DBNull.Value));
                 if (b.BookLink != null)
                     cmd.Parameters.Add("@bookLink", OleDbType.VarChar).Value = b.BookLink;
                 else
@@ -142,7 +167,7 @@ namespace ViewModel
             Book b = entity as Book;
             if (b != null)
             {
-                string sqlStr = $"UPDATE Book SET BookName=@bookName, PublicationDate=@publicationDate, Price=@price, IdAuthor=@idAuthor, IsFlaged=@isFlaged, Information=@information, IdLanguage=@idLanguage, BookLink=@bookLink WHERE ID=@id";
+                string sqlStr = $"UPDATE Book SET BookName=@bookName, PublicationDate=@publicationDate, Price=@price, IdAuthor=@idAuthor, IsFlaged=@isFlaged, Information=@information, IdLanguage=@idLanguage, BookLink=@bookLink, Cover=@cover, CoverPath=@coverPath WHERE ID=@id";
 
                 cmd.CommandText = sqlStr;
                 cmd.Parameters.Add(new OleDbParameter("@bookName", b.BookName));
@@ -162,6 +187,8 @@ namespace ViewModel
                     cmd.Parameters.Add("@bookLink", OleDbType.VarChar).Value = b.BookLink;
                 else
                     cmd.Parameters.Add("@bookLink", OleDbType.VarChar).Value = DBNull.Value;
+                cmd.Parameters.Add(new OleDbParameter("@cover", !string.IsNullOrEmpty(b.Cover) ? b.Cover : (object)DBNull.Value));
+                cmd.Parameters.Add(new OleDbParameter("@coverPath", !string.IsNullOrEmpty(b.CoverPath) ? b.CoverPath : (object)DBNull.Value));
                 cmd.Parameters.Add(new OleDbParameter("@id", b.Id));
             }
         }
