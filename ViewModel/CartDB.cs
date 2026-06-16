@@ -20,10 +20,12 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Cart c = entity as Cart;
-            c.IdReader = new Reader
-            {
-                Id = Convert.ToInt32(reader["idReader"])
-            };
+            int readerId = Convert.ToInt32(reader["idReader"]);
+            Reader r = ReaderDB.SelectById(readerId);
+            if (r != null)
+                c.IdReader = r;
+            else
+                c.IdReader = new Reader { Id = readerId };
             if (reader["discountCode"] != DBNull.Value)
                 c.DiscountCode = reader["discountCode"].ToString();
             else

@@ -21,10 +21,12 @@ namespace ViewModel
         {
             Author a = entity as Author;
             a.PenName = reader["penName"].ToString();
-            a.Genre = new Genre
-            {
-                Id = Convert.ToInt32(reader["genre"])
-            };
+            int genreId = Convert.ToInt32(reader["genre"]);
+            Genre g = GenreDB.SelectById(genreId);
+            if (g != null)
+                a.Genre= g;
+            else
+                a.Genre = new Genre { Id = genreId };
             a.InformationAboutAuthor = reader["informationAboutAuthor"].ToString();
             base.CreateModel(entity);
             return a;

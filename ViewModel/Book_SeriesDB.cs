@@ -21,10 +21,12 @@ namespace ViewModel
         {
             Book_Series bs = entity as Book_Series;
             bs.NameSeries = reader["nameSeries"].ToString();
-            bs.IdUser = new User
-            {
-                Id = Convert.ToInt32(reader["idUser"])
-            };
+            int userId = Convert.ToInt32(reader["idUser"]);
+            User u = UserDB.SelectById(userId);
+            if (u != null)
+                bs.IdUser = u;
+            else
+                bs.IdUser = new User { Id = userId };
             base.CreateModel(entity);
             return bs;
         }

@@ -19,14 +19,18 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Series_Detail sd = entity as Series_Detail;
-            sd.IdSeries = new Book_Series
-            {
-                Id = Convert.ToInt32(reader["idSeries"])
-            };
-            sd.IdBook = new Book
-            {
-                Id = Convert.ToInt32(reader["idBook"])
-            };
+            int seriesId = Convert.ToInt32(reader["idSeries"]);
+            Book_Series bs = Book_SeriesDB.SelectById(seriesId);
+            if (bs != null)
+                sd.IdSeries = bs;
+            else
+                sd.IdSeries = new Book_Series { Id = seriesId };
+            int bookId = Convert.ToInt32(reader["idBook"]);
+            Book b = BookDB.SelectById(bookId);
+            if (b != null)
+                sd.IdBook = b;
+            else
+                sd.IdBook = new Book { Id = bookId };
             sd.Number = (int)reader["number"];
             base.CreateModel(entity);
             return sd;

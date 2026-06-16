@@ -20,14 +20,18 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Cart_Detail cd = entity as Cart_Detail;
-            cd.IdCart = new Cart
-            {
-                Id = Convert.ToInt32(reader["idCart"])
-            };
-            cd.IdBook = new Book
-            {
-                Id = Convert.ToInt32(reader["idBook"])
-            };
+            int cartId = Convert.ToInt32(reader["idCart"]);
+            Cart c = CartDB.SelectById(cartId);
+            if (c != null)
+                cd.IdCart = c;
+            else
+                cd.IdCart = new Cart { Id = cartId };
+            int bookId = Convert.ToInt32(reader["idBook"]);
+            Book b = BookDB.SelectById(bookId);
+            if (b != null)
+                cd.IdBook = b;
+            else
+                cd.IdBook = new Book { Id = bookId };
             if (reader["purchaseDate"] != DBNull.Value)
                 cd.PurchaseDate = Convert.ToDateTime(reader["purchaseDate"]).Date;
             else

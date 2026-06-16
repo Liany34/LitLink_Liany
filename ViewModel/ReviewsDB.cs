@@ -20,15 +20,19 @@ namespace ViewModel
         {
             Reviews r = entity as Reviews;
             r.Text = reader["text"].ToString();
-            r.IdReader = new Reader
-            {
-                Id = Convert.ToInt32(reader["idReader"])
-            };
+            int readerId = Convert.ToInt32(reader["idReader"]);
+            Reader re = ReaderDB.SelectById(readerId);
+            if (re != null)
+                r.IdReader = re;
+            else
+                r.IdReader = new Reader { Id = readerId };
             r.Stars = (int)(reader["stars"]);
-            r.IdBook = new Book
-            {
-                Id = Convert.ToInt32(reader["idBook"])
-            };
+            int bookId = Convert.ToInt32(reader["idBook"]);
+            Book b = BookDB.SelectById(bookId);
+            if (b != null)
+                r.IdBook = b;
+            else
+                r.IdBook = new Book { Id = bookId };
             r.IsFlaged = (bool)(reader["isFlaged"]);
             base.CreateModel(entity);
             return r;

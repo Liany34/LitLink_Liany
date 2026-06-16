@@ -23,10 +23,12 @@ namespace ViewModel
             n.Content = reader["content"].ToString();
             n.PublishDate = Convert.ToDateTime(reader["publishDate"]).Date;
             n.Titel = reader["titel"].ToString();
-            n.IdUser = new User
-            {
-                Id = Convert.ToInt32(reader["idUser"])
-            };
+            int userId = Convert.ToInt32(reader["idUser"]);
+            User u = UserDB.SelectById(userId);
+            if (u != null)
+                n.IdUser = u;
+            else
+                n.IdUser = new User { Id = userId };
             base.CreateModel(entity);
             return n;
         }

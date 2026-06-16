@@ -31,14 +31,18 @@ namespace ViewModel
             else
                 b.Price = null;
             b.Information = reader["information"].ToString();
-            b.IdAuthor = new Author
-            {
-                Id = Convert.ToInt32(reader["idAuthor"])
-            };
-            b.IdLanguage = new Language
-            {
-                Id = Convert.ToInt32(reader["idLanguage"])
-            };
+            int authorId = Convert.ToInt32(reader["idAuthor"]);
+            Author a = AuthorDB.SelectById(authorId);
+            if (a != null)
+                b.IdAuthor = a;
+            else
+                b.IdAuthor = new Author { Id = authorId };
+            int languageId = Convert.ToInt32(reader["idLanguage"]);
+            Language l = LanguageDB.SelectById(languageId);
+            if (l != null)
+                b.IdLanguage = l;
+            else
+                b.IdLanguage = new Language { Id = languageId };
             if (reader["bookLink"] != DBNull.Value)
                 b.BookLink = reader["bookLink"].ToString();
             else
