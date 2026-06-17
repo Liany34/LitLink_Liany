@@ -36,7 +36,7 @@ namespace ViewModel
                 cd.PurchaseDate = Convert.ToDateTime(reader["purchaseDate"]).Date;
             else
                  cd.PurchaseDate = null;
-            cd.PurchasePrice = (int)reader["purchasePrice"];
+            cd.PurchasePrice = Convert.ToDouble(reader["purchasePrice"]);
             cd.IsPurchased = (bool)reader["isPurchased"];
             base.CreateModel(entity);
             return cd;

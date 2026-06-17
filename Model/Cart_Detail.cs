@@ -10,13 +10,13 @@ namespace Model
     {
         private Cart idCart;
         private Book idBook;
-        private int purchasePrice;
+        private double purchasePrice;
         private DateTime? purchaseDate = null;
         private bool isPurchased;
 
         public Cart IdCart { get => idCart; set => idCart = value; }
         public Book IdBook { get => idBook; set => idBook = value; }
-        public int PurchasePrice { get => purchasePrice; set => purchasePrice = value; }
+        public double PurchasePrice { get => purchasePrice; set => purchasePrice = value; }
         public DateTime? PurchaseDate { get => purchaseDate; set => purchaseDate = value; }
         public bool IsPurchased { get => isPurchased; set => isPurchased = value; }
 
