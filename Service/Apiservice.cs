@@ -140,7 +140,7 @@ namespace Service
         }
         public async Task<bool> UpdateAuthor(AuthorUpdateDto dto)
         {
-            string url = uri + "/api/Author/UpdateAuthor";
+            string url = uri + "/api/Update/AuthorUpdate";
 
             HttpResponseMessage response = await client.PutAsJsonAsync(url, dto, JsonOptions);
 
@@ -162,10 +162,13 @@ namespace Service
         }
         public async Task<bool> UpdateReader(ReaderUpdateDto dto)
         {
-            string url = uri + "/api/Reader/UpdateReader";
-
+            string url = uri + "/api/Update/ReaderUpdate";
             HttpResponseMessage response = await client.PutAsJsonAsync(url, dto, JsonOptions);
-
+            if (!response.IsSuccessStatusCode)
+            {
+                string error = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine($"UpdateReader failed: {response.StatusCode} - {error}");
+            }
             return response.IsSuccessStatusCode;
         }
         public async Task<int> DeleteReader(int id)
@@ -198,7 +201,7 @@ namespace Service
         }
         public async Task<bool> UpdateBook(BookUpdateDto bookDto)
         {
-            string url = uri+ "/api/Book/BookFullUpdate";
+            string url = uri+ "/api/Update/BookUpdate";
 
             HttpResponseMessage response = await client.PutAsJsonAsync(url, bookDto);
 
