@@ -42,7 +42,10 @@ namespace ViewModel
         public static Following SelectById(int id)
         {
             FollowingDB db = new FollowingDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+            {
+                list = db.SelectAll();
+            }
 
             Following f = list.Find(item => item.Id == id);
             return f;

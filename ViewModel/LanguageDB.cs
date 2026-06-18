@@ -33,7 +33,10 @@ namespace ViewModel
         public static Language SelectById(int id)
         {
             LanguageDB db = new LanguageDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+            {
+                list = db.SelectAll();
+            }
 
             Language g = list.Find(item => item.Id == id);
             return g;

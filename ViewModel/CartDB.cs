@@ -44,7 +44,10 @@ namespace ViewModel
         public static Cart SelectById(int id)
         {
             CartDB db = new CartDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+            {
+                list = db.SelectAll();
+            }
 
             Cart c = list.Find(item => item.Id == id);
             return c;

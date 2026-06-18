@@ -80,6 +80,7 @@ namespace LitLink_By_Liany.Controllers
                 User user = new User
                 {
                     Id = dto.Id,
+
                     FirstName = dto.FirstName,
                     LastName = dto.LastName,
                     PhoneNumber = dto.PhoneNumber,
@@ -87,6 +88,7 @@ namespace LitLink_By_Liany.Controllers
                     Username = dto.Username,
                     Pass = dto.Pass,
                     Birthdate = dto.Birthdate,
+
                     PicturePath = string.IsNullOrEmpty(pictureFileName)
                         ? null
                         : System.IO.Path.GetFileName(pictureFileName)
@@ -98,7 +100,7 @@ namespace LitLink_By_Liany.Controllers
                 int rows = db.SaveChanges();
 
                 if (rows > 0)
-                    return Ok(user);
+                    return Ok(rows);
 
                 return NotFound("User was not updated.");
             }
@@ -119,7 +121,6 @@ namespace LitLink_By_Liany.Controllers
             {
                 string pictureFileName = dto.PicturePath;
 
-                // אם נבחרה תמונה חדשה מהמחשב
                 if (!string.IsNullOrWhiteSpace(dto.Base64Image))
                 {
                     string coversFolder = System.IO.Path.Combine(BaseDB.Path(), "Covers");
@@ -194,7 +195,6 @@ namespace LitLink_By_Liany.Controllers
             {
                 string pictureFileName = dto.PicturePath;
 
-                // אם נבחרה תמונה חדשה מהמחשב
                 if (!string.IsNullOrWhiteSpace(dto.Base64Image))
                 {
                     string coversFolder = System.IO.Path.Combine(BaseDB.Path(), "Covers");

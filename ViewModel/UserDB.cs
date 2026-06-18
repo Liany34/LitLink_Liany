@@ -111,7 +111,10 @@ namespace ViewModel
         public static User SelectById(int id)
         {
             UserDB db = new UserDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+            {
+                list = db.SelectAll();
+            }
 
             User g = list.Find(item => item.Id == id);
             return g;

@@ -133,7 +133,10 @@ namespace ViewModel
         public static Book SelectById(int id)
         {
             BookDB db = new BookDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+            {
+                list = db.SelectAll();
+            }
 
             Book g = list.Find(item => item.Id == id);
             return g;

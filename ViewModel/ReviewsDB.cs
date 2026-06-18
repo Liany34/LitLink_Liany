@@ -45,7 +45,10 @@ namespace ViewModel
         public static Reviews SelectById(int id)
         {
             ReviewsDB db = new ReviewsDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+            {
+                list = db.SelectAll();
+            }
 
             Reviews r = list.Find(item => item.Id == id);
             return r;

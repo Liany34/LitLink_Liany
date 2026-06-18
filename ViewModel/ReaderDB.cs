@@ -32,7 +32,10 @@ namespace ViewModel
         public static Reader SelectById(int id)
         {
             ReaderDB db = new ReaderDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+            {
+                list = db.SelectAll();
+            }
 
             Reader g = list.Find(item => item.Id == id);
             return g;

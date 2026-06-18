@@ -38,7 +38,10 @@ namespace ViewModel
         public static Book_Series SelectById(int id)
         {
             Book_SeriesDB db = new Book_SeriesDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+            {
+                list = db.SelectAll();
+            }
 
             Book_Series g = list.Find(item => item.Id == id);
             return g;

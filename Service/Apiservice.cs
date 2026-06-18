@@ -105,10 +105,15 @@ namespace Service
         {
             return (await client.PostAsJsonAsync<User>(uri + "/api/Insert/UserInsert", u)).IsSuccessStatusCode ? 1 : 0;
         }
-        public async Task<bool> UpdateUser(UserUpdateDto userDto)
+        public async Task<bool> UpdateUser(UserUpdateDto dto)
         {
             string url = uri + "/api/Update/UserUpdate";
-            HttpResponseMessage response = await client.PutAsJsonAsync(url, userDto, JsonOptions);
+            HttpResponseMessage response = await client.PutAsJsonAsync(url, dto, JsonOptions);
+            if (!response.IsSuccessStatusCode)
+            {
+                string error = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine($"UpdateUser failed: {response.StatusCode} - {error}");
+            }
             return response.IsSuccessStatusCode;
         }
         public async Task<int> DeleteUser(int id)
@@ -141,9 +146,12 @@ namespace Service
         public async Task<bool> UpdateAuthor(AuthorUpdateDto dto)
         {
             string url = uri + "/api/Update/AuthorUpdate";
-
             HttpResponseMessage response = await client.PutAsJsonAsync(url, dto, JsonOptions);
-
+            if (!response.IsSuccessStatusCode)
+            {
+                string error = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine($"UpdateAuthor failed: {response.StatusCode} - {error}");
+            }
             return response.IsSuccessStatusCode;
         }
         public async Task<int> DeleteAuthor(int id)
@@ -199,12 +207,15 @@ namespace Service
         {
             return (await client.PostAsJsonAsync<Book>(uri + "/api/Insert/BookInsert", b)).IsSuccessStatusCode ? 1 : 0;
         }
-        public async Task<bool> UpdateBook(BookUpdateDto bookDto)
+        public async Task<bool> UpdateBook(BookUpdateDto dto)
         {
-            string url = uri+ "/api/Update/BookUpdate";
-
-            HttpResponseMessage response = await client.PutAsJsonAsync(url, bookDto);
-
+            string url = uri + "/api/Update/BookUpdate";
+            HttpResponseMessage response = await client.PutAsJsonAsync(url, dto, JsonOptions);
+            if (!response.IsSuccessStatusCode)
+            {
+                string error = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine($"UpdateBook failed: {response.StatusCode} - {error}");
+            }
             return response.IsSuccessStatusCode;
         }
         public async Task<int> DeleteBook(int id)

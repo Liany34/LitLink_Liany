@@ -36,7 +36,10 @@ namespace ViewModel
         public static DiscountCodes SelectById(int id)
         {
             DiscountCodesDB db = new DiscountCodesDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+            {
+                list = db.SelectAll();
+            }
 
             DiscountCodes g = list.Find(item => item.Id == id);
             return g;

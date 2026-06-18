@@ -43,7 +43,10 @@ namespace ViewModel
         public static Genre_Reader SelectById(int id)
         {
             Genre_ReaderDB db = new Genre_ReaderDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+            {
+                list = db.SelectAll();
+            }
 
             Genre_Reader g = list.Find(item => item.Id == id);
             return g;

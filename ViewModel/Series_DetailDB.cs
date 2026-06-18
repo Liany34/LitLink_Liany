@@ -43,7 +43,10 @@ namespace ViewModel
         public static Series_Detail SelectById(int id)
         {
             Series_DetailDB db = new Series_DetailDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+            {
+                list = db.SelectAll();
+            }
 
             Series_Detail g = list.Find(item => item.Id == id);
             return g;

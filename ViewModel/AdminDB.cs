@@ -30,7 +30,10 @@ namespace ViewModel
         public static Admin SelectById(int id)
         {
             AdminDB db = new AdminDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+            {
+                list = db.SelectAll();
+            }
 
             Admin g = list.Find(item => item.Id == id);
             return g;

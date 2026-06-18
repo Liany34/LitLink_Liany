@@ -40,7 +40,10 @@ namespace ViewModel
         public static News SelectById(int id)
         {
             NewsDB db = new NewsDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+            {
+                list = db.SelectAll();
+            }
 
             News news = list.Find(item => item.Id == id);
             return news;

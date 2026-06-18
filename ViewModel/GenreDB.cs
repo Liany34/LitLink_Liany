@@ -33,7 +33,10 @@ namespace ViewModel
         public static Genre SelectById(int id)
         {
             GenreDB db = new GenreDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+            {
+                list = db.SelectAll();
+            }
 
             Genre g = list.Find(item => item.Id == id);
             return g;

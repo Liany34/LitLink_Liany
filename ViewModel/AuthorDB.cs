@@ -39,7 +39,10 @@ namespace ViewModel
         public static Author SelectById(int id)
         {
             AuthorDB db = new AuthorDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+            {
+                list = db.SelectAll();
+            }
 
             Author g = list.Find(item => item.Id == id);
             return g;

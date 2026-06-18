@@ -42,7 +42,10 @@ namespace ViewModel
         public static Book_Genre SelectById(int id)
         {
             Book_GenreDB db = new Book_GenreDB();
-            list = db.SelectAll();
+            if (list.Count == 0)
+            {
+                list = db.SelectAll();
+            }
 
             Book_Genre g = list.Find(item => item.Id == id);
             return g;
