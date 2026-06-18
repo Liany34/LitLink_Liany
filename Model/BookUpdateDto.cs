@@ -20,9 +20,9 @@ namespace Model
         public int IdAuthor { get; set; }
         public int IdLanguage { get; set; }
 
-        public string CoverPath { get; set; }
+        public string? CoverPath { get; set; }
 
-        public string FileName { get; set; }
-        public string Base64Image { get; set; }
+        public string? FileName { get; set; }
+        public string? Base64Image { get; set; }
     }
 }

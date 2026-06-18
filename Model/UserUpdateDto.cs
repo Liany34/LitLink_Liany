@@ -17,9 +17,9 @@ namespace Model
         public string Username { get; set; }
         public string Pass { get; set; }
         public DateTime Birthdate { get; set; }
-        public string PicturePath { get; set; }
+        public string? PicturePath { get; set; }
 
-        public string FileName { get; set; }
-        public string Base64Image { get; set; }
+        public string? FileName { get; set; }
+        public string? Base64Image { get; set; }
     }
 }

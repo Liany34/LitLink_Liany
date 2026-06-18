@@ -91,12 +91,32 @@ namespace LitLink_By_Liany.Controllers
 
         [HttpPost]
         [ActionName("BookSeriesInsert")]
-        public int InsertBookSeries([FromBody] Book_Series bookSeries)
+        public IActionResult InsertBookSeries([FromBody] BookSeriesInsertDto dto)
         {
-            Book_SeriesDB db = new Book_SeriesDB();
-            db.Insert(bookSeries);
-            int x = db.SaveChanges();
-            return x;
+            if (dto == null || string.IsNullOrWhiteSpace(dto.NameSeries))
+                return BadRequest("Series name is required.");
+
+            try
+            {
+                Book_Series newSeries = new Book_Series
+                {
+                    NameSeries = dto.NameSeries,
+                    IdUser = new User { Id = dto.IdUser }
+                };
+
+                Book_SeriesDB db = new Book_SeriesDB();
+                db.Insert(newSeries);
+                int rows = db.SaveChanges();
+
+                if (rows > 0)
+                    return Ok(newSeries);
+
+                return BadRequest("Insert failed.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpPost]

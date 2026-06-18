@@ -59,7 +59,7 @@ namespace Service
 
 
         public Task<ListBook_Series> GetAllBookSeries();
-        public Task<int> InsertBookSeries(Book_Series book_series);
+        public Task<int> InsertBookSeries(BookSeriesInsertDto dto);
         public Task<int> UpdateBookSeries(Book_Series book_series);
         public Task<int> DeleteBookSeries(int id);
 

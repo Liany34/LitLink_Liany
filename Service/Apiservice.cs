@@ -241,9 +241,9 @@ namespace Service
         {
             return await client.GetFromJsonAsync<ListBook_Series>(uri + "/api/Select/BookSeriesSelector");
         }
-        public async Task<int> InsertBookSeries(Book_Series bs)
+        public async Task<int> InsertBookSeries(BookSeriesInsertDto dto)
         {
-            return (await client.PostAsJsonAsync<Book_Series>(uri + "/api/Insert/BookSeriesInsert", bs)).IsSuccessStatusCode ? 1 : 0;
+            return (await client.PostAsJsonAsync(uri + "/api/Insert/BookSeriesInsert", dto)).IsSuccessStatusCode ? 1 : 0;
         }
         public async Task<int> UpdateBookSeries(Book_Series bs)
         {
